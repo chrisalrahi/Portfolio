@@ -52,7 +52,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="resume.html">Resume</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Projects</a></li>
           <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -73,7 +73,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam</p>
+        <p>Hope you enjoyed looking around my portfolio, I'm currently looking for an internship for the Summer 2026 term. All of my information is here so don't hesitate to reach out!</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -82,49 +82,45 @@
           <div class="col-lg-5">
             <div class="info-box" data-aos="fade-up" data-aos-delay="200">
               <h3>Contact Info</h3>
-              <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis.</p>
-
-              <div class="info-item" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon-box">
-                  <i class="bi bi-geo-alt"></i>
-                </div>
-                <div class="content">
-                  <h4>Our Location</h4>
-                  <p>A108 Adam Street</p>
-                  <p>New York, NY 535022</p>
-                </div>
-              </div>
-
+              <p>Open to questions, collaborations, or just a quick chat... Reach out anytime!</p>
               <div class="info-item" data-aos="fade-up" data-aos-delay="400">
                 <div class="icon-box">
                   <i class="bi bi-telephone"></i>
                 </div>
                 <div class="content">
                   <h4>Phone Number</h4>
-                  <p>+1 5589 55488 55</p>
-                  <p>+1 6678 254445 41</p>
+                  <p>+1 613 407 7361</p>
                 </div>
               </div>
-
+              <br><br>
               <div class="info-item" data-aos="fade-up" data-aos-delay="500">
                 <div class="icon-box">
                   <i class="bi bi-envelope"></i>
                 </div>
                 <div class="content">
                   <h4>Email Address</h4>
-                  <p>info@example.com</p>
-                  <p>contact@example.com</p>
+                  <p>Chris.alrahi@gmail.com</p>
                 </div>
               </div>
+              <br><br>
+              <div class="info-item" data-aos="fade-up" data-aos-delay="600">
+                <div class="icon-box">
+                  <i class="bi bi-linkedin"></i>
+                </div>
+                <div class="content">
+                  <h4 style="position: relative; top: 15px;"> <a href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener noreferrer"> LinkedIn </a> </h4>
+                </div>
+            </div>
             </div>
           </div>
+
 
           <div class="col-lg-7">
             <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
               <h3>Get In Touch</h3>
-              <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis.</p>
+              <p>Feel free to fill out the form, all messages will go straight to my inbox.</p>
 
-              <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <form action="https://formspree.io/f/mldoepqq" method="POST" data-aos="fade-up" data-aos-delay="200">
                 <div class="row gy-4">
 
                   <div class="col-md-6">
@@ -140,15 +136,11 @@
                   </div>
 
                   <div class="col-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                    <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
                   </div>
 
-                  <div class="col-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
                     <button type="submit" class="btn">Send Message</button>
+
                   </div>
 
                 </div>
@@ -168,9 +160,7 @@
   <footer id="footer" class="footer">
 
     <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">FolioOne</strong> <span>All Rights Reserved<br></span></p>
-      </div>
+
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-twitter-x"></i></a>
         <a href=""><i class="bi bi-facebook"></i></a>
@@ -208,6 +198,53 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+<script>
+  const form = document.querySelector('form[action="https://formspree.io/f/mldoepqq"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // stop page reload
+    const formData = new FormData(form);
+
+    // show quick "sending" feedback
+    const button = form.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
+    button.textContent = 'Sending...';
+    button.disabled = true;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        // create or show thank-you message
+        let msg = document.createElement('p');
+        msg.textContent = 'Thanks — your message has been sent!';
+        msg.style.color = '#0f0';
+        msg.style.marginTop = '10px';
+        msg.style.textAlign = 'center';
+        form.appendChild(msg);
+
+        form.reset();
+
+        // remove message after 5 seconds
+        setTimeout(() => msg.remove(), 5000);
+      } else {
+        alert('There was a problem sending your message.');
+      }
+    } catch (error) {
+      alert('Network error — please try again later.');
+    } finally {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  });
+
+</script>
+
 
 </body>
 
