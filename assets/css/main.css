@@ -2518,6 +2518,7 @@ section,
   letter-spacing: 0.5px;
 }
 
+
 .portfolio-details .portfolio-details-content .project-overview {
   margin-bottom: var(--section-spacing);
 }
@@ -2853,9 +2854,15 @@ section,
   background-color: color-mix(in srgb, var(--surface-color), transparent 70%);
 }
 
+.project-website a + a {
+  margin-left: 4.5rem !important;
+}
+
+
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
 }
+
