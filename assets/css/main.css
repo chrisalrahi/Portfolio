@@ -2381,8 +2381,9 @@ section,
 
 .portfolio-details .portfolio-details-media .main-image .portfolio-details-slider .swiper-slide img {
   aspect-ratio: 3/2;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
+  background-color: #101a20;
 }
 
 .portfolio-details .portfolio-details-media .main-image .portfolio-details-slider .swiper-button-next,
@@ -2410,6 +2411,7 @@ section,
 .portfolio-details .portfolio-details-media .main-image .portfolio-details-slider .swiper-button-prev:hover:after {
   color: var(--contrast-color);
 }
+
 
 .portfolio-details .portfolio-details-media .thumbnail-grid img {
   height: 80px;

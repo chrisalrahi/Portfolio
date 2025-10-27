@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Chris Al-Rahi - Project Details</title>
+  <title>Chris Al-Rahi - Greenhouse</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -60,8 +60,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Beer Goggles</h2>
-        <p>My first year - Engineering Design - project done for Beyond the Pale Brewing Corp.</p>
+        <h2>Greenhouse System</h2>
+        <p>A Third Year Electronics Project</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -97,7 +97,19 @@
                   </script>
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <img src="assets/img/portfolio/BeerGoggles%20Group.png" alt="Portfolio Image" class="img-fluid">
+                      <img src="assets/img/portfolio/GreenHouse%20System.PNG" alt="" class="img-fluid">
+                    </div>
+                                        <div class="swiper-slide">
+                      <img src="assets/img/portfolio/Greenhouse%20Theoretical%20Config.PNG" alt="" class="img-fluid">
+                    </div>
+                                        <div class="swiper-slide">
+                      <img src="assets/img/portfolio/BlockDiagram.JPG" alt="" class="img-fluid">
+                    </div>
+                                        <div class="swiper-slide">
+                      <img src="assets/img/portfolio/Arduino%20Code.PNG" alt="" class="img-fluid">
+                    </div>
+                                        <div class="swiper-slide">
+                      <img src="assets/img/portfolio/Pin%20Diagram.JPG" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="swiper-button-prev"></div>
@@ -108,10 +120,19 @@
               <div class="thumbnail-grid" data-aos="fade-up" data-aos-delay="200">
                 <div class="row g-2 mt-3">
                   <div class="col-3">
-                    <img src="assets/img/portfolio/BeerGoggles%20Group.png" alt="Gallery Image" class="img-fluid glightbox">
+                    <img src="assets/img/portfolio/GreenHouse%20System.PNG" alt="" class="img-fluid glightbox">
                   </div>
                   <div class="col-3">
-                    <img src="assets/img/portfolio/Beer%20Goggles.PNG" alt="Gallery Image" class="img-fluid glightbox">
+                    <img src="assets/img/portfolio/Greenhouse%20Theoretical%20Config.PNG" alt="" class="img-fluid glightbox">
+                  </div>
+                  <div class="col-3">
+                    <img src="assets/img/portfolio/BlockDiagram.JPG" alt="" class="img-fluid glightbox">
+                  </div>
+                  <div class="col-3">
+                    <img src="assets/img/portfolio/Arduino%20Code.PNG" alt="" class="img-fluid glightbox">
+                  </div>
+                    <div class="col-3">
+                    <img src="assets/img/portfolio/Pin%20Diagram.JPG" alt="" class="img-fluid glightbox">
                   </div>
                 </div>
               </div>
@@ -143,31 +164,19 @@
                 </div>
               </div>
 
-              <h2 class="project-title">Beer Goggles</h2>
+              <h2 class="project-title"></h2>
 
               <div class="project-website">
-                <i class="bi bi-link-45deg"></i>
-                <a href="https://makerepo.com/ChristopherAlRahi/1336.gng1103b04group16beergoggles" target="_blank">makerepo.com/ChristopherAlRahi/beergoggles</a>
+                <a href="assets/Docs/ELG%203336%20-%20Greenhouse%20System%20-%20Final%20Report.docx.pdf" target="_blank" class="link-underline">
+                            View Report <i class="bi bi-download"></i> </a>
               </div>
 
               <div class="project-overview">
                 <p class="lead">
-Beer Goggles is a gravity and temperature monitoring system designed for Beyond the Pale Brewing. The prototype combines a load cell, ultrasonic sensor, and Arduino control to automate data collection during fermentation. I handled both the mechanical integration and sensor calibration, using 3D printing, wiring, and custom code to create a compact, closed-loop system that delivers accurate, real-time readings.
+The Greenhouse System is an automated climate control setup my partner and I built to monitor and maintain temperature, humidity, light, and air quality in a controlled space. Using an Arduino Uno with DHT22, BH1750, and MQ-9 sensors, the system reacts in real time by powering a fan or LED when certain thresholds are reached. My partner and I designed the system and I coded the full setup to collect and process data efficiently.
                 </p>
 
                 <div class="accordion project-accordion" id="portfolio-details-projectAccordion">
-                  <div class="accordion-item" data-aos="fade-up">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#portfolio-details-collapse-1" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="bi bi-clipboard-data me-2"></i> Project Overview
-                      </button>
-                    </h2>
-                    <div id="portfolio-details-collapse-1" class="accordion-collapse collapse show" data-bs-parent="#portfolio-details-projectAccordion">
-                      <div class="accordion-body">
-                        <p>Beyond the Pale is a local brewing company in Ottawa that needed a better way to measure specific gravity and temperature during beer production. Tracking these values is a key part of the brewing process, but their existing method was slow and inconsistent, leading to wasted time and product. As the company plans to scale up operations, improving this system became essential.</p>
-                      </div>
-                    </div>
-                  </div>
 
                   <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
                     <h2 class="accordion-header">
@@ -177,7 +186,9 @@ Beer Goggles is a gravity and temperature monitoring system designed for Beyond 
                     </h2>
                     <div id="portfolio-details-collapse-2" class="accordion-collapse collapse" data-bs-parent="#portfolio-details-projectAccordion">
                       <div class="accordion-body">
-                        <p>A specific gravity and temperature monitoring system is needed to streamline and support Beyond the Pale Brewing’s production as they expand. The system should enable simple, accurate, and continuous data collection directly from the brewing tanks. It must operate reliably under brewing conditions, maintain hygienic standards, and deliver consistent, real-time measurements to improve efficiency and product quality.</p>
+                        <p>
+Most greenhouse systems are expensive or rely on manual adjustments, making them impractical for small setups. The challenge was to design a system that could stay accurate, react fast, and remain affordable while still being modular enough to expand with more sensors or actuators.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -190,7 +201,9 @@ Beer Goggles is a gravity and temperature monitoring system designed for Beyond 
                     </h2>
                     <div id="portfolio-details-collapse-3" class="accordion-collapse collapse" data-bs-parent="#portfolio-details-projectAccordion">
                       <div class="accordion-body">
-                        <p>The final design uses a load cell and ultrasonic sensor connected to an Arduino Uno to calculate specific gravity automatically. A peristaltic pump transfers the beer between the main tank and a sealed side reservoir, while a custom program collects and visualizes real-time data. The result is a clean, closed-loop system that gives brewers consistent, accurate measurements with minimal manual input.</p>
+                        <p>
+I programmed the Arduino to constantly process the sensors and turn on a fan or LED whenever the temperature, humidity, or air quality went out of range. The setup became a simple and scalable control system that kept the environment stable on its own. This project helped me strengthen my skills in sensor calibration, embedded programming, and system automation.
+                        </p>
                       </div>
                     </div>
                   </div>
