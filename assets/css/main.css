@@ -2619,14 +2619,14 @@ section,
   font-size: 1.1em;
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons {
+.portfolio-details .cta-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: auto;
+  margin-top: 2rem;
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons .btn-view-project {
+.portfolio-details .cta-buttons .btn-view-project {
   padding: 12px 28px;
   background-color: var(--accent-color);
   color: var(--contrast-color);
@@ -2635,13 +2635,13 @@ section,
   transition: all 0.3s ease;
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons .btn-view-project:hover {
+.portfolio-details .cta-buttons .btn-view-project:hover {
   background-color: color-mix(in srgb, var(--accent-color), black 15%);
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons .btn-next-project {
+.portfolio-details .cta-buttons .btn-next-project {
   padding: 12px 28px;
   background-color: color-mix(in srgb, var(--heading-color), transparent 90%);
   color: var(--heading-color);
@@ -2653,15 +2653,15 @@ section,
   gap: 8px;
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons .btn-next-project i {
+.portfolio-details .cta-buttons .btn-next-project i {
   transition: transform 0.3s ease;
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons .btn-next-project:hover {
+.portfolio-details .cta-buttons .btn-next-project:hover {
   background-color: color-mix(in srgb, var(--heading-color), transparent 80%);
 }
 
-.portfolio-details .portfolio-details-content .cta-buttons .btn-next-project:hover i {
+.portfolio-details .cta-buttons .btn-next-project:hover i {
   transform: translateX(3px);
 }
 
@@ -2676,7 +2676,7 @@ section,
     padding: 2rem 0 0 0;
   }
 
-  .portfolio-details .portfolio-details-content .cta-buttons {
+  .portfolio-details .cta-buttons {
     margin-top: 2rem;
   }
 }
@@ -2700,6 +2700,21 @@ section,
   .portfolio-details .cta-buttons a {
     width: 100%;
     text-align: center;
+  }
+
+}
+
+.cta-buttons {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.3s; /* optional delay */
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -2860,7 +2875,6 @@ section,
   margin-left: 4.5rem !important;
 }
 
-
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
@@ -2868,3 +2882,99 @@ section,
   /* Add your styles here */
 }
 
+/* === GLightbox: full-screen, single-column, no chrome === */
+body.glightbox-open { overflow: hidden !important; }
+
+.glightbox-container {
+  inset: 0 !important;                    /* top/right/bottom/left = 0 */
+  position: fixed !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+.glightbox-container .ginner-container {
+  display: block !important;              /* break the default two-column flex */
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.glightbox-container .gslide,
+.glightbox-container .gslide-inline,
+.glightbox-container .gslide-inner-content,
+.glightbox-container .gslide-media {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  display:flex !important;
+  align-items:center !important;   /* vertical center */
+  justify-content:center !important; /* horizontal center */
+}
+
+.glightbox-container .gslide { padding: 0 !important; }
+
+
+/* === Inline gallery grid: tight, no scroll, no cropping === */
+#car-fender-gallery .lb-grid {
+  display: grid;
+  gap: 10px;                                /* set to 0 for edge-to-edge */
+  grid-template-columns: repeat(2, minmax(0,auto));
+  place-content: center;
+  grid-auto-rows: 40vh;                    /* controls image scale */
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+}
+
+#car-fender-gallery .lb-grid figure {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#car-fender-gallery .lb-grid img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;                      /* full image, no cropping */
+  display: block;
+  background: transparent;
+}
+
+/* Caption: bottom-center overlay inside each image */
+#car-fender-gallery .lb-grid figcaption {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
