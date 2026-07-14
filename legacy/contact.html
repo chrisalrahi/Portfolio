@@ -191,7 +191,7 @@
       if (response.ok) {
         // create or show thank-you message
         let msg = document.createElement('p');
-        msg.textContent = 'Thanks — your message has been sent!';
+        msg.textContent = 'Thanks, your message has been sent!';
         msg.style.color = '#0f0';
         msg.style.marginTop = '10px';
         msg.style.textAlign = 'center';
@@ -205,7 +205,7 @@
         alert('There was a problem sending your message.');
       }
     } catch (error) {
-      alert('Network error — please try again later.');
+      alert('Network error, please try again later.');
     } finally {
       button.textContent = originalText;
       button.disabled = false;
