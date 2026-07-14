@@ -147,7 +147,7 @@
             </div>
             <div class="feature-body">
               <h3>Mobilitray</h3>
-              <p class="hook">A foldable tray that clips onto posterior walkers so users can carry things without giving up the walker's stability. My second year design project, built for a real client.</p>
+              <p class="hook">A foldable tray that clips onto posterior walkers so users can carry things without giving up the walker's stability. </p>
               <dl class="meta">
                 <div><dt>My role</dt><dd>My work centered on the mechanical design and prototyping: 3D-printed hooks and clips, PEX supports, and a locking mechanism that folds flat when it's not in use.</dd></div>
                 <div><dt>Outcome</dt><dd>A simple (but effective) tray that carries five pounds and held up in user testing. We wrapped it up with a product manual.</dd></div>
@@ -345,6 +345,21 @@
             <a class="btn btn-outline" href="https://github.com/chrisalrahi" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
+
+        <div class="contact-form reveal">
+          <p class="form-intro">Or fill out the form, all messages go straight to my inbox.</p>
+          <form action="https://formspree.io/f/mldoepqq" method="POST">
+            <div class="form-grid">
+              <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" required>
+              <input type="email" name="email" placeholder="Your Email" aria-label="Your Email" required>
+              <input type="text" name="subject" class="full" placeholder="Subject" aria-label="Subject" required>
+              <textarea name="message" class="full" rows="4" placeholder="Message" aria-label="Message" required></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -359,6 +374,51 @@
   <a href="#hero" class="scroll-top" aria-label="Back to top">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
   </a>
+
+  <script>
+    const form = document.querySelector('form[action="https://formspree.io/f/mldoepqq"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // stop page reload
+      const formData = new FormData(form);
+
+      // show quick "sending" feedback
+      const button = form.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+      button.textContent = 'Sending...';
+      button.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          // create or show thank-you message
+          let msg = document.createElement('p');
+          msg.textContent = 'Thanks, your message has been sent!';
+          msg.style.color = '#0f0';
+          msg.style.marginTop = '10px';
+          msg.style.textAlign = 'center';
+          form.appendChild(msg);
+
+          form.reset();
+
+          // remove message after 5 seconds
+          setTimeout(() => msg.remove(), 5000);
+        } else {
+          alert('There was a problem sending your message.');
+        }
+      } catch (error) {
+        alert('Network error, please try again later.');
+      } finally {
+        button.textContent = originalText;
+        button.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 

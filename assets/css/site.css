@@ -721,6 +721,60 @@ section {
   gap: 1rem;
 }
 
+.contact-form {
+  max-width: 720px;
+  margin: 2.5rem auto 0;
+}
+
+.contact-form .form-intro {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.contact-form .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.contact-form .full {
+  grid-column: 1 / -1;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: var(--body-font);
+  font-size: 0.9375rem;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--muted);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form .form-actions {
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
@@ -894,5 +948,9 @@ section {
 
   .about-photo img {
     max-width: min(340px, 100%);
+  }
+
+  .contact-form .form-grid {
+    grid-template-columns: 1fr;
   }
 }
