@@ -3,128 +3,362 @@
 
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Chris Al-Rahi - Home</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chris Al-Rahi — Mechanical Engineering &amp; Computing Technology</title>
+  <meta name="description" content="Portfolio of Chris Al-Rahi — Mechanical Engineering &amp; Computing Technology co-op student at the University of Ottawa. Nine engineering projects spanning mechatronics, CAD design, and hands-on repair, plus co-op experience at Curtiss-Wright and CanmetENERGY.">
+  <link rel="canonical" href="https://chrisalrahi.com/">
+  <meta name="theme-color" content="#101a20">
 
-  <!-- Favicons -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chris Al-Rahi — Mechanical Engineering &amp; Computing Technology">
+  <meta property="og:description" content="Co-op student at the University of Ottawa. Nine engineering projects, from client-commissioned sensor systems to hands-on repairs.">
+  <meta property="og:url" content="https://chrisalrahi.com/">
+  <meta property="og:image" content="https://chrisalrahi.com/assets/img/profile/ConcreteNoSmile.JPG">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Raleway:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
+  <script>document.documentElement.classList.add("js");</script>
+  <link href="assets/css/site.css" rel="stylesheet">
+  <script src="assets/js/site.js" defer></script>
 </head>
 
-<body class="index-page">
+<body>
 
-  <header id="header" class="header d-flex align-items-center light-background sticky-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-      <img src="assets/img/logo.png" alt="Chris Al-Rahi Logo">
-    </a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-      <nav id="navmenu" class="navmenu">
+  <header class="site-header">
+    <div class="container">
+      <a class="wordmark" href="#hero">Chris Al-Rahi</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="resume.html">Resume</a></li>
-          <li><a href="portfolio.html">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="assets/Docs/Chris%20Al-Rahi%20Resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a class="icon-link" href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a class="icon-link" href="https://github.com/chrisalrahi" target="_blank" rel="noopener" aria-label="GitHub profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
       </nav>
-
-      <div class="header-social-links">
-        <a href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
-      </div>
-
     </div>
   </header>
 
-  <main class="main">
+  <main id="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4 align-items-center">
-          <div class="col-lg-6 order-2 order-lg-1">
-            <div class="hero-content">
-              <h1 data-aos="fade-up" data-aos-delay="200">Hello, I'm <span class="highlight">Chris Al-Rahi</span></h1>
-              <h2 data-aos="fade-up" data-aos-delay="300">I am <span class="typed" data-typed-items=" an Engineer, a Builder, a Designer, a Fighter, a Traveler, an Athlete"></span></h2>
-              <p data-aos="fade-up" data-aos-delay="400">I study Mechanical Engineering and Computing Technology at the University of Ottawa, and I’m all about learning, building, and finding smarter ways to make ideas real. I love projects that push me to think differently and get my hands dirty. When I’m not working on something new, you’ll probably find me training Muay Thai or planning my next trip somewhere new. As a co-op student, I’m always open to connecting and exploring future internship opportunities.</p>
-              <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
-                <a href="resume.html" class="btn btn-primary">View My Resume</a>
-                <a href="portfolio.html" class="btn btn-primary">View My Projects</a>
-                <a href="contact.html" class="btn btn-outline">Get In Touch</a>
-              </div>
-
-
-            </div>
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2">
-            <div class="hero-image" data-aos="zoom-in" data-aos-delay="300">
-              <div class="image-wrapper">
-                <img src="assets/img/profile/ConcreteNoSmile.JPG" alt="Chris Al-Rahi" class="img-fluid">
-                <div class="floating-elements">
-                  <div class="floating-card design" data-aos="fade-left" data-aos-delay="700">
-                    <i class="bi bi-wrench"></i>
-                    <span>Build</span>
-                  </div>
-                  <div class="floating-card code" data-aos="fade-right" data-aos-delay="800">
-                    <i class="bi bi-book"></i>
-                    <span>Learn</span>
-                  </div>
-                  <div class="floating-card creativity" data-aos="fade-up" data-aos-delay="900">
-                    <i class="bi bi-lightbulb"></i>
-                    <span>Innovate</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <!-- ======== Hero ======== -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="availability">Open to co-op &amp; internship opportunities</p>
+          <h1>Hello, I'm <span class="highlight">Chris Al-Rahi</span></h1>
+          <p class="tagline">Mechanical Engineering &amp; Computing Technology student — University of Ottawa</p>
+          <p class="subline">Co-op · graduating April 2027 · Ottawa, ON</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="assets/Docs/Chris%20Al-Rahi%20Resume.pdf" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+              Resume (PDF)
+            </a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-outline" href="https://github.com/chrisalrahi" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-outline" href="mailto:chris.alrahi@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              Email
+            </a>
           </div>
         </div>
-
+        <div class="hero-photo">
+          <img src="assets/img/opt/hero-chris.webp" width="640" height="767" alt="Chris Al-Rahi" fetchpriority="high">
+        </div>
       </div>
+    </section>
 
-    </section><!-- /Hero Section -->
+    <!-- ======== Projects ======== -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Projects</h2>
+          <p>Nine builds — from client-commissioned sensor systems to hands-on repairs.</p>
+        </div>
+
+        <div class="features">
+
+          <article class="feature reveal" id="beer-goggles">
+            <div class="feature-media">
+              <img src="assets/img/opt/beer-goggles.webp" width="667" height="500" loading="lazy" alt="The Beer Goggles team with the fermentation-monitoring prototype">
+            </div>
+            <div class="feature-body">
+              <h3>Beer Goggles</h3>
+              <p class="hook">Closed-loop sensor system that automates specific-gravity and temperature readings inside fermentation tanks — built for brewery client Beyond the Pale Brewing.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>Led the 3-person team; owned mechanical integration, sensor calibration, and the Arduino control code.</dd></div>
+                <div><dt>Outcome</dt><dd>±0.1 SG accuracy across three iterative design-test cycles; delivered with a user &amp; product manual.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>Arduino (C++)</li><li>Load cell + ultrasonic sensing</li><li>SolidWorks</li><li>3D printing</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://makerepo.com/ChristopherAlRahi/1336.gng1103b04group16beergoggles" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="assets/Docs/Beer%20Goggles%20-%20User%20and%20Product%20Manual.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature reveal" id="blade-polisher">
+            <div class="feature-media">
+              <img src="assets/img/opt/blade-polisher.webp" width="800" height="560" loading="lazy" alt="Isometric CAD render of the turbine blade mold polisher gantry system">
+            </div>
+            <div class="feature-body">
+              <h3>Turbine Blade Mold Polisher</h3>
+              <p class="hook">Pneumatic gantry system that automates polishing of 9-metre wind-turbine blade molds — replacing slow, physically demanding hand work.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>Designed the mechanical layout and motion system: gantry, yoke, and spring-linked polishing plates that conform to the curved mold surface.</dd></div>
+                <div><dt>Outcome</dt><dd>Complete CAD assembly, drawing package, and interactive 3D model; constant-pressure polishing across a complex curved surface.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>SolidWorks</li><li>Engineering drawings</li><li>Pneumatic actuation</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://skfb.ly/pCKSo" target="_blank" rel="noopener">3D model (Sketchfab) <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="https://drive.google.com/file/d/1IAgGhyez_0Hg4_hqSXrPCs9KN8DNypPy/view?usp=sharing" target="_blank" rel="noopener">Video <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="assets/Docs/MCG2101%20-%20Turbine%20Mold%20Polisher%20-%20Deliverable%2310%20E2-2.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature reveal" id="mobilitray">
+            <div class="feature-media duo">
+              <figure><img src="assets/img/opt/mobilitray.webp" width="301" height="399" loading="lazy" alt="Mobilitray prototype clipped onto a posterior walker"></figure>
+              <figure><img src="assets/img/opt/mobilitray-cad.webp" width="292" height="375" loading="lazy" alt="CAD diagram of the Mobilitray folding tray design"></figure>
+            </div>
+            <div class="feature-body">
+              <h3>Mobilitray</h3>
+              <p class="hook">Foldable clip-on tray that lets posterior-walker users carry items without compromising the walker's stability.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>Owned mechanical design and prototyping — 3D-printed hooks and clips, PEX supports, fold-flat locking mechanism.</dd></div>
+                <div><dt>Outcome</dt><dd>Lightweight tray carrying 5 lb, validated with a user-tested prototype; delivered with a product manual.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>SolidWorks</li><li>3D printing</li><li>User testing</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://makerepo.com/ChristopherAlRahi/1904.gng2101group-a-41mobilitray" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="https://drive.google.com/file/d/1qcZJhXqsPvL7GBu-d9-DBKo9N6WrZpPw/view" target="_blank" rel="noopener">Demo video <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="assets/Docs/Mobilitray%20-%20User%20and%20Product%20Manual%204.1.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature reveal" id="greenhouse">
+            <div class="feature-media">
+              <img src="assets/img/opt/greenhouse.webp" width="540" height="563" loading="lazy" alt="Assembled greenhouse climate controller with sensors and wiring">
+            </div>
+            <div class="feature-body">
+              <h3>Greenhouse Climate Controller</h3>
+              <p class="hook">Arduino system that monitors temperature, humidity, light, and air quality — and corrects the environment on its own.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>Co-designed the hardware; wrote all the sensing and control code.</dd></div>
+                <div><dt>Outcome</dt><dd>Low-cost, modular controller that held a stable environment autonomously; working demo on video.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>Arduino (C++)</li><li>DHT22 / BH1750 / MQ-9 sensors</li><li>Circuit design</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://drive.google.com/file/d/1O8_wQxcrmUnVgzpRxvYgv5CmfnYpsajJ/view?usp=sharing" target="_blank" rel="noopener">Demo video <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="assets/Docs/ELG%203336%20-%20Greenhouse%20System%20-%20Final%20Report.docx.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature reveal" id="truss-analysis">
+            <div class="feature-media">
+              <img src="assets/img/opt/truss-bridge.webp" width="655" height="253" loading="lazy" alt="Balsa wood truss bridge built for load testing">
+            </div>
+            <div class="feature-body">
+              <h3>Balsa Truss Bridge</h3>
+              <p class="hook">Hybrid Pratt–Warren balsa truss designed by hand analysis, then built and load-tested.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>Force analysis (method of joints &amp; sections), member sizing and optimization, construction.</dd></div>
+                <div><dt>Outcome</dt><dd>Load-to-weight ratio of 292.5 at test — theory vs. experiment compared in the final report.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>Structural analysis</li><li>Load testing</li>
+              </ul>
+              <div class="project-links">
+                <a href="assets/Docs/CVG%202140%20-%20Truss%20Analysis%20-%20Final%20Report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <h3 class="more-title reveal">More builds &amp; repairs</h3>
+        <p class="more-sub reveal">Self-directed projects and hands-on fixes.</p>
+
+        <div class="card-grid">
+
+          <article class="card reveal">
+            <div class="card-media collage">
+              <img src="assets/img/opt/fender-1-broken.webp" width="480" height="490" loading="lazy" alt="Cracked car fender before repair">
+              <img src="assets/img/opt/fender-2-paint.webp" width="480" height="598" loading="lazy" alt="Fender during sanding and painting">
+              <img src="assets/img/opt/fender-3-fixed.webp" width="480" height="429" loading="lazy" alt="Repaired fender with colour-matched finish">
+              <img src="assets/img/opt/fender-4-installed.webp" width="480" height="641" loading="lazy" alt="Finished fender reinstalled on the car">
+            </div>
+            <div class="card-body">
+              <h4>Car Fender Repair</h4>
+              <p>Bodywork restoration from cracked panel to colour-matched finish — fill, sand, paint, refit.</p>
+              <ul class="tags"><li>Surface prep</li><li>Finishing</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="assets/img/opt/pool-heater.webp" width="640" height="478" loading="lazy" alt="Opened pool heater during component-level repair">
+            </div>
+            <div class="card-body">
+              <h4>Pool Heater Recovery</h4>
+              <p>Dead pool heater diagnosed to component level and repaired — no service call needed.</p>
+              <ul class="tags"><li>Multimeter diagnostics</li><li>PCB rework</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="assets/img/opt/hottub-heater.webp" width="640" height="477" loading="lazy" alt="Hot-tub heater element during replacement">
+            </div>
+            <div class="card-body">
+              <h4>Hot-Tub Heater Repair</h4>
+              <p>Structured failure analysis on a hot-tub heating circuit; sourced and installed a compatible element.</p>
+              <ul class="tags"><li>Diagnostic testing</li><li>Circuit inspection</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="assets/img/opt/ping-pong.webp" width="601" height="625" loading="lazy" alt="Foldable ping-pong table top mounted on a pool table">
+            </div>
+            <div class="card-body">
+              <h4>Foldable Ping-Pong Table</h4>
+              <p>Custom fold-away top that converts a pool table into a ping-pong table in seconds — designed and built end-to-end.</p>
+              <ul class="tags"><li>CAD</li><li>Fabrication</li><li>3D printing</li></ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== Experience ======== -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Experience</h2>
+          <p>Three co-op terms across defense electronics and renewable-energy research.</p>
+        </div>
+
+        <div class="xp-list">
+          <article class="xp reveal">
+            <div class="xp-head">
+              <h3>Curtiss-Wright Defense — Mechanical Engineering Intern</h3>
+              <span class="when">Sep–Dec 2025 · Ottawa</span>
+            </div>
+            <p>Assembled and validated 8 ruggedized electronics chassis; ran environmental and thermal reliability testing on 9 conduction-cooled products (4,000+ insertions, 80+ thermal cycles); Flotherm simulations to guide liquid-cooled hardware design.</p>
+          </article>
+
+          <article class="xp reveal">
+            <div class="xp-head">
+              <h3>CanmetENERGY (NRCan) — Research Assistant, Renewable Heat &amp; Power</h3>
+              <span class="when">May–Aug 2025 · Ottawa</span>
+            </div>
+            <p>Root-caused and restored a solar tracker's range from ±15° to ±40° through mechanical redesign; built a height-adjustable shielded sensor system improving live temperature accuracy by 30%+.</p>
+          </article>
+
+          <article class="xp reveal">
+            <div class="xp-head">
+              <h3>CanmetENERGY (NRCan) — Research Assistant, Alternative Energies Lab</h3>
+              <span class="when">Jan–Apr 2025 · Ottawa</span>
+            </div>
+            <p>Designed four ventilation and mechanical CAD layouts across three heat-pump projects; automated performance analysis with VBA, cutting processing time by roughly 90%.</p>
+          </article>
+        </div>
+
+        <div class="edu reveal">
+          <p><strong>BASc Mechanical Engineering + BSc Computing Technology (Co-op)</strong><br>University of Ottawa — April 2027 · Dean's Honour List</p>
+          <a class="btn btn-outline" href="assets/Docs/Chris%20Al-Rahi%20Resume.pdf" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Download Resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== About ======== -->
+    <section id="about">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>About</h2>
+          <p>The person behind the projects.</p>
+        </div>
+
+        <div class="about-grid reveal">
+          <div class="about-text">
+            <p class="lede">I'm Chris — a mechanical engineering and computing technology student at uOttawa who's happiest when an idea becomes something physical: modelled in SolidWorks, wired to an Arduino, or fresh off a 3D printer. Co-op terms in defense electronics and renewable-energy research have taught me I do my best work where mechanical design meets code. Away from the lab I'm training Muay Thai, playing volleyball, or planning the next trip. Always glad to connect — especially about co-op and internship opportunities.</p>
+            <ul class="tags">
+              <li>Muay Thai</li><li>Travel</li><li>Volleyball</li><li>Reading</li>
+            </ul>
+          </div>
+          <div class="about-photo">
+            <img src="assets/img/opt/about-nrcan.webp" width="800" height="931" loading="lazy" alt="Chris Al-Rahi presenting a research poster at CanmetENERGY">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== Contact ======== -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Contact</h2>
+        </div>
+        <div class="contact-block reveal">
+          <p>Hope you enjoyed looking around — don't hesitate to reach out!</p>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:chris.alrahi@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              chris.alrahi@gmail.com
+            </a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-outline" href="https://github.com/chrisalrahi" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Chris Al-Rahi · Ottawa, ON</p>
+    </div>
+  </footer>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <a href="#hero" class="scroll-top" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+  </a>
 
 </body>
 
