@@ -24,6 +24,6 @@ There is no package manager, bundler, linter, or test framework. "Building" mean
 - **Filename case matters.** GitHub Pages serves from Linux; match on-disk casing exactly (existing files mix `.PNG`, `.png`, `.JPG`).
 - **HTML structure is hand-maintained.** After structural edits, sanity-check that `div`/`section`/`main` open/close counts balance per file.
 - Every project's copy follows **hook · My role · Outcome · tool tags · links**; keep new projects in that format.
-- The contact section is links-only (no form). The resume PDF at `assets/Docs/Chris Al-Rahi Resume.pdf` is THE resume link everywhere (nav, hero, experience).
+- The contact section has both quick links and a Formspree form. The resume PDF at `assets/Docs/Chris Al-Rahi Resume.pdf` is THE resume link everywhere (nav, hero, experience).
 - `assets/vendor/` was pruned to exactly what `/legacy` loads (e.g. Bootstrap is only `bootstrap.min.css` + `bootstrap.bundle.min.js`); don't re-add variants, and don't delete what remains.
 - The `.idea/` directory is JetBrains IDE config; leave it untracked/out of commits. `.playwright-mcp/` is test output; don't commit it.

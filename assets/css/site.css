@@ -624,6 +624,10 @@ html:not(.js) .track-filter {
   letter-spacing: 0.5px;
 }
 
+/* white on --accent measures 4.73:1, the same ratio .btn-primary uses site-wide.
+   that clears AA for this size; do not "fix" it with font-weight 700, since
+   Poppins only ships 400/500 here (faux bold) and 11px bold is still not
+   WCAG large text, so the 4.5:1 threshold would not change anyway */
 .badge-work {
   background: var(--accent);
   border-color: var(--accent);
@@ -705,7 +709,7 @@ html:not(.js) .track-filter {
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--accent), transparent 85%), 0 16px 40px rgba(0, 0, 0, 0.4);
 }
 
 .card-media {
@@ -1055,7 +1059,7 @@ html:not(.js) .track-filter {
     align-items: stretch;
     gap: 0;
     padding: 1rem 1.5rem 1.75rem;
-    background: rgba(16, 26, 32, 0.97);
+    background: color-mix(in srgb, var(--bg), transparent 3%);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
     display: none;
