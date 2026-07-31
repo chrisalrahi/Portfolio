@@ -293,7 +293,7 @@ section {
 .hero-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 3rem;
+  gap: 3.5rem;
   align-items: center;
 }
 
@@ -441,54 +441,59 @@ section {
 
 /* ---------- Featured projects ---------- */
 
+/* flex column so the track filter can float the teaser project to the bottom
+   with order, instead of relying on DOM position */
+.features {
+  display: flex;
+  flex-direction: column;
+}
+
 .feature {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3.5rem;
   align-items: center;
   padding: 3rem 0;
+  border-top: 1px solid var(--border);
   scroll-margin-top: var(--header-h);
 }
 
-.feature + .feature {
-  border-top: 1px solid var(--border);
+/* the hidden attribute alone loses to the flex display above */
+.features .feature[hidden] {
+  display: none;
 }
 
-.feature:nth-child(even) .feature-media {
+/* is-first / media-right are stamped into the HTML for the default order and
+   restamped by site.js on every filter change, so hidden siblings never leave
+   a stray divider or two images on the same side */
+.feature.is-first {
+  border-top: none;
+}
+
+html:not(.js) .features > .feature:first-child {
+  border-top: none;
+}
+
+.feature.media-right .feature-media {
   order: 2;
 }
 
 .feature-media {
   border-radius: 20px;
   overflow: hidden;
+  border: 1px solid var(--border);
   background: var(--surface);
 }
 
 .feature-media img {
   width: 100%;
+  display: block;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
 .feature-media:hover img {
   transform: scale(1.05);
-}
-
-.feature-media.duo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  background: none;
-  overflow: visible;
-}
-
-.feature-media.duo figure {
-  margin: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
 }
 
 .feature h3 {
@@ -500,6 +505,171 @@ section {
   font-size: 1.0625rem;
   color: var(--muted);
   margin-bottom: 1.25rem;
+}
+
+.feature-media.trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  overflow: visible;
+}
+
+.feature-media.trio figure {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  /* the pair shares a row, so a fixed box plus cover keeps both filled edge to
+     edge instead of letterboxing the shorter one. sources are pre-cropped 4:3
+     so nothing is actually lost to the crop */
+  aspect-ratio: 4 / 3;
+}
+
+.feature-media.trio figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* spans the row on its own, so its natural aspect already fills the width */
+.feature-media.trio figure.wide {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+}
+
+/* ---------- Work / school track filter ---------- */
+
+/* filter pills and the slide-deck link share one centred row above the list */
+.projects-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin: -1.5rem 0 1rem;
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.track-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--border);
+}
+
+/* without JS the buttons do nothing, so every project just stays on the page */
+html:not(.js) .track-filter {
+  display: none;
+}
+
+.deck-link {
+  padding: 8px 22px;
+  border-width: 1px;
+  border-color: var(--border);
+  font-size: 0.875rem;
+}
+
+.deck-link:hover {
+  border-color: var(--accent);
+}
+
+.track-btn {
+  padding: 8px 22px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--nav-font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.track-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent), transparent 78%);
+}
+
+.track-btn[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--contrast);
+}
+
+.feature-eyebrow,
+.card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 0.625rem;
+  font-family: var(--nav-font);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.badge {
+  padding: 3px 12px;
+  border-radius: 50px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 60%);
+  letter-spacing: 0.5px;
+}
+
+.badge-work {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--contrast);
+}
+
+.badge-school {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.badge-personal {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+/* the odd one out at the bottom of a filtered list, held back a little so it
+   does not read as part of the track you asked for. specificity has to clear
+   `.js .reveal.visible` (0,3,0), which pins opacity to 1 */
+.js .feature.reveal.is-teaser {
+  opacity: 0.72;
+  transition: opacity 0.3s ease;
+}
+
+.js .feature.reveal.is-teaser:hover {
+  opacity: 1;
+}
+
+.track-teaser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 2rem 0 0.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+/* as with .feature, the display above would otherwise beat [hidden] */
+.features .track-teaser[hidden] {
+  display: none;
+}
+
+.track-teaser p {
+  color: var(--muted);
 }
 
 /* ---------- Small project cards ---------- */
@@ -520,7 +690,7 @@ section {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
@@ -541,6 +711,8 @@ section {
 .card-media {
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .card-media img {
@@ -593,6 +765,15 @@ section {
 
 .card .tags {
   margin: auto 0 0;
+}
+
+.card .project-links {
+  gap: 0.875rem;
+  margin-top: 0.875rem;
+}
+
+.card .project-links a {
+  font-size: 0.8125rem;
 }
 
 /* ---------- Experience ---------- */
@@ -832,6 +1013,13 @@ section {
   transform: none;
 }
 
+/* .card:hover (0,2,0) loses to the rule above (0,3,0) once a card has
+   scrolled into view, so the hover lift silently stopped working; this
+   rule outranks it (0,4,0) to restore the lift without touching fade-in. */
+.js .card.reveal:hover {
+  transform: translateY(-10px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -930,8 +1118,18 @@ section {
     padding: 2.5rem 0;
   }
 
-  .feature:nth-child(even) .feature-media {
+  .feature.media-right .feature-media {
     order: 0;
+  }
+
+  .projects-controls {
+    margin-top: -1rem;
+  }
+
+  /* the divider reads as a stray mark once the row wraps */
+  .track-filter {
+    padding-right: 0;
+    border-right: none;
   }
 
   .card-grid {

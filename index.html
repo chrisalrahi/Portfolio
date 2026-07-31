@@ -74,7 +74,6 @@
               Resume (PDF)
             </a>
             <a class="btn btn-outline" href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="btn btn-outline" href="https://github.com/chrisalrahi" target="_blank" rel="noopener">GitHub</a>
             <a class="btn btn-outline" href="mailto:chris.alrahi@gmail.com">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
               Email
@@ -92,37 +91,104 @@
       <div class="container">
         <div class="section-title reveal">
           <h2>Projects</h2>
-          <p>A mix of school design projects, personal builds, and things I fixed along the way.</p>
+          <p>A mix of co-op work projects, school design projects, personal builds, and things I fixed along the way.</p>
+        </div>
+
+        <div class="projects-controls reveal">
+          <div class="track-filter" role="group" aria-label="Filter projects">
+            <button type="button" class="track-btn" data-filter="work" aria-pressed="false">Work projects</button>
+            <button type="button" class="track-btn" data-filter="school" aria-pressed="false">School projects</button>
+          </div>
+          <a class="btn btn-outline deck-link" href="https://drive.google.com/file/d/1_K2jrSHzDz3MdFnsW2T23iYDUHsTxgiF/view?usp=sharing" target="_blank" rel="noopener">
+            View my slide deck
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
         </div>
 
         <div class="features">
 
-          <article class="feature reveal" id="beer-goggles">
+          <article class="feature reveal is-first" data-track="work" id="cw-chassis">
             <div class="feature-media">
-              <img src="assets/img/opt/beer-goggles.webp" width="667" height="500" loading="lazy" alt="The Beer Goggles team with the fermentation-monitoring prototype">
+              <img src="assets/img/opt/cw-chassis.webp" width="800" height="753" loading="lazy" alt="The ruggedized VPX electronics chassis behind the liquid cooling redesign">
             </div>
             <div class="feature-body">
-              <h3>Beer Goggles</h3>
-              <p class="hook">A gravity and temperature monitoring system we built for Beyond the Pale Brewing. It takes specific gravity and temperature readings right from the fermentation tank, so the brewers don't have to sample by hand.</p>
+              <p class="feature-eyebrow"><span class="badge badge-work">Work</span> Curtiss-Wright · 2025</p>
+              <h3>Liquid-Cooled Chassis Redesign</h3>
+              <p class="hook">I reworked the liquid cooling geometry of a ruggedized electronics chassis to see if cheaper machining methods could hold the same thermal performance.</p>
               <dl class="meta">
-                <div><dt>My role</dt><dd>I led our team of three and handled the mechanical integration, sensor calibration, and the Arduino code that ties it all together.</dd></div>
-                <div><dt>Outcome</dt><dd>The final prototype read specific gravity within ±0.1 across three rounds of designing and testing, and we handed it off with a full user and product manual.</dd></div>
+                <div><dt>My role</dt><dd>I redrew the cooling paths in CAD around cheaper machining processes, then ran Flotherm simulations to compare the new geometry against the original.</dd></div>
+                <div><dt>Outcome</dt><dd>A manufacturable, lower-cost layout the team could build against. Alongside it I ran thermal and environmental testing on nine conduction-cooled products.</dd></div>
               </dl>
               <ul class="tags">
-                <li>Arduino (C++)</li><li>Load cell + ultrasonic sensing</li><li>SolidWorks</li><li>3D printing</li>
+                <li>Flotherm</li><li>Thermal design</li><li>CAD</li>
               </ul>
-              <div class="project-links">
-                <a href="https://makerepo.com/ChristopherAlRahi/1336.gng1103b04group16beergoggles" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a href="assets/Docs/Beer%20Goggles%20-%20User%20and%20Product%20Manual.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
-              </div>
             </div>
           </article>
 
-          <article class="feature reveal" id="blade-polisher">
+          <article class="feature reveal media-right" data-track="work" id="rtd-sensor">
+            <div class="feature-media">
+              <img src="assets/img/opt/about-nrcan.webp" width="800" height="931" loading="lazy" alt="Chris Al-Rahi presenting the aspirated and shielded RTD sensor research poster at CanmetENERGY">
+            </div>
+            <div class="feature-body">
+              <p class="feature-eyebrow"><span class="badge badge-work">Work</span> CanmetENERGY · Renewable Heat &amp; Power · 2025</p>
+              <h3>Aspirated &amp; Shielded RTD Sensor</h3>
+              <p class="hook">Air temperature readings inside the SolarSteam enclosure were being thrown off by radiation, so I built a shielded sensor that slides up and down to sample at any height.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>I designed the shield in SolidWorks, sized the aspiration from the literature, and ran the accuracy testing myself.</dd></div>
+                <div><dt>Outcome</dt><dd>Live temperature accuracy improved by more than 30%, and I presented the work as a research poster.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>SolidWorks</li><li>Instrumentation</li><li>Field testing</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="feature reveal" data-track="school" id="inverted-pendulum">
+            <div class="feature-media trio">
+              <figure class="wide"><img src="assets/img/opt/pendulum-rig.webp" width="800" height="384" loading="lazy" alt="The inverted pendulum rig: a belt-driven cart running on a 0.5 metre linear rail"></figure>
+              <figure><img src="assets/img/opt/pendulum-cad.webp" width="560" height="420" loading="lazy" alt="SolidWorks assembly of the pendulum cart, rail, motor, and electronics enclosure"></figure>
+              <figure><img src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" loading="lazy" alt="Step response plots from tuning the PID controller at three proportional gains"></figure>
+            </div>
+            <div class="feature-body">
+              <p class="feature-eyebrow"><span class="badge badge-school">School</span> Control Systems</p>
+              <h3>Inverted Pendulum</h3>
+              <p class="hook">A belt-driven cart on a 0.5 m rail that balances a rigid pendulum upright, with a rotary encoder reading the angle and nothing telling it where the cart is.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>I designed every 3D printed part on the rig, sourced all the parts, optimized the electronics layout, and helped tune the PID controller.</dd></div>
+                <div><dt>Outcome</dt><dd>A closed-loop system that holds the pendulum upright and recovers from disturbances.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>SolidWorks</li><li>Arduino (C++)</li><li>PID control</li><li>3D printing</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="feature reveal media-right" data-track="school" id="gear-reducer">
+            <div class="feature-media trio">
+              <figure class="wide"><img src="assets/img/opt/reducer-exploded.webp" width="545" height="307" loading="lazy" alt="Exploded view of the two-stage gear reducer assembly"></figure>
+              <figure><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" loading="lazy" alt="CAD render of the gear reducer with the casing shown transparent"></figure>
+              <figure><img src="assets/img/opt/reducer-drawing.webp" width="560" height="420" loading="lazy" alt="Top level assembly drawing of the gear reducer with its parts list"></figure>
+            </div>
+            <div class="feature-body">
+              <p class="feature-eyebrow"><span class="badge badge-school">School</span> Machine Design</p>
+              <h3>Two-Stage Gear Reducer</h3>
+              <p class="hook">A 9:1 reducer for an industrial conveyor drive, taking 6 hp at 400 rpm down to 45 rpm.</p>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>I sized the two-stage gear reduction and ran the bending and moment failure analysis, and I designed every part in the assembly except the shaft.</dd></div>
+                <div><dt>Outcome</dt><dd>A sealed unit validated for a five-year service life, delivered with a full drawing package.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>SolidWorks</li><li>Gear design</li><li>Failure analysis</li><li>Engineering drawings</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="feature reveal" data-track="school" id="blade-polisher">
             <div class="feature-media">
               <img src="assets/img/opt/blade-polisher.webp" width="800" height="560" loading="lazy" alt="Isometric CAD render of the turbine blade mold polisher gantry system">
             </div>
             <div class="feature-body">
+              <p class="feature-eyebrow"><span class="badge badge-school">School</span> MCG 2101</p>
               <h3>Turbine Blade Mold Polisher</h3>
               <p class="hook">A pneumatic gantry system that polishes 9-metre wind turbine blade molds automatically, replacing a job that used to be slow, inconsistent, and physically demanding to do by hand.</p>
               <dl class="meta">
@@ -140,34 +206,34 @@
             </div>
           </article>
 
-          <article class="feature reveal" id="mobilitray">
-            <div class="feature-media duo">
-              <figure><img src="assets/img/opt/mobilitray.webp" width="301" height="399" loading="lazy" alt="Mobilitray prototype clipped onto a posterior walker"></figure>
-              <figure><img src="assets/img/opt/mobilitray-cad.webp" width="292" height="375" loading="lazy" alt="CAD diagram of the Mobilitray folding tray design"></figure>
+          <article class="feature reveal media-right" data-track="school" id="beer-goggles">
+            <div class="feature-media">
+              <img src="assets/img/opt/beer-goggles.webp" width="667" height="500" loading="lazy" alt="The Beer Goggles team with the fermentation-monitoring prototype">
             </div>
             <div class="feature-body">
-              <h3>Mobilitray</h3>
-              <p class="hook">A foldable tray that clips onto posterior walkers so users can carry things without giving up the walker's stability. </p>
+              <p class="feature-eyebrow"><span class="badge badge-school">School</span> Beyond the Pale Brewing</p>
+              <h3>Beer Goggles</h3>
+              <p class="hook">A gravity and temperature monitoring system we built for Beyond the Pale Brewing. It takes specific gravity and temperature readings right from the fermentation tank, so the brewers don't have to sample by hand.</p>
               <dl class="meta">
-                <div><dt>My role</dt><dd>My work centered on the mechanical design and prototyping: 3D-printed hooks and clips, PEX supports, and a locking mechanism that folds flat when it's not in use.</dd></div>
-                <div><dt>Outcome</dt><dd>A simple (but effective) tray that carries five pounds and held up in user testing. We wrapped it up with a product manual.</dd></div>
+                <div><dt>My role</dt><dd>I led our team of three and handled the mechanical integration, sensor calibration, and the Arduino code that ties it all together.</dd></div>
+                <div><dt>Outcome</dt><dd>The final prototype read specific gravity within ±0.1 across three rounds of designing and testing, and we handed it off with a full user and product manual.</dd></div>
               </dl>
               <ul class="tags">
-                <li>SolidWorks</li><li>3D printing</li><li>User testing</li>
+                <li>Arduino (C++)</li><li>Load cell + ultrasonic sensing</li><li>SolidWorks</li><li>3D printing</li>
               </ul>
               <div class="project-links">
-                <a href="https://makerepo.com/ChristopherAlRahi/1904.gng2101group-a-41mobilitray" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a href="https://drive.google.com/file/d/1qcZJhXqsPvL7GBu-d9-DBKo9N6WrZpPw/view" target="_blank" rel="noopener">Demo video <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a href="assets/Docs/Mobilitray%20-%20User%20and%20Product%20Manual%204.1.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
+                <a href="https://makerepo.com/ChristopherAlRahi/1336.gng1103b04group16beergoggles" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="assets/Docs/Beer%20Goggles%20-%20User%20and%20Product%20Manual.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
               </div>
             </div>
           </article>
 
-          <article class="feature reveal" id="greenhouse">
+          <article class="feature reveal" data-track="school" id="greenhouse">
             <div class="feature-media">
               <img src="assets/img/opt/greenhouse.webp" width="540" height="563" loading="lazy" alt="Assembled greenhouse climate controller with sensors and wiring">
             </div>
             <div class="feature-body">
+              <p class="feature-eyebrow"><span class="badge badge-school">School</span> Embedded Systems · ELG 3336</p>
               <h3>Greenhouse Climate Controller</h3>
               <p class="hook">An automated climate control setup my partner and I built to monitor temperature, humidity, light, and air quality, and correct the environment on its own.</p>
               <dl class="meta">
@@ -184,32 +250,49 @@
             </div>
           </article>
 
-          <article class="feature reveal" id="truss-analysis">
-            <div class="feature-media">
-              <img src="assets/img/opt/truss-bridge.webp" width="655" height="253" loading="lazy" alt="Balsa wood truss bridge built for load testing">
+          <div class="track-teaser" hidden>
+            <p>That's one of my <span class="teaser-track"></span> projects. Want to see the rest?</p>
+            <button type="button" class="btn btn-outline teaser-btn"></button>
+          </div>
+
+        </div>
+
+        <h3 class="more-title reveal">More projects, builds &amp; repairs</h3>
+        <p class="more-sub reveal">A couple more school projects, plus things I've built and fixed on my own time.</p>
+
+        <div class="card-grid">
+
+          <article class="card reveal" id="mobilitray">
+            <div class="card-media">
+              <img src="assets/img/opt/mobilitray.webp" width="560" height="420" loading="lazy" alt="Mobilitray prototype clipped onto a posterior walker">
             </div>
-            <div class="feature-body">
-              <h3>Balsa Truss Bridge</h3>
-              <p class="hook">A balsa wood truss bridge we designed by hand using a hybrid Pratt-Warren layout, then built and load tested to see how far it could go.</p>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>I worked on the force analysis using the method of joints and sections, helped size and optimize the members, and got hands-on with the construction.</dd></div>
-                <div><dt>Outcome</dt><dd>The bridge hit a load-to-weight ratio of 292.5 at testing, and the final report compares how the theory held up against the real thing.</dd></div>
-              </dl>
-              <ul class="tags">
-                <li>Structural analysis</li><li>Load testing</li>
-              </ul>
+            <div class="card-body">
+              <p class="card-eyebrow"><span class="badge badge-school">School</span> GNG 2101</p>
+              <h4>Mobilitray</h4>
+              <p>A foldable tray that clips onto posterior walkers so users can carry things without giving up the walker's stability. It carries five pounds, held up in user testing, and folds flat when it's not in use.</p>
+              <ul class="tags"><li>SolidWorks</li><li>3D printing</li><li>User testing</li></ul>
+              <div class="project-links">
+                <a href="https://makerepo.com/ChristopherAlRahi/1904.gng2101group-a-41mobilitray" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="https://drive.google.com/file/d/1qcZJhXqsPvL7GBu-d9-DBKo9N6WrZpPw/view" target="_blank" rel="noopener">Demo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a href="assets/Docs/Mobilitray%20-%20User%20and%20Product%20Manual%204.1.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" id="truss-analysis">
+            <div class="card-media">
+              <img src="assets/img/opt/truss-bridge.webp" width="560" height="420" loading="lazy" alt="Balsa wood truss bridge built for load testing">
+            </div>
+            <div class="card-body">
+              <p class="card-eyebrow"><span class="badge badge-school">School</span> CVG 2140</p>
+              <h4>Balsa Truss Bridge</h4>
+              <p>A balsa wood truss bridge we designed by hand using a hybrid Pratt-Warren layout, then built and load tested. It hit a load-to-weight ratio of 292.5.</p>
+              <ul class="tags"><li>Structural analysis</li><li>Load testing</li></ul>
               <div class="project-links">
                 <a href="assets/Docs/CVG%202140%20-%20Truss%20Analysis%20-%20Final%20Report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
               </div>
             </div>
           </article>
-
-        </div>
-
-        <h3 class="more-title reveal">More builds &amp; repairs</h3>
-        <p class="more-sub reveal">Things I've built and fixed on my own time.</p>
-
-        <div class="card-grid">
 
           <article class="card reveal">
             <div class="card-media collage">
@@ -219,6 +302,7 @@
               <img src="assets/img/opt/fender-4-installed.webp" width="480" height="641" loading="lazy" alt="Finished fender reinstalled on the car">
             </div>
             <div class="card-body">
+              <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
               <h4>Car Fender Repair</h4>
               <p>The fender was cracked, so I repaired it myself. Filled and sanded the panel, matched the paint, and refit it on the car.</p>
               <ul class="tags"><li>Surface prep</li><li>Finishing</li></ul>
@@ -230,6 +314,7 @@
               <img src="assets/img/opt/pool-heater.webp" width="640" height="478" loading="lazy" alt="Opened pool heater during component-level repair">
             </div>
             <div class="card-body">
+              <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
               <h4>Pool Heater Recovery</h4>
               <p>The pool heater died, so I traced the fault down to the board, repaired it, and got it running again without a service call.</p>
               <ul class="tags"><li>Multimeter diagnostics</li><li>PCB rework</li></ul>
@@ -241,6 +326,7 @@
               <img src="assets/img/opt/hottub-heater.webp" width="640" height="477" loading="lazy" alt="Hot-tub heater element during replacement">
             </div>
             <div class="card-body">
+              <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
               <h4>Hot-Tub Heater Repair</h4>
               <p>Tracked down an electrical fault in the hot tub's heating circuit, sourced a compatible element, and installed it back into the piping.</p>
               <ul class="tags"><li>Diagnostic testing</li><li>Circuit inspection</li></ul>
@@ -252,6 +338,7 @@
               <img src="assets/img/opt/ping-pong.webp" width="601" height="625" loading="lazy" alt="Foldable ping-pong table top mounted on a pool table">
             </div>
             <div class="card-body">
+              <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
               <h4>Foldable Ping-Pong Table</h4>
               <p>Designed and built a fold-away top that turns our pool table into a ping pong table in seconds.</p>
               <ul class="tags"><li>CAD</li><li>Fabrication</li><li>3D printing</li></ul>
@@ -323,7 +410,7 @@
             </ul>
           </div>
           <div class="about-photo">
-            <img src="assets/img/opt/about-nrcan.webp" width="800" height="931" loading="lazy" alt="Chris Al-Rahi presenting a research poster at CanmetENERGY">
+            <img src="assets/img/opt/about-chris.webp" width="800" height="1000" loading="lazy" alt="Chris Al-Rahi">
           </div>
         </div>
       </div>
@@ -400,7 +487,7 @@
           // create or show thank-you message
           let msg = document.createElement('p');
           msg.textContent = 'Thanks, your message has been sent!';
-          msg.style.color = '#0f0';
+          msg.style.color = 'var(--accent-text)';
           msg.style.marginTop = '10px';
           msg.style.textAlign = 'center';
           form.appendChild(msg);
