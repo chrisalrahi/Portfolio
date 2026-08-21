@@ -27,3 +27,13 @@ There is no package manager, bundler, linter, or test framework. "Building" mean
 - The contact section has both quick links and a Formspree form. The resume PDF at `assets/Docs/Chris Al-Rahi Resume.pdf` is THE resume link everywhere (nav, hero, experience).
 - `assets/vendor/` was pruned to exactly what `/legacy` loads (e.g. Bootstrap is only `bootstrap.min.css` + `bootstrap.bundle.min.js`); don't re-add variants, and don't delete what remains.
 - The `.idea/` directory is JetBrains IDE config; leave it untracked/out of commits. `.playwright-mcp/` is test output; don't commit it.
+
+## Vault
+
+Knowledge for this project lives in Chris's Obsidian vault, not in this repo:
+`C:/Users/chris.DESKTOP-S71LEBE/OneDrive/Documents/MyBrain/wiki/projects/Portfolio Site.md`. Read it before starting. Search the vault (`obsidian_search` or `/obsidian-find`) before asking Chris to re-explain anything about him, his machine, or this project. Log finished work with `/obsidian-log` and record decisions with `/obsidian-decide`. Never write into the vault's `raw/` folder.
+
+## Vault propagation hints
+
+- Save: copy decisions with reasons, design-token changes, deploy incidents, anything touching repo visibility or the custom domain.
+- Keep CLAUDE.md identical to this file when either changes.
