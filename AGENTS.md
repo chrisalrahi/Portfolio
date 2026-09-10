@@ -31,7 +31,7 @@ There is no package manager, bundler, linter, or test framework. "Building" mean
 ## Vault
 
 Knowledge for this project lives in Chris's Obsidian vault, not in this repo:
-`C:/Users/chris.DESKTOP-S71LEBE/OneDrive/Documents/MyBrain/wiki/projects/Portfolio Site.md`. Read it before starting. Search the vault (`obsidian_search` or `/obsidian-find`) before asking Chris to re-explain anything about him, his machine, or this project. Log finished work with `/obsidian-log` and record decisions with `/obsidian-decide`. Never write into the vault's `raw/` folder.
+`C:/Users/chris.DESKTOP-S71LEBE/Dev/MyBrain/wiki/projects/Portfolio Site.md`. Read it before starting. Search the vault (`obsidian_search` or `/obsidian-find`) before asking Chris to re-explain anything about him, his machine, or this project. Log finished work with `/obsidian-log` and record decisions with `/obsidian-decide`. Never write into the vault's `raw/` folder.
 
 ## Vault propagation hints
 
