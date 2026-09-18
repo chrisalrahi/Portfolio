@@ -1841,12 +1841,21 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 0.9375rem;
   }
 
+  /* never a scroll container while folded: the folded stage fits on one
+     screen at every phone size, and a nested scroller with
+     overscroll-behavior: contain inside the pinned stage swallowed every
+     swipe that started on it, so the page could only be moved from the
+     header or from the 72px strip under the grid. Only an opened fold can
+     outgrow the stage, so only then does the grid scroll inside it, sized to
+     the whole stage and chaining back to the page at its end */
   .peak-grid {
     align-content: start;
-    max-height: calc(100svh - var(--header-h));
+  }
+
+  .peak-grid:has(details[open]) {
+    max-height: 100svh;
     overflow-x: clip;
     overflow-y: auto;
-    overscroll-behavior: contain;
   }
 
   .plate-trio {
@@ -2064,11 +2073,27 @@ html:not(.js) .peak-grid .plate--plot {
 
   /* Safety net. If a stage still cannot hold its content, the content scrolls
      inside the stage instead of being cropped and unreachable. */
-  .hero-sheet,
-  .peak-grid {
+  .hero-sheet {
     /* start, not center: centred content that overflows its box is clipped at
        the top, which hid the film plate under the header on a 640px phone */
     align-content: start;
+    max-height: calc(100svh - var(--header-h));
+    overflow-x: clip;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .peak-grid {
+    align-content: start;
+  }
+}
+
+/* The peak keeps its safety net for short wide windows only. Phones never
+   scroll inside the folded stage (see the 768px block), and this rule used
+   to re-apply the trap on every phone under 740px tall, which in Safari is
+   every iPhone with its toolbars showing. */
+@media (max-height: 740px) and (min-width: 769px) {
+  .peak-grid {
     max-height: calc(100svh - var(--header-h));
     overflow-x: clip;
     overflow-y: auto;
