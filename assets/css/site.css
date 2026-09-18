@@ -1841,21 +1841,28 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 0.9375rem;
   }
 
-  /* never a scroll container while folded: the folded stage fits on one
-     screen at every phone size, and a nested scroller with
-     overscroll-behavior: contain inside the pinned stage swallowed every
-     swipe that started on it, so the page could only be moved from the
-     header or from the 72px strip under the grid. Only an opened fold can
-     outgrow the stage, so only then does the grid scroll inside it, sized to
-     the whole stage and chaining back to the page at its end */
+  /* never a scroll container: the folded stage fits on one screen at every
+     phone size, and a nested scroller inside the pinned stage swallowed
+     every swipe that started on it (with overscroll-behavior: contain the
+     page could only be moved from the header or from the 72px strip under
+     the grid; without it an iPhone still latched the swipe to the inner box
+     and the page never moved). An opened fold can outgrow one screen, so the
+     stage grows with it and the page scroll carries the extra copy past the
+     fold: the act is one and a half screens tall, so the taller stage still
+     pins briefly and then rides out with the act's end */
   .peak-grid {
     align-content: start;
   }
 
-  .peak-grid:has(details[open]) {
-    max-height: 100svh;
-    overflow-x: clip;
-    overflow-y: auto;
+  #inverted-pendulum:has(details[open]) .sc-stage {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  /* the engine sizes the act inline (span times the viewport); a grown stage
+     must never be taller than its act, or it paints over the next sheet */
+  #inverted-pendulum:has(details[open]) {
+    min-height: max-content;
   }
 
   .plate-trio {
