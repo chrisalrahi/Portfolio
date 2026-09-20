@@ -10,13 +10,13 @@
   --surface: #141f26;
   --text: #e7f2f7;
   --heading: #ffffff;
-  --accent: #9655be;
-  --contrast: #ffffff;
+  --accent: #5a9fe0;
+  --contrast: #101a20;
   --muted: color-mix(in srgb, #e7f2f7, transparent 30%);
   --border: color-mix(in srgb, #e7f2f7, transparent 88%);
-  --accent-soft: color-mix(in srgb, #9655be, transparent 88%);
-  /* AA-compliant tint (~6.6:1 on --bg) for accent-colored SMALL text; pure accent stays for large text/graphics */
-  --accent-text: color-mix(in srgb, #9655be, #ffffff 40%);
+  --accent-soft: color-mix(in srgb, #5a9fe0, transparent 88%);
+  /* AA-compliant tint (~8:1 on --bg) for accent-colored SMALL text; pure accent stays for large text/graphics */
+  --accent-text: color-mix(in srgb, #5a9fe0, #ffffff 25%);
   --heading-font: "Raleway", sans-serif;
   --body-font: "Roboto", sans-serif;
   --nav-font: "Poppins", sans-serif;
@@ -33,7 +33,7 @@
   --sc-ink: var(--text);
   --sc-ink-soft: var(--muted);
   --sc-accent: var(--accent);
-  --sc-accent-ink: #ffffff;
+  --sc-accent-ink: #101a20;
   --sc-font-display: var(--heading-font);
   --sc-font-text: var(--body-font);
   --sc-font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
