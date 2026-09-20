@@ -10,13 +10,13 @@
   --surface: #141f26;
   --text: #e7f2f7;
   --heading: #ffffff;
-  --accent: #ac23ff;
+  --accent: #9655be;
   --contrast: #ffffff;
   --muted: color-mix(in srgb, #e7f2f7, transparent 30%);
   --border: color-mix(in srgb, #e7f2f7, transparent 88%);
-  --accent-soft: color-mix(in srgb, #ac23ff, transparent 88%);
+  --accent-soft: color-mix(in srgb, #9655be, transparent 88%);
   /* AA-compliant tint (~6.6:1 on --bg) for accent-colored SMALL text; pure accent stays for large text/graphics */
-  --accent-text: color-mix(in srgb, #ac23ff, #ffffff 40%);
+  --accent-text: color-mix(in srgb, #9655be, #ffffff 40%);
   --heading-font: "Raleway", sans-serif;
   --body-font: "Roboto", sans-serif;
   --nav-font: "Poppins", sans-serif;
