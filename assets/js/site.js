@@ -4,12 +4,304 @@
   /* ---- 1. Mount the scroll engine -------------------------------------- */
   // Both scripts are deferred, so the DOM and the engine are both ready here.
   var phoneMQ = window.matchMedia ? window.matchMedia("(max-width: 768px)") : null;
+  // Swipe strips need a coarse pointer because narrow mouse windows keep the desktop flow.
+  var stripMQ = window.matchMedia ? window.matchMedia("(max-width: 768px) and (pointer: coarse)") : null;
   var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  var stripsAtLoad = !!(stripMQ && stripMQ.matches);
   var peak = document.querySelector("#inverted-pendulum[data-sc-act=\"scrub\"]");
   var folds = [...document.querySelectorAll("details.label-more")];
+  var strips = [];
+  var placeBlocks = [];
+  var lastSeenId = null;
+  var printing = false;
+  var sending = false;
+  var crossingPending = false;
 
-  // Phones hold the pendulum stage for one and a half screens instead of three, and the
-  // role/outcome copy starts folded so each sheet reads photo, title, hook.
+  var stripGroups = [
+    {
+      key: "work",
+      title: "Work projects",
+      ids: ["cw-chassis", "rtd-sensor"]
+    },
+    {
+      key: "school",
+      title: "School projects",
+      ids: ["inverted-pendulum", "blade-polisher", "gear-reducer", "beer-goggles", "greenhouse"]
+    }
+  ];
+
+  // Track the reader's place before a breakpoint crossing can reflow the page.
+  var readPlace = function () {
+    if (stripMQ && stripMQ.matches !== stripsAtLoad) return;
+    if (!placeBlocks.length) return;
+    var current = placeBlocks[0];
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      current = placeBlocks[placeBlocks.length - 1];
+    } else {
+      placeBlocks.forEach(function (block) {
+        if (block.getBoundingClientRect().top <= window.innerHeight * 0.35) current = block;
+      });
+    }
+    if (current.classList.contains("project-strip")) {
+      var currentStrip = strips.find(function (strip) { return strip.wrapper === current; });
+      if (currentStrip && currentStrip.sections[currentStrip.index]) {
+        lastSeenId = currentStrip.sections[currentStrip.index].id;
+      }
+      return;
+    }
+    lastSeenId = current.id;
+  };
+
+  var setupPhonePeak = function () {
+    if (!peak) return;
+    var video = peak.querySelector("video[data-sc-scrub]");
+    var plate = video ? video.closest(".plate--film") : null;
+    peak.removeAttribute("data-sc-act");
+    peak.style.setProperty("--sc-p", "1");
+    if (!video || (reduceMQ && reduceMQ.matches)) return;
+
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.src = video.getAttribute("data-sc-src-mobile");
+    video.addEventListener("playing", function () {
+      if (plate) plate.classList.add("sc-has-clip");
+    }, { once: true });
+
+    if (plate && "IntersectionObserver" in window) {
+      var peakClipObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            var play = video.play();
+            if (play && play.catch) play.catch(function () {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: [0, 0.5, 1] });
+      peakClipObserver.observe(plate);
+    }
+  };
+
+  var buildStrips = function () {
+    if (!stripsAtLoad || strips.length) return;
+    var main = document.querySelector("main");
+    if (!main) return;
+
+    var schoolBuilt = false;
+    stripGroups.forEach(function (group) {
+      var sections = group.ids.map(function (id) { return document.getElementById(id); });
+      if (sections.some(function (section) { return !section || section.parentNode !== main; })) return;
+
+      var wrapper = document.createElement("div");
+      wrapper.className = "project-strip";
+      wrapper.id = group.key + "-strip";
+      wrapper.dataset.strip = group.key;
+
+      var head = document.createElement("div");
+      head.className = "project-strip__head";
+      var title = document.createElement("h3");
+      title.className = "project-strip__title";
+      title.textContent = group.title;
+      var hint = document.createElement("p");
+      hint.className = "swipe-hint";
+      hint.setAttribute("aria-hidden", "true");
+      hint.textContent = "Swipe sideways \u00b7 " + sections.length + " projects";
+      var count = document.createElement("p");
+      count.className = "project-strip__count";
+      count.setAttribute("aria-live", "polite");
+      count.textContent = "1 / " + sections.length;
+
+      var track = document.createElement("div");
+      track.className = "project-strip__track";
+      track.tabIndex = 0;
+      track.setAttribute("role", "group");
+      track.setAttribute("aria-label", group.title);
+
+      head.append(title, hint, count);
+      wrapper.append(head, track);
+      main.insertBefore(wrapper, sections[0]);
+      sections.forEach(function (section) {
+        track.appendChild(section);
+        section.querySelectorAll("[data-sc-in]").forEach(function (node) {
+          node.classList.add("sc-in");
+        });
+        section.querySelectorAll("[data-sc-stagger]").forEach(function (node) {
+          Array.prototype.forEach.call(node.children, function (child) {
+            child.classList.add("sc-in");
+          });
+        });
+      });
+
+      var strip = {
+        wrapper: wrapper,
+        track: track,
+        sections: sections,
+        index: 0
+      };
+      var frame = 0;
+      var updateCount = function () {
+        frame = 0;
+        var nearest = 0;
+        var distance = Infinity;
+        sections.forEach(function (section, index) {
+          var nextDistance = Math.abs(section.offsetLeft - track.scrollLeft);
+          if (nextDistance < distance) {
+            nearest = index;
+            distance = nextDistance;
+          }
+        });
+        var nextText = (nearest + 1) + " / " + sections.length;
+        if (count.textContent !== nextText) count.textContent = nextText;
+        if (strip.index !== nearest) {
+          strip.index = nearest;
+          readPlace();
+        }
+      };
+      var onStripScroll = function () {
+        if (!frame) frame = requestAnimationFrame(updateCount);
+      };
+      track.addEventListener("scroll", onStripScroll, { passive: true });
+      strips.push(strip);
+      if (group.key === "school") schoolBuilt = true;
+    });
+    if (strips.length) document.documentElement.classList.add("strips-on");
+    if (schoolBuilt) setupPhonePeak();
+  };
+
+  var rememberCrossingForm = function () {
+    var values = {};
+    var hasValue = false;
+    var focus = null;
+    var fields = document.querySelectorAll(".contact-form form input[name], .contact-form form textarea[name], .contact-form form select[name]");
+    fields.forEach(function (field) {
+      values[field.name] = field.value;
+      if (field.value !== "") hasValue = true;
+      if (field === document.activeElement) {
+        focus = { name: field.name, start: null, end: null };
+        try {
+          var start = field.selectionStart;
+          var end = field.selectionEnd;
+          focus.start = typeof start === "number" ? start : null;
+          focus.end = typeof end === "number" ? end : null;
+        } catch (error) {}
+      }
+    });
+    if (!hasValue && !focus) return;
+    try {
+      window.sessionStorage.setItem("chrisalrahi:crossing-form", JSON.stringify({
+        values: values,
+        focus: focus,
+        t: Date.now()
+      }));
+    } catch (error) {}
+  };
+
+  var restoreCrossingState = function () {
+    var scrollJSON = null;
+    var formJSON = null;
+    var scrollId = null;
+    var formState = null;
+    var now = Date.now();
+    try {
+      scrollJSON = window.sessionStorage.getItem("chrisalrahi:crossing-scroll");
+      window.sessionStorage.removeItem("chrisalrahi:crossing-scroll");
+    } catch (error) {}
+    try {
+      formJSON = window.sessionStorage.getItem("chrisalrahi:crossing-form");
+      window.sessionStorage.removeItem("chrisalrahi:crossing-form");
+    } catch (error) {}
+
+    if (scrollJSON !== null) {
+      try {
+        var scrollState = JSON.parse(scrollJSON);
+        if (scrollState && typeof scrollState.id === "string" && typeof scrollState.t === "number" && now - scrollState.t <= 30000) {
+          scrollId = scrollState.id;
+        }
+      } catch (error) {}
+    }
+    if (formJSON !== null) {
+      try {
+        var savedForm = JSON.parse(formJSON);
+        if (savedForm && savedForm.values && typeof savedForm.t === "number" && now - savedForm.t <= 30000) {
+          formState = savedForm;
+        }
+      } catch (error) {}
+    }
+
+    var focusField = null;
+    if (formState) {
+      document.querySelectorAll(".contact-form form input[name], .contact-form form textarea[name], .contact-form form select[name]").forEach(function (field) {
+        if (Object.prototype.hasOwnProperty.call(formState.values, field.name)) field.value = formState.values[field.name];
+        if (formState.focus && field.name === formState.focus.name) focusField = field;
+      });
+    }
+
+    var jumpToSavedState = function () {
+      if (focusField) {
+        focusField.scrollIntoView({ block: "center", behavior: "instant" });
+        return;
+      }
+      if (scrollId !== null) {
+        var target = document.getElementById(scrollId);
+        if (target) {
+          var track = target.closest(".project-strip__track");
+          if (track) {
+            var scrollPadding = parseFloat(window.getComputedStyle(track).scrollPaddingLeft) || 0;
+            track.scrollLeft = target.offsetLeft - scrollPadding;
+            target.closest(".project-strip").scrollIntoView({ block: "start", behavior: "instant" });
+          } else {
+            target.scrollIntoView({ block: "start", behavior: "instant" });
+          }
+        }
+      }
+    };
+
+    if (focusField || scrollId !== null) {
+      history.scrollRestoration = "manual";
+      // Hold manual restoration through load so the browser cannot overwrite the saved place.
+      requestAnimationFrame(function () {
+        if (focusField) {
+          try {
+            focusField.focus({ preventScroll: true });
+          } catch (error) {
+            focusField.focus();
+          }
+          try {
+            if (typeof formState.focus.start === "number" && typeof formState.focus.end === "number") {
+              focusField.setSelectionRange(formState.focus.start, formState.focus.end);
+            }
+          } catch (error) {}
+        }
+        jumpToSavedState();
+        var finishRestoration = function () {
+          jumpToSavedState();
+          window.addEventListener("pagehide", function () { history.scrollRestoration = "auto"; }, { once: true });
+          readPlace();
+        };
+        if (document.readyState === "complete") finishRestoration();
+        else window.addEventListener("load", finishRestoration, { once: true });
+      });
+    } else {
+      requestAnimationFrame(readPlace);
+    }
+  };
+
+  var saveCrossingStateAndReload = function () {
+    if (lastSeenId !== null) {
+      try {
+        window.sessionStorage.setItem("chrisalrahi:crossing-scroll", JSON.stringify({
+          id: lastSeenId,
+          t: Date.now()
+        }));
+      } catch (error) {}
+    }
+    rememberCrossingForm();
+    window.location.reload();
+  };
+
+  // On phones the role/outcome copy starts folded so each card reads photo,
+  // title, hook, then the optional detail.
   var setFolds = function () {
     var phone = !!(phoneMQ && phoneMQ.matches);
     folds.forEach(function (d) { d.open = !phone; });
@@ -23,7 +315,32 @@
     if (peak) peak.setAttribute("data-sc-span", "1.25");
   }
 
+  if (stripsAtLoad) {
+    try {
+      buildStrips();
+    } catch (error) {
+      document.querySelectorAll(".project-strip").forEach(function (wrapper) {
+        try {
+          wrapper.querySelectorAll(".project-strip__track").forEach(function (track) {
+            Array.prototype.forEach.call(track.children, function (section) {
+              if (section.tagName === "SECTION" && wrapper.parentNode) {
+                wrapper.parentNode.insertBefore(section, wrapper);
+              }
+            });
+          });
+        } catch (unwrapError) {}
+        try { wrapper.remove(); } catch (removeError) {}
+      });
+      strips.length = 0;
+      document.documentElement.classList.remove("strips-on");
+      if (peak && !peak.hasAttribute("data-sc-act")) peak.setAttribute("data-sc-act", "scrub");
+      if (peak) peak.style.removeProperty("--sc-p");
+    }
+  }
+  placeBlocks = [...document.querySelectorAll("main > section[id], main > .project-strip")];
+
   var sc = window.ScrollCraft ? window.ScrollCraft.mount(document.body) : null;
+  restoreCrossingState();
 
   // Opening a fold changes the page height under every act below it. The engine
   // only remeasures on a width change, so ask it directly.
@@ -34,6 +351,28 @@
     var onPhoneChange = function () { setFolds(); if (sc) sc.layout(); };
     if (phoneMQ.addEventListener) phoneMQ.addEventListener("change", onPhoneChange);
     else phoneMQ.addListener(onPhoneChange);
+  }
+  var onStripChange = function () {
+    if (printing || window.matchMedia("print").matches) return;
+    if (stripMQ.matches === stripsAtLoad) {
+      crossingPending = false;
+      return;
+    }
+    if (sending) {
+      crossingPending = true;
+      return;
+    }
+    crossingPending = false;
+    saveCrossingStateAndReload();
+  };
+  window.addEventListener("beforeprint", function () { printing = true; });
+  window.addEventListener("afterprint", function () {
+    printing = false;
+    if (crossingPending) onStripChange();
+  });
+  if (stripMQ) {
+    if (stripMQ.addEventListener) stripMQ.addEventListener("change", onStripChange);
+    else stripMQ.addListener(onStripChange);
   }
 
   /* ---- 2. Header state and scroll-top visibility ------------------------ */
@@ -100,6 +439,7 @@
     if (scrollTop) scrollTop.classList.toggle("show", y > 400);
     readParts();
     updatePartsZone();
+    readPlace();
   };
   window.addEventListener("scroll", () => {
     if (ticking) return;
@@ -166,7 +506,12 @@
       document.body.classList.toggle("filter-school", activeTrack === "school");
       if (activeTrack) {
         const first = document.querySelector('.sheet--part[data-track="' + activeTrack + '"]');
-        if (first) first.scrollIntoView({ block: "start" });
+        if (first) {
+          const wrapper = first.closest(".project-strip");
+          const stripTrack = wrapper ? wrapper.querySelector(".project-strip__track") : null;
+          if (stripTrack) stripTrack.scrollLeft = 0;
+          (wrapper || first).scrollIntoView({ block: "start" });
+        }
       }
     });
   });
@@ -185,6 +530,7 @@
       button.textContent = "Sending...";
       button.disabled = true;
 
+      sending = true;
       try {
         const response = await fetch(form.action, {
           method: "POST",
@@ -211,8 +557,10 @@
       } catch (error) {
         alert("Network error, please try again later.");
       } finally {
+        sending = false;
         button.textContent = originalText;
         button.disabled = false;
+        if (crossingPending) onStripChange();
       }
     });
   }
