@@ -1127,6 +1127,16 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   object-fit: cover;
 }
 
+/* three photos: the first fills the left column, the other two stack on the right */
+.card-media.collage--three img:first-child {
+  grid-row: 1 / 3;
+}
+
+/* two photos side by side, each the full height of the card */
+.card-media.collage--two {
+  grid-template-rows: 1fr;
+}
+
 .card-body {
   padding: 1.25rem 1.25rem 1.5rem;
   display: flex;
