@@ -434,18 +434,18 @@ body.filter-school .parts-list li:not([data-track="school"]) {
 
   body.pl-hidden .parts-list {
     opacity: 0;
-    transform: translateX(14px) scale(0.96);
+    transform: translateY(-50%) translateX(14px) scale(0.96);
     pointer-events: none;
   }
 
   body.pl-near .parts-list {
     opacity: 1;
-    transform: none;
+    transform: translateY(-50%);
   }
 
   body.pl-far .parts-list {
     opacity: 0.55;
-    transform: translateX(6px) scale(0.92);
+    transform: translateY(-50%) translateX(6px) scale(0.92);
   }
 
   /* The rail is fixed, so it takes no space in flow and would sit on top of the
@@ -1084,7 +1084,7 @@ body.filter-school .parts-list li:not([data-track="school"]) {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
@@ -1461,7 +1461,7 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   body.pl-hidden .parts-list,
   body.pl-near .parts-list,
   body.pl-far .parts-list {
-    transform: none;
+    transform: translateY(-50%);
   }
 }
 

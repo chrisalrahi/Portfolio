@@ -26,7 +26,7 @@
     {
       key: "school",
       title: "School projects",
-      ids: ["inverted-pendulum", "blade-polisher", "gear-reducer", "beer-goggles", "greenhouse"]
+      ids: ["inverted-pendulum", "blade-polisher", "gear-reducer"]
     }
   ];
 

@@ -11,7 +11,7 @@ and update the excerpts, rather than reading the PDF directly.
 
 - **First person, plain and direct.** "I reworked the liquid cooling geometry", "I built a shielded sensor."
 - **Never use em dashes.** Use a spaced hyphen ( - ), a comma, or a period. This is a hard requirement.
-- **Honest about team vs. solo.** "my partner and I built", "Led our team of three", "helped tune the PID
+- **Honest about team vs. solo.** "my partner and I built", "Led our team of five", "helped tune the PID
   controller." Never inflate a shared project into a solo one.
 - **No resume-speak.** Avoid "owned", "delivered", "spearheaded", "leveraged", "passionate about."
 - **No marketing constructions.** Avoid "where X meets Y" framings and sentence fragments used for punch.
@@ -54,7 +54,7 @@ Every project follows the same shape, and new ones should match it:
 
 **Role and outcome, side by side:**
 
-> MY ROLE: Led our team of three, handled mechanical integration, sensor calibration, and the Arduino code
+> MY ROLE: Led our team of five, handled mechanical integration, sensor calibration, and the Arduino code
 > tying it together.
 > OUTCOME: Read specific gravity within ±0.1 across three rounds of testing, handed off with a full user manual.
 
