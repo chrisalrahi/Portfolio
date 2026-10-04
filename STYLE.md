@@ -31,6 +31,18 @@ Every project follows the same shape, and new ones should match it:
 > **Outcome** - what came of it, with a number where one exists.
 > Then tool tags, then links.
 
+## Cards and captions (Chris, 2026-10-04)
+
+- What Chris tells you about a project is background, not copy. Pick the few facts that carry the card.
+- Name what happened plainly ("had a burst pipe", not "had sprung a leak").
+- Don't define the work by what it wasn't. "Without a service call" was cut.
+- Keep it professional and lead with the action: "Traced a hot tub error to a burnt heater port", not
+  "The hot tub kept throwing a heater too hot error".
+- Captions don't state the obvious and don't add a second clause: "The pendulum in action", not
+  "Real footage · the cart corrects a disturbance".
+- Cards in the More projects grid stay about the same length (two sentences, roughly 25 words, two or three
+  short tags) so no card stretches its row.
+
 ## Voice samples
 
 **About, from the deck:**
