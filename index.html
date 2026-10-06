@@ -47,10 +47,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Raleway:wght@300;400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <script>document.documentElement.classList.add("js");</script>
-  <link href="assets/css/scrollcraft.css" rel="stylesheet">
-  <link href="assets/css/site.css" rel="stylesheet">
-  <script src="assets/js/scrollcraft.js" defer></script>
-  <script src="assets/js/site.js" defer></script>
+  <!-- bump ?v= whenever these files change, or browsers keep a cached copy
+       that no longer matches this page -->
+  <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261005" rel="stylesheet">
+  <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
+  <script src="assets/js/site.js?v=20261005" defer></script>
 </head>
 
 <body>
@@ -272,7 +274,7 @@
           <div class="peak-film">
             <div class="plate plate--film">
               <img class="sc-stage__poster" src="assets/img/opt/pendulum-poster.webp" width="816" height="334" alt="The inverted pendulum rig balancing on its rail in the controls lab">
-              <video data-sc-scrub data-sc-src="assets/video/pendulum.mp4" data-sc-src-mobile="assets/video/pendulum-m.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+              <video class="peak-clip" data-loop-src="assets/video/pendulum.mp4" data-loop-src-mobile="assets/video/pendulum-m.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
             </div>
             <p class="plate-note">The pendulum in action</p>
           </div>

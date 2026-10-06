@@ -52,35 +52,47 @@
     lastSeenId = current.id;
   };
 
+  // In a phone strip the pendulum sheet is not pinned, so the plot shows fully drawn.
   var setupPhonePeak = function () {
     if (!peak) return;
-    var video = peak.querySelector("video[data-sc-scrub]");
-    var plate = video ? video.closest(".plate--film") : null;
     peak.removeAttribute("data-sc-act");
     peak.style.setProperty("--sc-p", "1");
-    if (!video || (reduceMQ && reduceMQ.matches)) return;
+  };
 
+  // The pendulum clip loops on its own at every width, playing only while it is
+  // on screen; scroll drives the step response plot beside it. Under reduced
+  // motion the clip is never fetched and the poster stays.
+  var startPeakLoop = function () {
+    if (!peak || (reduceMQ && reduceMQ.matches)) return;
+    var video = peak.querySelector("video.peak-clip");
+    var plate = video ? video.closest(".plate--film") : null;
+    if (!video || !plate) return;
+
+    // same small-screen rule the engine used to pick the lighter encode
+    var small = window.matchMedia &&
+      window.matchMedia("(max-width: 860px), (hover: none) and (pointer: coarse)").matches;
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
-    video.src = video.getAttribute("data-sc-src-mobile");
+    video.src = video.getAttribute(small ? "data-loop-src-mobile" : "data-loop-src");
     video.addEventListener("playing", function () {
-      if (plate) plate.classList.add("sc-has-clip");
+      plate.classList.add("sc-has-clip");
     }, { once: true });
 
-    if (plate && "IntersectionObserver" in window) {
-      var peakClipObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            var play = video.play();
-            if (play && play.catch) play.catch(function () {});
-          } else {
-            video.pause();
-          }
-        });
-      }, { threshold: [0, 0.5, 1] });
-      peakClipObserver.observe(plate);
+    var play = function () {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    if (!("IntersectionObserver" in window)) {
+      play();
+      return;
     }
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) play();
+        else video.pause();
+      });
+    }, { threshold: [0, 0.5, 1] }).observe(plate);
   };
 
   var buildStrips = function () {
@@ -338,6 +350,7 @@
     }
   }
   placeBlocks = [...document.querySelectorAll("main > section[id], main > .project-strip")];
+  startPeakLoop();
 
   var sc = window.ScrollCraft ? window.ScrollCraft.mount(document.body) : null;
   restoreCrossingState();

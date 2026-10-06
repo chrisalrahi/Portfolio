@@ -977,6 +977,22 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   max-width: min(100%, calc((100svh - var(--header-h)) * 0.34 * 816 / 334));
 }
 
+/* The pendulum clip loops on its own, so it is not an engine scrub clip and
+   needs the stage media layout here. It fades in over the poster once playing. */
+.peak-film .peak-clip {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 380ms var(--sc-ease-out);
+}
+
+.sc-has-clip .peak-clip {
+  opacity: 1;
+}
+
 .peak-grid .plate--plot {
   max-width: min(100%, calc((100svh - var(--header-h)) * 0.40 * 4 / 3));
 }

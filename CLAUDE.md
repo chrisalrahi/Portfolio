@@ -23,6 +23,7 @@ There is no package manager, bundler, linter, or test framework. "Building" mean
 - **Asset filenames contain spaces** (and one contains `#`: the Turbine Mold Polisher PDF). In `href`/`src` these must be URL-encoded (`%20`, `%23`) or the link breaks.
 - **Filename case matters.** GitHub Pages serves from Linux; match on-disk casing exactly (existing files mix `.PNG`, `.png`, `.JPG`).
 - **HTML structure is hand-maintained.** After structural edits, sanity-check that `div`/`section`/`main` open/close counts balance per file.
+- **Bump the `?v=` on the CSS and JS links in `index.html` whenever those files change.** GitHub Pages lets browsers cache them for 10 minutes, so new HTML can run against an old script. On 2026-10-05 that left the pendulum clip unstarted until the version tag was added.
 - Every project's copy follows **hook · My role · Outcome · tool tags · links**; keep new projects in that format.
 - The contact section has both quick links and a Formspree form. The resume PDF at `assets/Docs/Chris Al-Rahi Resume.pdf` is THE resume link everywhere (nav, hero, experience).
 - `assets/vendor/` was pruned to exactly what `/legacy` loads (e.g. Bootstrap is only `bootstrap.min.css` + `bootstrap.bundle.min.js`); don't re-add variants, and don't delete what remains.
