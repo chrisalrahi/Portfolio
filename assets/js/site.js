@@ -86,7 +86,6 @@
     toggle.className = "clip-toggle";
     var showHeld = function () {
       toggle.textContent = held ? "Play the clip" : "Pause the clip";
-      toggle.setAttribute("aria-pressed", String(held));
     };
     showHeld();
 
