@@ -2183,16 +2183,10 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 0.875rem;
   }
 
-  /* Safety net. If a stage still cannot hold its content, the content scrolls
-     inside the stage instead of being cropped and unreachable. */
+  /* start, not center: centred content that overflows its box is clipped at
+     the top, which hid the film plate under the header on a 640px phone */
   .hero-sheet {
-    /* start, not center: centred content that overflows its box is clipped at
-       the top, which hid the film plate under the header on a 640px phone */
     align-content: start;
-    max-height: calc(100svh - var(--header-h));
-    overflow-x: clip;
-    overflow-y: auto;
-    overscroll-behavior: contain;
   }
 
   .peak-grid {
@@ -2200,11 +2194,17 @@ html:not(.js) .peak-grid .plate--plot {
   }
 }
 
-/* The peak keeps its safety net for short wide windows only. Phones never
-   scroll inside the folded stage (see the 768px block), and this rule used
-   to re-apply the trap on every phone under 740px tall, which in Safari is
-   every iPhone with its toolbars showing. */
+/* Safety net, short wide windows only. If a stage still cannot hold its
+   content, the content scrolls inside the stage instead of being cropped and
+   unreachable. Phones never get it: once a stage overflows, a nested scroller
+   with overscroll-behavior: contain keeps every swipe that starts on it, so
+   on a 360x560 phone the page could not be moved past the hero. This rule
+   used to apply on every phone under 740px tall, which in Safari is every
+   iPhone with its toolbars showing. On a phone the hero is a normal
+   scrolling section that grows to fit, and the peak only scrolls inside its
+   stage with the fold open (see the 768px block). */
 @media (max-height: 740px) and (min-width: 769px) {
+  .hero-sheet,
   .peak-grid {
     max-height: calc(100svh - var(--header-h));
     overflow-x: clip;
