@@ -993,6 +993,26 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   opacity: 1;
 }
 
+/* Pause and play for the looping clip. site.js adds it once the clip plays.
+   The top right corner keeps it off the rig, and the inset leaves room for
+   the focus ring inside the plate's clipped edge. */
+.clip-toggle {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  z-index: 2;
+  padding: 3px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 60%);
+  border-radius: 50px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--nav-font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
 .peak-grid .plate--plot {
   max-width: min(100%, calc((100svh - var(--header-h)) * 0.40 * 4 / 3));
 }
@@ -1490,6 +1510,10 @@ body.filter-school .parts-list li:not([data-track="school"]) {
 
   .track-btn:hover {
     transform: translateY(-2px);
+  }
+
+  .clip-toggle:hover {
+    border-color: var(--accent);
   }
 
   .scroll-top:hover {

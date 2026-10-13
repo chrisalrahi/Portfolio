@@ -61,7 +61,8 @@
 
   // The pendulum clip loops on its own at every width, playing only while it is
   // on screen; scroll drives the step response plot beside it. Under reduced
-  // motion the clip is never fetched and the poster stays.
+  // motion the clip is never fetched and the poster stays, so there is no
+  // pause button either.
   var startPeakLoop = function () {
     if (!peak || (reduceMQ && reduceMQ.matches)) return;
     var video = peak.querySelector("video.peak-clip");
@@ -75,14 +76,36 @@
     video.loop = true;
     video.playsInline = true;
     video.src = video.getAttribute(small ? "data-loop-src-mobile" : "data-loop-src");
+
+    // A looping clip needs a way to stop it (WCAG 2.2.2). The button joins the
+    // plate once the clip is playing, and a clip paused with it stays paused
+    // when it scrolls off screen and back.
+    var held = false;
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "clip-toggle";
+    var showHeld = function () {
+      toggle.textContent = held ? "Play the clip" : "Pause the clip";
+      toggle.setAttribute("aria-pressed", String(held));
+    };
+    showHeld();
+
     video.addEventListener("playing", function () {
       plate.classList.add("sc-has-clip");
+      plate.appendChild(toggle);
     }, { once: true });
 
     var play = function () {
+      if (held) return;
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
     };
+    toggle.addEventListener("click", function () {
+      held = !held;
+      showHeld();
+      if (held) video.pause();
+      else play();
+    });
     if (!("IntersectionObserver" in window)) {
       play();
       return;
