@@ -8,7 +8,7 @@
   var stripMQ = window.matchMedia ? window.matchMedia("(max-width: 768px) and (pointer: coarse)") : null;
   var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
   var stripsAtLoad = !!(stripMQ && stripMQ.matches);
-  var peak = document.querySelector("#inverted-pendulum[data-sc-act=\"scrub\"]");
+  var peak = document.getElementById("inverted-pendulum");
   var folds = [...document.querySelectorAll("details.label-more")];
   var strips = [];
   var placeBlocks = [];
@@ -52,13 +52,6 @@
     lastSeenId = current.id;
   };
 
-  // In a phone strip the pendulum sheet is not pinned, so the plot shows fully drawn.
-  var setupPhonePeak = function () {
-    if (!peak) return;
-    peak.removeAttribute("data-sc-act");
-    peak.style.setProperty("--sc-p", "1");
-  };
-
   // The pendulum clip loops on its own at every width, playing only while it is
   // on screen; scroll drives the step response plot beside it. Under reduced
   // motion the clip is never fetched and the poster stays.
@@ -100,7 +93,6 @@
     var main = document.querySelector("main");
     if (!main) return;
 
-    var schoolBuilt = false;
     stripGroups.forEach(function (group) {
       var sections = group.ids.map(function (id) { return document.getElementById(id); });
       if (sections.some(function (section) { return !section || section.parentNode !== main; })) return;
@@ -175,10 +167,8 @@
       };
       track.addEventListener("scroll", onStripScroll, { passive: true });
       strips.push(strip);
-      if (group.key === "school") schoolBuilt = true;
     });
     if (strips.length) document.documentElement.classList.add("strips-on");
-    if (schoolBuilt) setupPhonePeak();
   };
 
   var rememberCrossingForm = function () {
@@ -318,14 +308,7 @@
     var phone = !!(phoneMQ && phoneMQ.matches);
     folds.forEach(function (d) { d.open = !phone; });
   };
-  if (phoneMQ && phoneMQ.matches && peak) peak.setAttribute("data-sc-span", "1.5");
   setFolds();
-  // Under reduced motion the pendulum clip is never fetched, so its pinned stage
-  // would hold a still poster for two viewports. Shrink the hold to the engine
-  // minimum before mount; the poster, plot and copy stay complete.
-  if (reduceMQ && reduceMQ.matches) {
-    if (peak) peak.setAttribute("data-sc-span", "1.25");
-  }
 
   if (stripsAtLoad) {
     try {
@@ -345,8 +328,6 @@
       });
       strips.length = 0;
       document.documentElement.classList.remove("strips-on");
-      if (peak && !peak.hasAttribute("data-sc-act")) peak.setAttribute("data-sc-act", "scrub");
-      if (peak) peak.style.removeProperty("--sc-p");
     }
   }
   placeBlocks = [...document.querySelectorAll("main > section[id], main > .project-strip")];
@@ -517,6 +498,7 @@
       });
       document.body.classList.toggle("filter-work", activeTrack === "work");
       document.body.classList.toggle("filter-school", activeTrack === "school");
+      document.body.classList.toggle("filter-personal", activeTrack === "personal");
       if (activeTrack) {
         const first = document.querySelector('.sheet--part[data-track="' + activeTrack + '"]');
         if (first) {

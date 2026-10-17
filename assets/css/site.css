@@ -121,8 +121,15 @@ main > section {
   background-color: var(--bg);
 }
 
-main > section:nth-child(even) {
+/* The robot arm sheet is left out of the count so every other section keeps the
+   colour it had before the arm was added; the arm gets its own below. */
+main > section:nth-child(even of :not(#robot-arm)) {
   background-color: var(--surface);
+}
+
+main > #robot-arm {
+  background-color: var(--surface);
+  border-top: 1px solid var(--border);
 }
 
 /* the sheet edge */
@@ -414,7 +421,8 @@ main > section + section {
 }
 
 body.filter-work .parts-list li:not([data-track="work"]),
-body.filter-school .parts-list li:not([data-track="school"]) {
+body.filter-school .parts-list li:not([data-track="school"]),
+body.filter-personal .parts-list li:not([data-track="personal"]) {
   opacity: 0.4;
 }
 
@@ -934,10 +942,10 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   margin: 0 0 2rem 2rem;
 }
 
-/* ---------- E. The peak (scrubbed footage) ---------- */
+/* ---------- E. Inverted pendulum ---------- */
 
-/* the grid child fills the stage; the grid itself centres its rows inside the
-   height left over once the header band is reserved */
+/* An ordinary sheet since 2026-10-17: the pinned, scroll-scrubbed stage made
+   scrolling feel buggy. The clip loops on its own and the plot is always drawn. */
 .peak-stage {
   display: grid;
 }
@@ -951,8 +959,7 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   gap: clamp(1rem, 2.4vw, 2.25rem);
   align-items: start;
   align-content: center;
-  padding-top: calc(var(--header-h) + 0.75rem);
-  padding-bottom: 1rem;
+  padding-block: clamp(3rem, 6vw, 5rem);
 }
 
 .peak-film {
@@ -971,14 +978,22 @@ body.filter-school .parts-list li:not([data-track="school"]) {
   grid-area: label;
 }
 
-/* both media plates are capped against the viewport height, because the stage
-   is exactly one screen tall and the label block owns the other column */
+/* both media plates are capped against the viewport height, so the sheet stays
+   about one screen tall beside the label block */
 .peak-film .plate--film {
   max-width: min(100%, calc((100svh - var(--header-h)) * 0.34 * 816 / 334));
 }
 
-/* The pendulum clip loops on its own, so it is not an engine scrub clip and
-   needs the stage media layout here. It fades in over the poster once playing. */
+/* The poster and the looping clip share the plate; the clip fades in over the
+   poster once it is playing. */
+.peak-film .sc-stage__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .peak-film .peak-clip {
   position: absolute;
   inset: 0;
@@ -999,23 +1014,6 @@ body.filter-school .parts-list li:not([data-track="school"]) {
 
 .peak-grid .plate--cad {
   max-width: min(100%, 15rem);
-}
-
-.plot-mask {
-  position: absolute;
-  inset: 0;
-  background-color: var(--plot-white);
-  transform: translateX(calc(var(--sc-p, 0) * 100%));
-}
-
-.plot-playhead {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 2px;
-  background-color: var(--accent);
-  transform: translateX(calc(var(--sc-p, 0) * (100cqw - 2px)));
 }
 
 /* ---------- G. Gear reducer media ---------- */
@@ -1044,6 +1042,27 @@ body.filter-school .parts-list li:not([data-track="school"]) {
 .plate-trio figure.wide {
   grid-column: 1 / -1;
   aspect-ratio: auto;
+}
+
+/* a portrait plate (the robot arm's schematic) takes the right column at the
+   full height of the two landscape plates stacked beside it */
+.plate-trio figure.tall {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  aspect-ratio: auto;
+}
+
+/* on a phone the plates are a swipe strip of equal 4:3 frames, so the portrait
+   schematic sits whole on its own paper colour instead of being cropped */
+@media (max-width: 768px) {
+  .plate-trio figure.tall {
+    aspect-ratio: 4 / 3;
+    background: #eff0ef;
+  }
+
+  .plate-trio figure.tall img {
+    object-fit: contain;
+  }
 }
 
 .figures {
@@ -1521,14 +1540,6 @@ body.filter-school .parts-list li:not([data-track="school"]) {
     scroll-behavior: auto;
   }
 
-  .plot-mask {
-    transform: translateX(100%);
-  }
-
-  .plot-playhead {
-    transform: translateX(calc(100cqw - 2px));
-  }
-
   body.pl-hidden .parts-list,
   body.pl-near .parts-list,
   body.pl-far .parts-list {
@@ -1556,8 +1567,6 @@ html:not(.js) .sc-stage {
 }
 
 html:not(.js) .plane,
-html:not(.js) .plot-mask,
-html:not(.js) .plot-playhead,
 html:not(.js) .track-filter {
   display: none;
 }
@@ -1935,17 +1944,6 @@ html:not(.js) .peak-grid .plate--plot {
     align-content: start;
   }
 
-  #inverted-pendulum:has(details[open]) .sc-stage {
-    height: auto;
-    min-height: 100svh;
-  }
-
-  /* the engine sizes the act inline (span times the viewport); a grown stage
-     must never be taller than its act, or it paints over the next sheet */
-  #inverted-pendulum:has(details[open]) {
-    min-height: max-content;
-  }
-
   .plate-trio {
     display: flex;
     gap: 0.75rem;
@@ -2176,19 +2174,6 @@ html:not(.js) .peak-grid .plate--plot {
   }
 }
 
-/* The peak keeps its safety net for short wide windows only. Phones never
-   scroll inside the folded stage (see the 768px block), and this rule used
-   to re-apply the trap on every phone under 740px tall, which in Safari is
-   every iPhone with its toolbars showing. */
-@media (max-height: 740px) and (min-width: 769px) {
-  .peak-grid {
-    max-height: calc(100svh - var(--header-h));
-    overflow-x: clip;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
-}
-
 /* Short phones only. The beat row would otherwise sit below the hero grid's
    clipped bottom edge and cut the button row; the stage gives the grid its
    full height and the portrait shrinks so the buttons stay on the first screen. */
@@ -2300,26 +2285,6 @@ html:not(.js) .peak-grid .plate--plot {
     padding-inline: 1rem;
   }
 
-  .project-strip #inverted-pendulum {
-    height: auto !important;
-    min-height: 0;
-  }
-
-  .project-strip #inverted-pendulum .sc-stage {
-    position: static;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .project-strip #inverted-pendulum:has(details[open]) .sc-stage {
-    min-height: 0;
-  }
-
-  .project-strip #inverted-pendulum:has(details[open]) {
-    min-height: 0;
-  }
-
   .project-strip #inverted-pendulum .peak-grid {
     grid-template-areas:
       "film"
@@ -2331,11 +2296,6 @@ html:not(.js) .peak-grid .plate--plot {
   }
 
   .project-strip #inverted-pendulum .peak-grid .plate--cad {
-    display: none;
-  }
-
-  .project-strip #inverted-pendulum .plot-mask,
-  .project-strip #inverted-pendulum .plot-playhead {
     display: none;
   }
 

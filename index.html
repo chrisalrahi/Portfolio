@@ -50,9 +50,9 @@
   <!-- bump ?v= whenever these files change, or browsers keep a cached copy
        that no longer matches this page -->
   <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
-  <link href="assets/css/site.css?v=20261005" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261017c" rel="stylesheet">
   <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
-  <script src="assets/js/site.js?v=20261005" defer></script>
+  <script src="assets/js/site.js?v=20261017c" defer></script>
 </head>
 
 <body>
@@ -95,9 +95,10 @@
     <ol>
       <li data-part="cw-chassis" data-track="work"><a href="#cw-chassis"><span class="balloon">1</span>Liquid-Cooled Chassis</a></li>
       <li data-part="rtd-sensor" data-track="work"><a href="#rtd-sensor"><span class="balloon">2</span>Shielded RTD Sensor</a></li>
-      <li data-part="inverted-pendulum" data-track="school"><a href="#inverted-pendulum"><span class="balloon">3</span>Inverted Pendulum</a></li>
-      <li data-part="blade-polisher" data-track="school"><a href="#blade-polisher"><span class="balloon">4</span>Blade Mold Polisher</a></li>
-      <li data-part="gear-reducer" data-track="school"><a href="#gear-reducer"><span class="balloon">5</span>Gear Reducer</a></li>
+      <li data-part="robot-arm" data-track="personal"><a href="#robot-arm"><span class="balloon">3</span>Six-Axis Robot Arm</a></li>
+      <li data-part="inverted-pendulum" data-track="school"><a href="#inverted-pendulum"><span class="balloon">4</span>Inverted Pendulum</a></li>
+      <li data-part="blade-polisher" data-track="school"><a href="#blade-polisher"><span class="balloon">5</span>Blade Mold Polisher</a></li>
+      <li data-part="gear-reducer" data-track="school"><a href="#gear-reducer"><span class="balloon">6</span>Gear Reducer</a></li>
     </ol>
   </nav>
 
@@ -167,8 +168,9 @@
           </div>
           <div class="projects-controls">
             <div class="track-filter" role="group" aria-label="Filter projects">
-              <button type="button" class="track-btn" data-filter="work" aria-pressed="false">Work projects</button>
-              <button type="button" class="track-btn" data-filter="school" aria-pressed="false">School projects</button>
+              <button type="button" class="track-btn" data-filter="work" aria-pressed="false">Work</button>
+              <button type="button" class="track-btn" data-filter="school" aria-pressed="false">School</button>
+              <button type="button" class="track-btn" data-filter="personal" aria-pressed="false">Personal</button>
             </div>
             <a class="btn btn-outline deck-link" href="deck.html" target="_blank" rel="noopener">
               View my slide deck
@@ -266,9 +268,45 @@
       </div>
     </section>
 
-    <!-- ======== E. Inverted pendulum, the peak ======== -->
-    <section class="sheet sheet--part" id="inverted-pendulum" data-track="school" data-sc-act="scrub" data-sc-span="3" data-sc-dwell="0.4">
-      <div data-sc-stage class="sc-stage peak-stage">
+    <!-- ======== D2. Six-axis robot arm, the personal sheet ======== -->
+    <section class="sheet sheet--part" id="robot-arm" data-track="personal" data-sc-act="flow">
+      <div class="sheet-inner">
+        <div class="container part-grid">
+          <div class="label-block">
+            <p class="titleblock"><span class="balloon">3</span><span class="tb-track badge badge-personal">Personal</span><span class="tb-meta">With Nik · In progress</span></p>
+            <h3>Six-Axis Robot Arm</h3>
+            <p class="hook"><span class="copy-full">A desktop robot arm my friend Nik and I are building to lift finished prints off the 3D printer on its own. Six NEMA 17 steppers drive planetary reducers we print ourselves, with a camera on the wrist.</span><span class="copy-short">A desktop arm my friend Nik and I are building to lift finished prints off the 3D printer, with six printed planetary reducers and a wrist camera.</span></p>
+            <details class="label-more" open>
+              <summary>Role and status</summary>
+              <dl class="meta">
+                <div><dt>My role</dt><dd>Nik and I worked together to make different parts of the mechanical design, iterating on each other's revisions of the electronics schematic and the building plan.</dd></div>
+                <div><dt>Status</dt><dd>A complete CAD prototype, with 93 printed parts designed, the wiring schematic drawn, and the motors, bearings and boards picked. Next is printing one large and one small reducer and testing them on the bench.</dd></div>
+              </dl>
+              <ul class="tags">
+                <li>3D printing</li><li>Planetary gearing</li><li>ESP32 + CAN bus</li><li>Stepper motors</li>
+              </ul>
+            </details>
+            <dl class="figures">
+              <div><dt>Axes</dt><dd>6</dd></div>
+              <div><dt>Shoulder reduction</dt><dd><span class="sc-nums" data-sc-count="4 256" data-sc-count-at="0.18 0.48">256</span>:1</dd></div>
+              <div><dt>Payload target</dt><dd>300 g</dd></div>
+              <div><dt>Printed parts</dt><dd>93</dd></div>
+            </dl>
+          </div>
+          <div class="media-block">
+            <div class="plate-trio plate-trio--tall">
+              <figure><img src="assets/img/opt/arm-render.webp" width="1120" height="840" loading="lazy" alt="CAD render of the six-axis robot arm on its base plate"></figure>
+              <figure class="tall"><img src="assets/img/opt/arm-schematic.webp" width="900" height="1334" loading="lazy" alt="Hand-drawn Mk-2 electronics schematic: 24 V supply, buck converters, ESP32, CAN bus to each joint, emergency stop relays"></figure>
+              <figure><img src="assets/img/opt/arm-covers.webp" width="1120" height="840" loading="lazy" alt="CAD render of the arm with its covers removed, showing the planetary reducers and motors"></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== E. Inverted pendulum ======== -->
+    <section class="sheet sheet--part" id="inverted-pendulum" data-track="school">
+      <div class="peak-stage">
         <div class="container peak-grid">
 
           <div class="peak-film">
@@ -282,8 +320,6 @@
           <figure class="plate plate--plot">
             <div class="plot-frame">
               <img src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" loading="lazy" alt="Step response plots from tuning the PID controller at three proportional gains">
-              <span class="plot-mask" aria-hidden="true"></span>
-              <span class="plot-playhead" aria-hidden="true"></span>
             </div>
             <figcaption class="plate-caption">Step response at three proportional gains</figcaption>
           </figure>
@@ -296,7 +332,7 @@
           </figure>
 
           <div class="label-block label-block--compact">
-            <p class="titleblock"><span class="balloon">3</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">Control Systems</span></p>
+            <p class="titleblock"><span class="balloon">4</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">Control Systems</span></p>
             <h3>Inverted Pendulum</h3>
             <p class="hook"><span class="copy-full">A belt-driven cart on a 0.5 m rail that balances a rigid pendulum upright, with a rotary encoder reading the angle and nothing telling it where the cart is.</span><span class="copy-short">A belt-driven cart that balances a pendulum upright using only the angle from an encoder.</span></p>
             <details class="label-more" open>
@@ -316,11 +352,11 @@
     </section>
 
     <!-- ======== F. Turbine blade mold polisher, the calm sheet ======== -->
-    <section class="sheet sheet--part media-left sheet--after-act" id="blade-polisher" data-track="school">
+    <section class="sheet sheet--part media-left" id="blade-polisher" data-track="school">
       <div class="sheet-inner">
         <div class="container part-grid" data-sc-in data-sc-stagger="70">
           <div class="label-block">
-            <p class="titleblock"><span class="balloon">4</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">MCG 2101</span></p>
+            <p class="titleblock"><span class="balloon">5</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">MCG 2101</span></p>
             <h3>Turbine Blade Mold Polisher</h3>
             <p class="hook"><span class="copy-full">A pneumatic gantry system that polishes 9-metre wind turbine blade molds automatically, replacing a job that used to be slow, inconsistent, and physically demanding to do by hand.</span><span class="copy-short">A pneumatic gantry that polishes 9-metre wind turbine blade molds automatically.</span></p>
             <details class="label-more" open>
@@ -353,7 +389,7 @@
       <div class="sheet-inner">
         <div class="container part-grid">
           <div class="label-block">
-            <p class="titleblock"><span class="balloon">5</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">Machine Design</span></p>
+            <p class="titleblock"><span class="balloon">6</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">Machine Design</span></p>
             <h3>Two-Stage Gear Reducer</h3>
             <p class="hook">A 9:1 reducer for an industrial conveyor drive, taking 6 hp at 400 rpm down to 45 rpm.</p>
             <details class="label-more" open>
