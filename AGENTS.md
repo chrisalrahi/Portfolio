@@ -1,6 +1,6 @@
-# AGENTS.md
+# CLAUDE.md
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## What this is
 
@@ -10,11 +10,13 @@ There is no package manager, bundler, linter, or test framework. "Building" mean
 
 ## Architecture
 
-**The live site is one page:** `index.html` (Hero → Projects → Experience → About → Contact), styled by `assets/css/site.css` (hand-written, design tokens in `:root`) and driven by `assets/js/site.js` (vanilla: nav toggle, scrolled header, scrollspy, IntersectionObserver fade-ups). It loads **zero vendor JS**; do not reintroduce the template's vendor libraries into it. Images it uses live in `assets/img/opt/` (resized WebP copies with explicit width/height; below-fold ones are `loading="lazy"`; regenerate with Node + `sharp` from the originals if new ones are added). `404.html` and `.nojekyll` are intentional GitHub Pages files.
+**The live site is one page:** `index.html` (Hero, Projects, Also built and repaired, Experience, About, Contact), styled by `assets/css/site.css` (hand-written, design tokens in `:root`) and driven by `assets/js/site.js` (vanilla: nav toggle, once-only section reveals, key-figure count-ups, the pendulum clip's lazy source, the card dialogs with a fixed-body scroll lock, the Formspree fetch submit). It loads **zero vendor JS**; do not reintroduce the template's vendor libraries into it. Images it uses live in `assets/img/opt/` (resized WebP copies with explicit width/height; below-fold ones are `loading="lazy"`; regenerate with Node + `sharp` from the originals if new ones are added). `404.html` and `.nojekyll` are intentional GitHub Pages files.
 
-**Design tokens (preserve):** bg `#101a20`, surface `#141f26`, text `#e7f2f7`, headings `#fff`, single accent `#ac23ff` (use the lighter `--accent-text` tint for small accent-colored text; it exists for WCAG contrast); Raleway headings / Roboto body / Poppins nav; pill buttons (50px radius), cards 10px, images up to 20px radius; gentle lift-and-glow hovers. `.reveal` animations are gated on `html.js` (set by an inline script) so content is never hidden without JS.
+**Redesign of 2026-10-17 (branch `redesign-2026-10`):** the page was rebuilt from the content pack in `content/` (see `STYLE.md`). Projects are a two-column grid of dark cards (six featured, two of them spanning both columns, then seven smaller "Also built" cards). Every card opens a native `<dialog>` holding the project's remaining pictures, one short paragraph and its links. No scroll-driven effects: motion is a hero load sequence, sections fading up once, hover lifts, the pendulum clip playing when its card is near, the step-response plot wiping in once, and the count-ups; all of it is off under `prefers-reduced-motion`. Both `<video>` elements ship without a `<source>`; `site.js` attaches `assets/video/pendulum.mp4` when motion is allowed (the card's when it approaches, the dialog's on open), so one clip request per visit and none under reduced motion. `node scripts/check-site.mjs` checks facts, words, links, dashes, spelling and sizes against the pack.
 
-**Writing style (user requirement, applies to ALL site copy):** write in Chris's own voice, matching the original writing archived in `/legacy`: first person and conversational ("I helped design", "my partner and I built"), plain and direct, honest about team vs. solo work, casual short forms like "mech eng and comp tech" where natural. **Never use em dashes anywhere** (in copy, comments, or strings); Chris uses a spaced hyphen (" - ") or a comma instead. Avoid resume-speak ("owned", "delivered", "spearheaded") and marketing fragments; write complete natural sentences.
+**Design tokens (preserve):** ground `#101a20`, surface `#16222b`, text `#e7f2f7`, headings `#fff`, accent `#5a9fe0` with text on an accent fill in the ground colour (never white; it fails AA) and `--accent-text` `#83b7e8` for small accent text; track badges Work `#83b7e8`, School `#8fd3b6`, Personal `#e6c079` on 16 percent tints; one family, Manrope 400/500/800; plates and cards 20px radius, thumbnails 16px, pills and buttons full; card shadow `0 12px 32px rgba(0,0,0,.35)`, deeper on the hero plate and the dialogs. Reveals are gated on `html.js` (set by an inline script, with a 2.5 s `no-motion` fallback) so content is never hidden without JS.
+
+**Writing style (user requirement, applies to ALL site copy):** see **`STYLE.md`** for the full voice reference with samples from the 2026 slide deck. Read that file rather than `assets/Portfolio Chris Al-Rahi.pdf`, which is 10.7 MB and has previously blown up session context. In short: write in Chris's own voice, matching the original writing archived in `/legacy`: first person and conversational ("I helped design", "my partner and I built"), plain and direct, honest about team vs. solo work, casual short forms like "mech eng and comp tech" where natural. **Never use em dashes anywhere** (in copy, comments, or strings); Chris uses a spaced hyphen (" - ") or a comma instead. Avoid resume-speak ("owned", "delivered", "spearheaded") and marketing fragments; write complete natural sentences.
 
 **Legacy archive:** the full original template pages are archived verbatim in `/legacy/` with asset paths rewritten to `../assets/…` and `noindex` added; they still depend on `assets/css/main.css`, `assets/js/main.js`, and the surviving files in `assets/vendor/`; keep all of those, and keep the original images/PDFs the legacy pages and `index.html` reference. The old top-level URLs (`/portfolio.html` etc.) no longer resolve; their redirect stubs were removed at Chris's request in July 2026, so old links land on `404.html`.
 
@@ -24,8 +26,8 @@ There is no package manager, bundler, linter, or test framework. "Building" mean
 - **Filename case matters.** GitHub Pages serves from Linux; match on-disk casing exactly (existing files mix `.PNG`, `.png`, `.JPG`).
 - **HTML structure is hand-maintained.** After structural edits, sanity-check that `div`/`section`/`main` open/close counts balance per file.
 - **Bump the `?v=` on the CSS and JS links in `index.html` whenever those files change.** GitHub Pages lets browsers cache them for 10 minutes, so new HTML can run against an old script. On 2026-10-05 that left the pendulum clip unstarted until the version tag was added.
-- Every project's copy follows **hook · My role · Outcome · tool tags · links**; keep new projects in that format.
-- The contact section has both quick links and a Formspree form. The resume PDF at `assets/Docs/Chris Al-Rahi Resume.pdf` is THE resume link everywhere (nav, hero, experience).
+- Every project card follows **track badge, title, a hook of one or two sentences, key figures where the pack has numbers, up to three tags, links, See more**; no Role or Outcome labels and no bullets (Chris, 2026-10-17). The detail lives in the card's dialog as one paragraph of at most 60 words. The page stays under 900 visible words with dialogs closed.
+- The contact section has link pills (email, LinkedIn, GitHub, Infyl, Resume (PDF), Portfolio deck (PDF)) and the Formspree form. The resume PDF at `assets/Docs/Chris Al-Rahi Resume.pdf` is THE resume link everywhere (nav, hero, contact).
 - `assets/vendor/` was pruned to exactly what `/legacy` loads (e.g. Bootstrap is only `bootstrap.min.css` + `bootstrap.bundle.min.js`); don't re-add variants, and don't delete what remains.
 - The `.idea/` directory is JetBrains IDE config; leave it untracked/out of commits. `.playwright-mcp/` is test output; don't commit it.
 
@@ -37,4 +39,4 @@ Knowledge for this project lives in Chris's Obsidian vault, not in this repo:
 ## Vault propagation hints
 
 - Save: copy decisions with reasons, design-token changes, deploy incidents, anything touching repo visibility or the custom domain.
-- Keep CLAUDE.md identical to this file when either changes.
+- Keep AGENTS.md identical to this file when either changes.

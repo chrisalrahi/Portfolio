@@ -78,3 +78,7 @@ Every project follows the same shape, and new ones should match it:
 **Light self-deprecation is in voice** (used once, in Honorable Mentions):
 
 > Things I've built or fixed on my own time, a jack of all and a master of builds.
+
+## Content pack (added 2026-10-17)
+
+The redesign was built from `content/content.md` and `content/images.md`, a verbatim transcript of every fact, link and image on the previous page. Any copy change starts there: a fact that is not in the pack is not on the site. `node scripts/check-site.mjs` checks the page against it.

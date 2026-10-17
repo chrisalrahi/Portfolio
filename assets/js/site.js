@@ -1,562 +1,282 @@
-(() => {
-  "use strict";
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
 
-  /* ---- 1. Mount the scroll engine -------------------------------------- */
-  // Both scripts are deferred, so the DOM and the engine are both ready here.
-  var phoneMQ = window.matchMedia ? window.matchMedia("(max-width: 768px)") : null;
-  // Swipe strips need a coarse pointer because narrow mouse windows keep the desktop flow.
-  var stripMQ = window.matchMedia ? window.matchMedia("(max-width: 768px) and (pointer: coarse)") : null;
-  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
-  var stripsAtLoad = !!(stripMQ && stripMQ.matches);
-  var peak = document.getElementById("inverted-pendulum");
-  var folds = [...document.querySelectorAll("details.label-more")];
-  var strips = [];
-  var placeBlocks = [];
-  var lastSeenId = null;
-  var printing = false;
-  var sending = false;
-  var crossingPending = false;
-
-  var stripGroups = [
-    {
-      key: "work",
-      title: "Work projects",
-      ids: ["cw-chassis", "rtd-sensor"]
-    },
-    {
-      key: "school",
-      title: "School projects",
-      ids: ["inverted-pendulum", "blade-polisher", "gear-reducer"]
-    }
-  ];
-
-  // Track the reader's place before a breakpoint crossing can reflow the page.
-  var readPlace = function () {
-    if (stripMQ && stripMQ.matches !== stripsAtLoad) return;
-    if (!placeBlocks.length) return;
-    var current = placeBlocks[0];
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-      current = placeBlocks[placeBlocks.length - 1];
-    } else {
-      placeBlocks.forEach(function (block) {
-        if (block.getBoundingClientRect().top <= window.innerHeight * 0.35) current = block;
-      });
-    }
-    if (current.classList.contains("project-strip")) {
-      var currentStrip = strips.find(function (strip) { return strip.wrapper === current; });
-      if (currentStrip && currentStrip.sections[currentStrip.index]) {
-        lastSeenId = currentStrip.sections[currentStrip.index].id;
-      }
-      return;
-    }
-    lastSeenId = current.id;
+  // Pendulum clip: both videos ship with a poster and no source, so nothing downloads until a source is added.
+  // Under reduced motion no source is ever added: the poster stays and no video is fetched.
+  var CLIP = 'assets/video/pendulum.mp4';
+  var playClip = function (v) {
+    var p = v.play();
+    if (p) p.catch(function () {});
+    return p;
   };
+  var loadClip = function (v) {
+    if (v.querySelector('source')) return;
+    var s = document.createElement('source');
+    s.src = CLIP;
+    s.type = 'video/mp4';
+    v.appendChild(s);
+    v.load();
+  };
+  var cardClip = document.querySelector('.card--signature video.plate-clip');
+  if (!reduce && cardClip) {
+    if (hasIO) {
+      var clipVisible = false;
+      // The card's clip loads once, when the card comes within 600 px, and plays only while it is on screen
+      var near = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (e) { return e.isIntersecting; })) return;
+        near.disconnect();
+        loadClip(cardClip);
+        var p = playClip(cardClip);
+        if (p) p.then(function () { if (!clipVisible) cardClip.pause(); }, function () {});
+      }, { rootMargin: '600px 0px' });
+      near.observe(cardClip);
+      var seen = new IntersectionObserver(function (entries) {
+        clipVisible = entries[entries.length - 1].isIntersecting;
+        if (!cardClip.querySelector('source')) return;
+        if (clipVisible) playClip(cardClip);
+        else cardClip.pause();
+      }, { threshold: 0 });
+      seen.observe(cardClip);
+    } else {
+      loadClip(cardClip);
+      playClip(cardClip);
+    }
+  }
+  window.siteReady = true;
 
-  // The pendulum clip loops on its own at every width, playing only while it is
-  // on screen; scroll drives the step response plot beside it. Under reduced
-  // motion the clip is never fetched and the poster stays.
-  var startPeakLoop = function () {
-    if (!peak || (reduceMQ && reduceMQ.matches)) return;
-    var video = peak.querySelector("video.peak-clip");
-    var plate = video ? video.closest(".plate--film") : null;
-    if (!video || !plate) return;
-
-    // same small-screen rule the engine used to pick the lighter encode
-    var small = window.matchMedia &&
-      window.matchMedia("(max-width: 860px), (hover: none) and (pointer: coarse)").matches;
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.src = video.getAttribute(small ? "data-loop-src-mobile" : "data-loop-src");
-    video.addEventListener("playing", function () {
-      plate.classList.add("sc-has-clip");
-    }, { once: true });
-
-    var play = function () {
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
+  // Nav: one toggle button below 1024 px
+  var header = document.querySelector('.site-header');
+  var toggle = document.querySelector('.menu-toggle');
+  var nav = document.getElementById('site-nav');
+  if (header && toggle && nav) {
+    var setOpen = function (open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('is-open', open);
     };
-    if (!("IntersectionObserver" in window)) {
-      play();
-      return;
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && header.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+
+  // Scroll lock while a dialog is open: the body is pinned where it was, which also holds on iOS Safari
+  var savedY = 0;
+  var lockScroll = function () {
+    var body = document.body;
+    var bar = window.innerWidth - root.clientWidth;
+    var before = body.clientWidth;
+    savedY = window.scrollY;
+    root.classList.add('is-locked');
+    body.style.position = 'fixed';
+    body.style.top = -savedY + 'px';
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    // Pad by the scrollbar width only when the pinned body spread into the scrollbar's space, so nothing shifts
+    if (bar > 0 && body.clientWidth > before) body.style.paddingRight = bar + 'px';
+  };
+  var unlockScroll = function () {
+    var s = document.body.style;
+    s.position = s.top = s.left = s.right = s.width = s.paddingRight = '';
+    root.classList.remove('is-locked');
+    try {
+      window.scrollTo({ top: savedY, left: 0, behavior: 'instant' });
+    } catch (e) {
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, savedY);
+      root.style.scrollBehavior = '';
     }
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) play();
-        else video.pause();
-      });
-    }, { threshold: [0, 0.5, 1] }).observe(plate);
   };
 
-  var buildStrips = function () {
-    if (!stripsAtLoad || strips.length) return;
-    var main = document.querySelector("main");
-    if (!main) return;
-
-    stripGroups.forEach(function (group) {
-      var sections = group.ids.map(function (id) { return document.getElementById(id); });
-      if (sections.some(function (section) { return !section || section.parentNode !== main; })) return;
-
-      var wrapper = document.createElement("div");
-      wrapper.className = "project-strip";
-      wrapper.id = group.key + "-strip";
-      wrapper.dataset.strip = group.key;
-
-      var head = document.createElement("div");
-      head.className = "project-strip__head";
-      var title = document.createElement("h3");
-      title.className = "project-strip__title";
-      title.textContent = group.title;
-      var hint = document.createElement("p");
-      hint.className = "swipe-hint";
-      hint.setAttribute("aria-hidden", "true");
-      hint.textContent = "Swipe sideways \u00b7 " + sections.length + " projects";
-      var count = document.createElement("p");
-      count.className = "project-strip__count";
-      count.setAttribute("aria-live", "polite");
-      count.textContent = "1 / " + sections.length;
-
-      var track = document.createElement("div");
-      track.className = "project-strip__track";
-      track.tabIndex = 0;
-      track.setAttribute("role", "group");
-      track.setAttribute("aria-label", group.title);
-
-      head.append(title, hint, count);
-      wrapper.append(head, track);
-      main.insertBefore(wrapper, sections[0]);
-      sections.forEach(function (section) {
-        track.appendChild(section);
-        section.querySelectorAll("[data-sc-in]").forEach(function (node) {
-          node.classList.add("sc-in");
+  // Card dialogs: the plate and the See more button open one native modal per project
+  var lastTrigger = null;
+  var dialogs = [].slice.call(document.querySelectorAll('dialog.detail'));
+  dialogs.forEach(function (dlg) {
+    if (typeof dlg.showModal !== 'function') return;
+    dlg.querySelector('.detail-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) {
+      if (e.target !== dlg) return;
+      var r = dlg.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dlg.close();
+    });
+    dlg.addEventListener('close', function () {
+      unlockScroll();
+      dlg.querySelectorAll('video').forEach(function (v) { v.pause(); });
+      if (lastTrigger) {
+        // Restore focus without a smooth scroll, then bring the trigger back on screen if the open happened mid-scroll
+        lastTrigger.focus({ preventScroll: true });
+        var tr = lastTrigger.getBoundingClientRect();
+        if (tr.top < 0 || tr.bottom > window.innerHeight) {
+          lastTrigger.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        }
+        lastTrigger = null;
+      }
+    });
+  });
+  document.querySelectorAll('[data-dialog]').forEach(function (btn) {
+    var dlg = document.getElementById(btn.getAttribute('data-dialog'));
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    // The plate is a pointer target only, so focus always comes back to the card's See more button
+    var returnTo = btn.classList.contains('see-more') ? btn : (document.querySelector('.see-more[data-dialog="' + dlg.id + '"]') || btn);
+    btn.disabled = false;
+    btn.addEventListener('click', function () {
+      lastTrigger = returnTo;
+      dlg.showModal();
+      lockScroll();
+      dlg.scrollTop = 0;
+      dlg.querySelector('.detail-title').focus();
+      if (!reduce) {
+        dlg.querySelectorAll('video').forEach(function (v) {
+          loadClip(v);
+          playClip(v);
         });
-        section.querySelectorAll("[data-sc-stagger]").forEach(function (node) {
-          Array.prototype.forEach.call(node.children, function (child) {
-            child.classList.add("sc-in");
-          });
-        });
-      });
-
-      var strip = {
-        wrapper: wrapper,
-        track: track,
-        sections: sections,
-        index: 0
-      };
-      var frame = 0;
-      var updateCount = function () {
-        frame = 0;
-        var nearest = 0;
-        var distance = Infinity;
-        sections.forEach(function (section, index) {
-          var nextDistance = Math.abs(section.offsetLeft - track.scrollLeft);
-          if (nextDistance < distance) {
-            nearest = index;
-            distance = nextDistance;
-          }
-        });
-        var nextText = (nearest + 1) + " / " + sections.length;
-        if (count.textContent !== nextText) count.textContent = nextText;
-        if (strip.index !== nearest) {
-          strip.index = nearest;
-          readPlace();
-        }
-      };
-      var onStripScroll = function () {
-        if (!frame) frame = requestAnimationFrame(updateCount);
-      };
-      track.addEventListener("scroll", onStripScroll, { passive: true });
-      strips.push(strip);
-    });
-    if (strips.length) document.documentElement.classList.add("strips-on");
-  };
-
-  var rememberCrossingForm = function () {
-    var values = {};
-    var hasValue = false;
-    var focus = null;
-    var fields = document.querySelectorAll(".contact-form form input[name], .contact-form form textarea[name], .contact-form form select[name]");
-    fields.forEach(function (field) {
-      values[field.name] = field.value;
-      if (field.value !== "") hasValue = true;
-      if (field === document.activeElement) {
-        focus = { name: field.name, start: null, end: null };
-        try {
-          var start = field.selectionStart;
-          var end = field.selectionEnd;
-          focus.start = typeof start === "number" ? start : null;
-          focus.end = typeof end === "number" ? end : null;
-        } catch (error) {}
-      }
-    });
-    if (!hasValue && !focus) return;
-    try {
-      window.sessionStorage.setItem("chrisalrahi:crossing-form", JSON.stringify({
-        values: values,
-        focus: focus,
-        t: Date.now()
-      }));
-    } catch (error) {}
-  };
-
-  var restoreCrossingState = function () {
-    var scrollJSON = null;
-    var formJSON = null;
-    var scrollId = null;
-    var formState = null;
-    var now = Date.now();
-    try {
-      scrollJSON = window.sessionStorage.getItem("chrisalrahi:crossing-scroll");
-      window.sessionStorage.removeItem("chrisalrahi:crossing-scroll");
-    } catch (error) {}
-    try {
-      formJSON = window.sessionStorage.getItem("chrisalrahi:crossing-form");
-      window.sessionStorage.removeItem("chrisalrahi:crossing-form");
-    } catch (error) {}
-
-    if (scrollJSON !== null) {
-      try {
-        var scrollState = JSON.parse(scrollJSON);
-        if (scrollState && typeof scrollState.id === "string" && typeof scrollState.t === "number" && now - scrollState.t <= 30000) {
-          scrollId = scrollState.id;
-        }
-      } catch (error) {}
-    }
-    if (formJSON !== null) {
-      try {
-        var savedForm = JSON.parse(formJSON);
-        if (savedForm && savedForm.values && typeof savedForm.t === "number" && now - savedForm.t <= 30000) {
-          formState = savedForm;
-        }
-      } catch (error) {}
-    }
-
-    var focusField = null;
-    if (formState) {
-      document.querySelectorAll(".contact-form form input[name], .contact-form form textarea[name], .contact-form form select[name]").forEach(function (field) {
-        if (Object.prototype.hasOwnProperty.call(formState.values, field.name)) field.value = formState.values[field.name];
-        if (formState.focus && field.name === formState.focus.name) focusField = field;
-      });
-    }
-
-    var jumpToSavedState = function () {
-      if (focusField) {
-        focusField.scrollIntoView({ block: "center", behavior: "instant" });
-        return;
-      }
-      if (scrollId !== null) {
-        var target = document.getElementById(scrollId);
-        if (target) {
-          var track = target.closest(".project-strip__track");
-          if (track) {
-            var scrollPadding = parseFloat(window.getComputedStyle(track).scrollPaddingLeft) || 0;
-            track.scrollLeft = target.offsetLeft - scrollPadding;
-            target.closest(".project-strip").scrollIntoView({ block: "start", behavior: "instant" });
-          } else {
-            target.scrollIntoView({ block: "start", behavior: "instant" });
-          }
-        }
-      }
-    };
-
-    if (focusField || scrollId !== null) {
-      history.scrollRestoration = "manual";
-      // Hold manual restoration through load so the browser cannot overwrite the saved place.
-      requestAnimationFrame(function () {
-        if (focusField) {
-          try {
-            focusField.focus({ preventScroll: true });
-          } catch (error) {
-            focusField.focus();
-          }
-          try {
-            if (typeof formState.focus.start === "number" && typeof formState.focus.end === "number") {
-              focusField.setSelectionRange(formState.focus.start, formState.focus.end);
-            }
-          } catch (error) {}
-        }
-        jumpToSavedState();
-        var finishRestoration = function () {
-          jumpToSavedState();
-          window.addEventListener("pagehide", function () { history.scrollRestoration = "auto"; }, { once: true });
-          readPlace();
-        };
-        if (document.readyState === "complete") finishRestoration();
-        else window.addEventListener("load", finishRestoration, { once: true });
-      });
-    } else {
-      requestAnimationFrame(readPlace);
-    }
-  };
-
-  var saveCrossingStateAndReload = function () {
-    if (lastSeenId !== null) {
-      try {
-        window.sessionStorage.setItem("chrisalrahi:crossing-scroll", JSON.stringify({
-          id: lastSeenId,
-          t: Date.now()
-        }));
-      } catch (error) {}
-    }
-    rememberCrossingForm();
-    window.location.reload();
-  };
-
-  // On phones the role/outcome copy starts folded so each card reads photo,
-  // title, hook, then the optional detail.
-  var setFolds = function () {
-    var phone = !!(phoneMQ && phoneMQ.matches);
-    folds.forEach(function (d) { d.open = !phone; });
-  };
-  setFolds();
-
-  if (stripsAtLoad) {
-    try {
-      buildStrips();
-    } catch (error) {
-      document.querySelectorAll(".project-strip").forEach(function (wrapper) {
-        try {
-          wrapper.querySelectorAll(".project-strip__track").forEach(function (track) {
-            Array.prototype.forEach.call(track.children, function (section) {
-              if (section.tagName === "SECTION" && wrapper.parentNode) {
-                wrapper.parentNode.insertBefore(section, wrapper);
-              }
-            });
-          });
-        } catch (unwrapError) {}
-        try { wrapper.remove(); } catch (removeError) {}
-      });
-      strips.length = 0;
-      document.documentElement.classList.remove("strips-on");
-    }
-  }
-  placeBlocks = [...document.querySelectorAll("main > section[id], main > .project-strip")];
-  startPeakLoop();
-
-  var sc = window.ScrollCraft ? window.ScrollCraft.mount(document.body) : null;
-  restoreCrossingState();
-
-  // Opening a fold changes the page height under every act below it. The engine
-  // only remeasures on a width change, so ask it directly.
-  folds.forEach(function (d) {
-    d.addEventListener("toggle", function () { if (sc) sc.layout(); });
-  });
-  if (phoneMQ) {
-    var onPhoneChange = function () { setFolds(); if (sc) sc.layout(); };
-    if (phoneMQ.addEventListener) phoneMQ.addEventListener("change", onPhoneChange);
-    else phoneMQ.addListener(onPhoneChange);
-  }
-  var onStripChange = function () {
-    if (printing || window.matchMedia("print").matches) return;
-    if (stripMQ.matches === stripsAtLoad) {
-      crossingPending = false;
-      return;
-    }
-    if (sending) {
-      crossingPending = true;
-      return;
-    }
-    crossingPending = false;
-    saveCrossingStateAndReload();
-  };
-  window.addEventListener("beforeprint", function () { printing = true; });
-  window.addEventListener("afterprint", function () {
-    printing = false;
-    if (crossingPending) onStripChange();
-  });
-  if (stripMQ) {
-    if (stripMQ.addEventListener) stripMQ.addEventListener("change", onStripChange);
-    else stripMQ.addListener(onStripChange);
-  }
-
-  /* ---- 2. Header state and scroll-top visibility ------------------------ */
-  const header = document.querySelector(".site-header");
-  const nav = document.querySelector(".site-nav");
-  const toggle = document.querySelector(".nav-toggle");
-  const scrollTop = document.querySelector(".scroll-top");
-
-  /* ---- 5. Parts list tracking (set up here, driven from the scroll loop) - */
-  const wideMQ = window.matchMedia("(min-width: 1200px)");
-  const partSections = [...document.querySelectorAll(".sheet--part")];
-  const partRows = new Map();
-  document.querySelectorAll(".parts-list li[data-part]").forEach((li) => {
-    partRows.set(li.dataset.part, li);
-  });
-
-  const readParts = () => {
-    if (!wideMQ.matches || !partRows.size) return;
-    const vh = window.innerHeight;
-    const mark = vh * 0.45;
-    const doneLine = vh * 0.4;
-    let current = null;
-    partSections.forEach((sec) => {
-      const r = sec.getBoundingClientRect();
-      if (current === null && r.top <= mark && r.bottom >= mark) current = sec.id;
-      // a trace, not a counter: once passed, a row stays marked
-      if (r.bottom < doneLine) {
-        const done = partRows.get(sec.id);
-        if (done) done.classList.add("is-done");
-      }
-    });
-    partRows.forEach((row, id) => row.classList.toggle("is-current", id === current));
-  };
-
-  /* ---- 5b. Parts list depth zones -------------------------------------- */
-  // Three mutually exclusive body classes trace how far the reader has moved
-  // past the hero and into (then past) Experience, so the rail can fade back
-  // and settle rather than just being visible/hidden.
-  const heroSection = document.getElementById("hero");
-  const experienceSection = document.getElementById("experience");
-
-  const updatePartsZone = () => {
-    if (!heroSection || !experienceSection) return;
-    const vh = window.innerHeight;
-    const heroBottom = heroSection.getBoundingClientRect().bottom;
-    const expTop = experienceSection.getBoundingClientRect().top;
-    let zone;
-    if (heroBottom > vh * 0.6) {
-      zone = "pl-hidden";
-    } else if (expTop > vh * 0.5) {
-      zone = "pl-near";
-    } else {
-      zone = "pl-far";
-    }
-    document.body.classList.toggle("pl-hidden", zone === "pl-hidden");
-    document.body.classList.toggle("pl-near", zone === "pl-near");
-    document.body.classList.toggle("pl-far", zone === "pl-far");
-  };
-
-  let ticking = false;
-  const onScroll = () => {
-    const y = window.scrollY;
-    if (header) header.classList.toggle("scrolled", y > 40);
-    if (scrollTop) scrollTop.classList.toggle("show", y > 400);
-    readParts();
-    updatePartsZone();
-    readPlace();
-  };
-  window.addEventListener("scroll", () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      onScroll();
-      ticking = false;
-    });
-  }, { passive: true });
-  onScroll();
-
-  /* ---- 3. Nav toggle --------------------------------------------------- */
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-    nav.addEventListener("click", (e) => {
-      if (e.target.closest("a")) {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  /* ---- 4. Scrollspy ---------------------------------------------------- */
-  const navLinks = [...document.querySelectorAll('.site-nav ul a[href^="#"]')];
-  const spyTargets = [
-    document.getElementById("projects"),
-    ...partSections,
-    document.getElementById("experience"),
-    document.getElementById("about"),
-    document.getElementById("contact")
-  ].filter(Boolean);
-
-  if (navLinks.length && spyTargets.length && "IntersectionObserver" in window) {
-    const spy = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        // every project sheet belongs to the Projects link
-        const hash = el.classList.contains("sheet--part") ? "#projects" : "#" + el.id;
-        navLinks.forEach((a) => a.classList.toggle("active", a.hash === hash));
-      });
-    }, { rootMargin: "-40% 0px -55% 0px" });
-    spyTargets.forEach((s) => spy.observe(s));
-  }
-
-  /* ---- 6. Work / school filter ----------------------------------------- */
-  // Nothing is hidden: the engine measures act positions once at mount, so
-  // removing a sheet would move every act below it. The filter dims the parts
-  // list and jumps to the first sheet of the track instead.
-  const filterBtns = [...document.querySelectorAll(".track-btn")];
-  let activeTrack = null;
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const track = btn.dataset.filter;
-      activeTrack = track === activeTrack ? null : track;
-      filterBtns.forEach((b) => {
-        b.setAttribute("aria-pressed", String(b.dataset.filter === activeTrack));
-      });
-      document.body.classList.toggle("filter-work", activeTrack === "work");
-      document.body.classList.toggle("filter-school", activeTrack === "school");
-      document.body.classList.toggle("filter-personal", activeTrack === "personal");
-      if (activeTrack) {
-        const first = document.querySelector('.sheet--part[data-track="' + activeTrack + '"]');
-        if (first) {
-          const wrapper = first.closest(".project-strip");
-          const stripTrack = wrapper ? wrapper.querySelector(".project-strip__track") : null;
-          if (stripTrack) stripTrack.scrollLeft = 0;
-          (wrapper || first).scrollIntoView({ block: "start" });
-        }
       }
     });
   });
 
-  /* ---- 8. Contact form ------------------------------------------------- */
-  const form = document.querySelector(".contact-form form");
-
+  // Contact form: stay on the page and report the result inline
+  var form = document.querySelector('.contact-form');
   if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault(); // stop page reload
-      const formData = new FormData(form);
-
-      // show quick "sending" feedback
-      const button = form.querySelector('button[type="submit"]');
-      const originalText = button.textContent;
-      button.textContent = "Sending...";
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var button = form.querySelector('button[type="submit"]');
+      var original = button.textContent;
+      var previous = form.querySelector('.form-status');
+      if (previous) previous.remove();
+      var say = function (text, isError) {
+        var p = document.createElement('p');
+        p.className = isError ? 'form-status form-status--error' : 'form-status';
+        p.setAttribute('role', isError ? 'alert' : 'status');
+        p.textContent = text;
+        form.appendChild(p);
+        return p;
+      };
+      button.textContent = 'Sending...';
       button.disabled = true;
-
-      sending = true;
-      try {
-        const response = await fetch(form.action, {
-          method: "POST",
-          body: formData,
-          headers: { "Accept": "application/json" }
-        });
-
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      }).then(function (response) {
         if (response.ok) {
-          // create or show thank-you message
-          let msg = document.createElement("p");
-          msg.textContent = "Thanks, your message has been sent!";
-          msg.style.color = "var(--accent-text)";
-          msg.style.marginTop = "10px";
-          msg.style.textAlign = "center";
-          form.appendChild(msg);
-
+          var msg = say('Thanks, your message has been sent!', false);
           form.reset();
-
-          // remove message after 5 seconds
-          setTimeout(() => msg.remove(), 5000);
+          setTimeout(function () { msg.remove(); }, 5000);
         } else {
-          alert("There was a problem sending your message.");
+          say('There was a problem sending your message.', true);
         }
-      } catch (error) {
-        alert("Network error, please try again later.");
-      } finally {
-        sending = false;
-        button.textContent = originalText;
+      }).catch(function () {
+        say('Network error, please try again later.', true);
+      }).finally(function () {
+        button.textContent = original;
         button.disabled = false;
-        if (crossingPending) onStripChange();
-      }
+      });
     });
   }
+
+  // Under reduced motion or without IntersectionObserver nothing animates, and every key figure keeps its final value
+  if (reduce || !hasIO) {
+    root.classList.add('no-motion');
+    return;
+  }
+
+  var plot = document.querySelector('.sig-plot .plot-plate');
+  var rows = [].slice.call(document.querySelectorAll('.card .figures'));
+  var pending = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  var wipe = null;
+
+  // The step-response plot draws itself in once
+  var drawPlot = function () {
+    if (!plot) return;
+    plot.classList.add('is-drawn');
+    if (wipe) wipe.disconnect();
+  };
+
+  // Key figures count up once from 0 over 600 ms; the final value is already in the markup
+  var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+  var finalText = function (el) {
+    return Number(el.getAttribute('data-count')).toFixed(Number(el.getAttribute('data-decimals') || 0));
+  };
+  var countRow = function (row) {
+    if (row.hasAttribute('data-counted')) return;
+    row.setAttribute('data-counted', '');
+    counter.unobserve(row);
+    row.querySelectorAll('[data-count]').forEach(function (el) {
+      var end = Number(el.getAttribute('data-count'));
+      var dec = Number(el.getAttribute('data-decimals') || 0);
+      var start = performance.now();
+      var tick = function (now) {
+        var p = Math.min((now - start) / 600, 1);
+        el.textContent = (end * easeOut(p)).toFixed(dec);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  };
+  // A row that was scrolled or jumped past without being seen goes straight to its final values
+  var finishRow = function (row) {
+    if (row.hasAttribute('data-counted')) return;
+    row.setAttribute('data-counted', '');
+    counter.unobserve(row);
+    row.querySelectorAll('[data-count]').forEach(function (el) { el.textContent = finalText(el); });
+  };
+
+  // Anything already in or above the viewport settles, so an anchor jump never leaves content hidden
+  var sweep = function () {
+    var vh = window.innerHeight;
+    pending = pending.filter(function (el) {
+      if (el.getBoundingClientRect().top >= vh) return true;
+      el.classList.add('is-in');
+      reveal.unobserve(el);
+      return false;
+    });
+    if (plot && plot.getBoundingClientRect().bottom < vh) drawPlot();
+    rows.forEach(function (row) {
+      var bottom = row.getBoundingClientRect().bottom;
+      if (bottom < 0) finishRow(row);
+      else if (bottom < vh) countRow(row);
+    });
+  };
+
+  // Headings and cards fade up once as they enter
+  var reveal = new IntersectionObserver(function (entries) {
+    if (entries.some(function (e) { return e.isIntersecting; })) sweep();
+  }, { threshold: 0.15 });
+  pending.forEach(function (el) { reveal.observe(el); });
+
+  if (plot) {
+    wipe = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) drawPlot();
+    }, { threshold: 0.5 });
+    wipe.observe(plot);
+  }
+
+  var counter = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) countRow(entry.target);
+      else if (entry.boundingClientRect.bottom < 0) finishRow(entry.target);
+    });
+  }, { threshold: 0.6 });
+  rows.forEach(function (row) {
+    // Already above the viewport at load: keep the final values from the markup
+    if (row.getBoundingClientRect().bottom < 0) {
+      row.setAttribute('data-counted', '');
+      return;
+    }
+    row.querySelectorAll('[data-count]').forEach(function (el) {
+      el.textContent = (0).toFixed(Number(el.getAttribute('data-decimals') || 0));
+    });
+    counter.observe(row);
+  });
 })();

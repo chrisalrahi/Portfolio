@@ -1,63 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page not found | Chris Al-Rahi</title>
-  <meta name="robots" content="noindex">
-  <link href="/assets/img/favicon.png" rel="icon">
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #101a20;
-      color: #e7f2f7;
-      font-family: Roboto, sans-serif;
-      text-align: center;
-      padding: 0 1.5rem;
-    }
-
-    h1 {
-      color: #ffffff;
-      font-family: Raleway, sans-serif;
-      font-size: 4rem;
-      font-weight: 400;
-      letter-spacing: -1px;
-      margin: 0 0 0.5rem;
-    }
-
-    p {
-      color: rgba(231, 242, 247, 0.7);
-      margin: 0 0 1.75rem;
-    }
-
-    a {
-      display: inline-block;
-      padding: 10px 26px;
-      border-radius: 50px;
-      border: 2px solid #5a9fe0;
-      background: #5a9fe0;
-      color: #101a20;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s ease;
-    }
-
-    a:hover {
-      transform: translateY(-2px);
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Chris Al-Rahi</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#101a20">
+<link rel="icon" href="/assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&amp;display=swap">
+<style>
+  :root {
+    --ground: #101a20;
+    --text: #e7f2f7;
+    --heading: #ffffff;
+    --accent: #5a9fe0;
+    --accent-hover: #74b0ea;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 100dvh;
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: "Manrope", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  ::selection { background: var(--accent); color: var(--ground); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  header, main { width: min(100% - 32px, 1200px); margin-inline: auto; }
+  header { display: flex; align-items: center; min-height: 84px; }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--heading);
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .brand:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 0.24em; }
+  main { align-self: center; padding-bottom: 84px; }
+  h1 {
+    margin: 0 0 32px;
+    color: var(--heading);
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 32px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--ground);
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pill:hover { background: var(--accent-hover); }
+</style>
 </head>
-
 <body>
-  <main>
-    <h1>404</h1>
-    <p>That page doesn't exist, but the portfolio does.</p>
-    <a href="/">Back to chrisalrahi.com</a>
-  </main>
+<header>
+  <a class="brand" href="/">Chris Al-Rahi</a>
+</header>
+<main id="main">
+  <h1>Page not found</h1>
+  <a class="pill" href="/">Go to the home page</a>
+</main>
 </body>
-
 </html>
