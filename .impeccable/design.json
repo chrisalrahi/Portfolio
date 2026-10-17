@@ -1,0 +1,503 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-17T23:04:22.327Z",
+  "title": "Design System: chrisalrahi.com (direction E, Cards)",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Night Navy",
+        "canonical": "#101a20",
+        "oklch": "oklch(21.1% 0.019 235)",
+        "tonalRamp": [
+          "oklch(15% 0.019 235)",
+          "oklch(26% 0.019 235)",
+          "oklch(38% 0.019 235)",
+          "oklch(49% 0.019 235)",
+          "oklch(61% 0.019 235)",
+          "oklch(72% 0.019 235)",
+          "oklch(84% 0.019 235)",
+          "oklch(95% 0.019 235)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Deep Slate",
+        "canonical": "#16222b",
+        "oklch": "oklch(24.5% 0.024 241)",
+        "tonalRamp": [
+          "oklch(15% 0.024 241)",
+          "oklch(26% 0.024 241)",
+          "oklch(38% 0.024 241)",
+          "oklch(49% 0.024 241)",
+          "oklch(61% 0.024 241)",
+          "oklch(72% 0.024 241)",
+          "oklch(84% 0.024 241)",
+          "oklch(95% 0.024 241)"
+        ]
+      },
+      "plate-ground": {
+        "role": "neutral",
+        "displayName": "Plate Black",
+        "canonical": "#0c1419",
+        "oklch": "oklch(18.6% 0.016 236)",
+        "tonalRamp": [
+          "oklch(15% 0.016 236)",
+          "oklch(26% 0.016 236)",
+          "oklch(38% 0.016 236)",
+          "oklch(49% 0.016 236)",
+          "oklch(61% 0.016 236)",
+          "oklch(72% 0.016 236)",
+          "oklch(84% 0.016 236)",
+          "oklch(95% 0.016 236)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Frost",
+        "canonical": "#e7f2f7",
+        "oklch": "oklch(95.4% 0.014 227)",
+        "tonalRamp": [
+          "oklch(15% 0.014 227)",
+          "oklch(26% 0.014 227)",
+          "oklch(38% 0.014 227)",
+          "oklch(49% 0.014 227)",
+          "oklch(61% 0.014 227)",
+          "oklch(72% 0.014 227)",
+          "oklch(84% 0.014 227)",
+          "oklch(95% 0.014 227)"
+        ]
+      },
+      "heading": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(26% 0.000 90)",
+          "oklch(38% 0.000 90)",
+          "oklch(49% 0.000 90)",
+          "oklch(61% 0.000 90)",
+          "oklch(72% 0.000 90)",
+          "oklch(84% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Steel Blue",
+        "canonical": "#5a9fe0",
+        "oklch": "oklch(68.5% 0.119 249)",
+        "tonalRamp": [
+          "oklch(15% 0.119 249)",
+          "oklch(26% 0.119 249)",
+          "oklch(38% 0.119 249)",
+          "oklch(49% 0.119 249)",
+          "oklch(61% 0.119 249)",
+          "oklch(72% 0.119 249)",
+          "oklch(84% 0.119 249)",
+          "oklch(95% 0.119 249)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Steel Blue Lifted",
+        "canonical": "#74b0ea",
+        "oklch": "oklch(73.9% 0.105 249)",
+        "tonalRamp": [
+          "oklch(15% 0.105 249)",
+          "oklch(26% 0.105 249)",
+          "oklch(38% 0.105 249)",
+          "oklch(49% 0.105 249)",
+          "oklch(61% 0.105 249)",
+          "oklch(72% 0.105 249)",
+          "oklch(84% 0.105 249)",
+          "oklch(95% 0.105 249)"
+        ]
+      },
+      "accent-text": {
+        "role": "primary",
+        "displayName": "Pale Steel Ink",
+        "canonical": "#83b7e8",
+        "oklch": "oklch(76.1% 0.090 248)",
+        "tonalRamp": [
+          "oklch(15% 0.090 248)",
+          "oklch(26% 0.090 248)",
+          "oklch(38% 0.090 248)",
+          "oklch(49% 0.090 248)",
+          "oklch(61% 0.090 248)",
+          "oklch(72% 0.090 248)",
+          "oklch(84% 0.090 248)",
+          "oklch(95% 0.090 248)"
+        ]
+      },
+      "accent-text-hover": {
+        "role": "primary",
+        "displayName": "Pale Steel Ink Hover",
+        "canonical": "#a9cdf0",
+        "oklch": "oklch(83.4% 0.063 248)",
+        "tonalRamp": [
+          "oklch(15% 0.063 248)",
+          "oklch(26% 0.063 248)",
+          "oklch(38% 0.063 248)",
+          "oklch(49% 0.063 248)",
+          "oklch(61% 0.063 248)",
+          "oklch(72% 0.063 248)",
+          "oklch(84% 0.063 248)",
+          "oklch(95% 0.063 248)"
+        ]
+      },
+      "school-ink": {
+        "role": "secondary",
+        "displayName": "School Green",
+        "canonical": "#8fd3b6",
+        "oklch": "oklch(81.3% 0.080 166)",
+        "tonalRamp": [
+          "oklch(15% 0.080 166)",
+          "oklch(26% 0.080 166)",
+          "oklch(38% 0.080 166)",
+          "oklch(49% 0.080 166)",
+          "oklch(61% 0.080 166)",
+          "oklch(72% 0.080 166)",
+          "oklch(84% 0.080 166)",
+          "oklch(95% 0.080 166)"
+        ]
+      },
+      "personal-ink": {
+        "role": "secondary",
+        "displayName": "Personal Amber",
+        "canonical": "#e6c079",
+        "oklch": "oklch(82.6% 0.099 82)",
+        "tonalRamp": [
+          "oklch(15% 0.099 82)",
+          "oklch(26% 0.099 82)",
+          "oklch(38% 0.099 82)",
+          "oklch(49% 0.099 82)",
+          "oklch(61% 0.099 82)",
+          "oklch(72% 0.099 82)",
+          "oklch(84% 0.099 82)",
+          "oklch(95% 0.099 82)"
+        ]
+      },
+      "tag-ink": {
+        "role": "neutral",
+        "displayName": "Tag Grey",
+        "canonical": "#c9d4db",
+        "oklch": "oklch(86.4% 0.015 235)",
+        "tonalRamp": [
+          "oklch(15% 0.015 235)",
+          "oklch(26% 0.015 235)",
+          "oklch(38% 0.015 235)",
+          "oklch(49% 0.015 235)",
+          "oklch(61% 0.015 235)",
+          "oklch(72% 0.015 235)",
+          "oklch(84% 0.015 235)",
+          "oklch(95% 0.015 235)"
+        ]
+      },
+      "error-ink": {
+        "role": "neutral",
+        "displayName": "Error Coral",
+        "canonical": "#f2a7a0",
+        "oklch": "oklch(79.9% 0.090 25)",
+        "tonalRamp": [
+          "oklch(15% 0.090 25)",
+          "oklch(26% 0.090 25)",
+          "oklch(38% 0.090 25)",
+          "oklch(49% 0.090 25)",
+          "oklch(61% 0.090 25)",
+          "oklch(72% 0.090 25)",
+          "oklch(84% 0.090 25)",
+          "oklch(95% 0.090 25)"
+        ]
+      },
+      "work-ink": {
+        "role": "secondary",
+        "displayName": "Work Blue",
+        "canonical": "#83b7e8",
+        "note": "Same value as accent-text; kept as its own token so the Work badge can move independently."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name in the hero only, two stacked lines, surname in the accent."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, left-aligned; 32px on phones."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Featured card titles; 24px on phones. Dialog titles 24px, experience employers 20px."
+      },
+      "title-sm": {
+        "displayName": "Title small",
+        "purpose": "Mini card titles; 20px on phones."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Key figure values, tabular, no wrap; units at 0.6em in the body colour."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The hero sentence at 40ch; 19px on phones."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running copy at 60 to 65ch; 16px on phones; About and Contact copy at 19px."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Muted captions under plates and the clip."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Pill tags and figure labels."
+      },
+      "label-strong": {
+        "displayName": "Label strong",
+        "purpose": "Track badges."
+      }
+    },
+    "shadows": [
+      {
+        "name": "plate",
+        "value": "0 24px 60px rgba(0, 0, 0, 0.45)",
+        "purpose": "Hero portrait, dialog photos, open mobile menu."
+      },
+      {
+        "name": "lift",
+        "value": "0 32px 72px rgba(0, 0, 0, 0.55)",
+        "purpose": "Hero plate on hover and the open dialog."
+      },
+      {
+        "name": "card",
+        "value": "0 12px 32px rgba(0, 0, 0, 0.35)",
+        "purpose": "Cards, mini cards and panels at rest."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 18px 40px rgba(0, 0, 0, 0.45)",
+        "purpose": "Cards and mini cards when lifted."
+      },
+      {
+        "name": "pill",
+        "value": "0 12px 28px rgba(0, 0, 0, 0.35)",
+        "purpose": "Solid pill at rest."
+      },
+      {
+        "name": "pill-hover",
+        "value": "0 16px 32px rgba(0, 0, 0, 0.45)",
+        "purpose": "Solid pill on hover."
+      },
+      {
+        "name": "plate-focus",
+        "value": "inset 0 0 0 2px #5a9fe0, inset 0 0 0 5px rgba(16, 26, 32, 0.85)",
+        "purpose": "Focus ring drawn inside photo plate buttons so it shows over images."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "Shared ease for every transition and keyframe except the plot wipe."
+      },
+      {
+        "name": "fast",
+        "value": "200ms",
+        "purpose": "Colour, border, background and pill state changes."
+      },
+      {
+        "name": "lift",
+        "value": "220ms",
+        "purpose": "Hover lifts on plates and cards; dialog open and backdrop fade."
+      },
+      {
+        "name": "load-sequence",
+        "value": "rise 600ms, 14px, delays 0 / 70 / 140 / 210 / 280ms",
+        "purpose": "Hero only: bar, name, sentence, actions, plate."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity and translate 500ms, 14px, stagger 70ms by --i, threshold 0.15",
+        "purpose": "Section heads and cards fade up once; anything above the viewport settles at once."
+      },
+      {
+        "name": "hover-lift",
+        "value": "translateY(-4px), pill translateY(-2px)",
+        "purpose": "Fine pointers with hover only, never under reduced motion."
+      },
+      {
+        "name": "count-up",
+        "value": "600ms, ease-out cubic, threshold 0.6",
+        "purpose": "Key figures count once from zero; a row scrolled past jumps to its final value."
+      },
+      {
+        "name": "plot-wipe",
+        "value": "clip-path inset(0 100% 0 0) to inset(0 0 0 0), 1100ms cubic-bezier(0.33, 0, 0.2, 1), 200ms delay, threshold 0.5",
+        "purpose": "The pendulum step-response plot draws itself in once."
+      },
+      {
+        "name": "dialog-in",
+        "value": "opacity and 8px rise, 220ms; backdrop fade 220ms",
+        "purpose": "Card dialogs on open."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "No sequence, reveals, wipe, count, lift or smooth scroll; clip never loads, poster stays."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-tight",
+        "value": "1180px"
+      },
+      {
+        "name": "tablet",
+        "value": "1023px"
+      },
+      {
+        "name": "cards-single",
+        "value": "860px"
+      },
+      {
+        "name": "hero-stack",
+        "value": "760px"
+      },
+      {
+        "name": "phone",
+        "value": "640px"
+      }
+    ],
+    "layout": {
+      "frame": "1200px",
+      "gutter": "32px (16px on phones)",
+      "barHeight": "84px / 72px tablet / 64px phone",
+      "sectionGap": "64px"
+    }
+  },
+  "components": [
+    {
+      "name": "Solid Pill",
+      "kind": "button",
+      "refersTo": "pill-solid",
+      "description": "The primary action (resume, send); Steel Blue with ground ink.",
+      "html": "<a class=\"ds-pill ds-pill--solid\" href=\"#\">Resume (PDF)</a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border: 0; border-radius: 999px; font-family: Manrope, system-ui, sans-serif; font-size: 16px; font-weight: 800; text-decoration: none; cursor: pointer; transition: background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-pill--solid { background: #5a9fe0; color: #101a20; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); } .ds-pill--solid:hover { background: #74b0ea; box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45); transform: translateY(-2px); } .ds-pill--solid:active { background: #5a9fe0; transform: translateY(0); } .ds-pill:focus-visible { outline: 2px solid #5a9fe0; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Pill",
+      "kind": "button",
+      "refersTo": "pill-ghost",
+      "description": "Secondary actions and link pills; grey wash, hairline, accent wash on hover.",
+      "html": "<a class=\"ds-ghost\" href=\"#\">Get in touch</a>",
+      "css": ".ds-ghost { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border: 1px solid rgba(231, 242, 247, 0.24); border-radius: 999px; background: rgba(231, 242, 247, 0.08); color: #e7f2f7; font-family: Manrope, system-ui, sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; transition: background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), color 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-ghost:hover { border-color: rgba(131, 183, 232, 0.45); background: rgba(90, 159, 224, 0.12); color: #ffffff; } .ds-ghost:active { background: rgba(231, 242, 247, 0.15); } .ds-ghost:focus-visible { outline: 2px solid #5a9fe0; outline-offset: 3px; }"
+    },
+    {
+      "name": "See More",
+      "kind": "button",
+      "refersTo": "see-more",
+      "description": "Outline pill in the card footer that opens the project dialog.",
+      "html": "<button class=\"ds-more\" type=\"button\">See more</button>",
+      "css": ".ds-more { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 1px solid rgba(131, 183, 232, 0.45); border-radius: 999px; background: transparent; color: #83b7e8; font-family: Manrope, system-ui, sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; transition: background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), color 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-more:hover { border-color: #83b7e8; background: rgba(90, 159, 224, 0.12); color: #a9cdf0; } .ds-more:focus-visible { outline: 2px solid #5a9fe0; outline-offset: 3px; }"
+    },
+    {
+      "name": "Track Badges and Tags",
+      "kind": "chip",
+      "refersTo": "badge-work",
+      "description": "Semantic track badges (Work, School, Personal) and neutral tool tags.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-badge ds-badge--work\">Work</span><span class=\"ds-badge ds-badge--school\">School</span><span class=\"ds-badge ds-badge--personal\">Personal</span><span class=\"ds-tag\">SOLIDWORKS</span><span class=\"ds-tag\">Arduino</span></div>",
+      "css": ".ds-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: Manrope, system-ui, sans-serif; } .ds-badge { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 800; line-height: 1; letter-spacing: 0.01em; } .ds-badge--work { background: rgba(90, 159, 224, 0.16); color: #83b7e8; } .ds-badge--school { background: rgba(123, 196, 160, 0.16); color: #8fd3b6; } .ds-badge--personal { background: rgba(224, 179, 90, 0.16); color: #e6c079; } .ds-tag { padding: 6px 12px; border: 1px solid rgba(231, 242, 247, 0.12); border-radius: 999px; background: rgba(231, 242, 247, 0.08); color: #c9d4db; font-size: 13px; font-weight: 500; line-height: 1.25; transition: background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), color 200ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-tag:hover { border-color: rgba(231, 242, 247, 0.24); background: rgba(231, 242, 247, 0.15); color: #e7f2f7; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The project unit: plate, badge, title, hook, key figures, tags, footer.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-plate\"></div><div class=\"ds-card-body\"><span class=\"ds-card-badge\">Work</span><h3 class=\"ds-card-title\">Liquid-Cooled Chassis Redesign</h3><p class=\"ds-card-hook\">One or two sentences on what the thing is and why it exists.</p><dl class=\"ds-figs\"><div><dt>Products tested</dt><dd>9</dd></div></dl><button class=\"ds-card-more\" type=\"button\">See more</button></div></article>",
+      "css": ".ds-card { display: flex; flex-direction: column; max-width: 560px; overflow: hidden; border: 1px solid rgba(231, 242, 247, 0.12); border-radius: 20px; background: #16222b; color: #e7f2f7; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35); font-family: Manrope, system-ui, sans-serif; font-size: 17px; line-height: 1.6; transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); } .ds-card-plate { aspect-ratio: 16 / 10; background: #0c1419; } .ds-card-body { display: flex; flex-direction: column; align-items: flex-start; padding: 32px; } .ds-card-badge { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; background: rgba(90, 159, 224, 0.16); color: #83b7e8; font-size: 13px; font-weight: 800; line-height: 1; } .ds-card-title { margin: 12px 0 8px; color: #ffffff; font-size: 28px; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; } .ds-card-hook { max-width: 62ch; margin: 0; } .ds-figs { width: 100%; margin: 20px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(231, 242, 247, 0.12); } .ds-figs div { display: flex; flex-direction: column-reverse; gap: 4px; } .ds-figs dt { color: rgba(231, 242, 247, 0.68); font-size: 13px; font-weight: 500; line-height: 1.3; } .ds-figs dd { margin: 0; color: #ffffff; font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; } .ds-card-more { margin-top: 20px; min-height: 44px; padding: 0 20px; border: 1px solid rgba(131, 183, 232, 0.45); border-radius: 999px; background: transparent; color: #83b7e8; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; } .ds-card-more:hover { background: rgba(90, 159, 224, 0.12); color: #a9cdf0; } .ds-card-more:focus-visible { outline: 2px solid #5a9fe0; outline-offset: 3px; }"
+    },
+    {
+      "name": "Mini Card",
+      "kind": "card",
+      "refersTo": "mini-card",
+      "description": "Also-built entries: 16px corners, one line of muted copy.",
+      "html": "<article class=\"ds-mini\"><div class=\"ds-mini-plate\"></div><div class=\"ds-mini-body\"><h3 class=\"ds-mini-title\">Hot Tub Heater Repair</h3><p class=\"ds-mini-line\">Traced a heater error to a burnt port.</p></div></article>",
+      "css": ".ds-mini { display: flex; flex-direction: column; max-width: 280px; overflow: hidden; border: 1px solid rgba(231, 242, 247, 0.12); border-radius: 16px; background: #16222b; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35); font-family: Manrope, system-ui, sans-serif; transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-mini:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); } .ds-mini-plate { aspect-ratio: 16 / 10; background: #0c1419; } .ds-mini-body { padding: 16px 20px 20px; } .ds-mini-title { margin: 0 0 8px; color: #ffffff; font-size: 19px; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; } .ds-mini-line { margin: 0; color: rgba(231, 242, 247, 0.68); font-size: 15px; line-height: 1.55; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Contact form field on the ground colour inside a surface panel.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-email\">Email</label><input id=\"ds-email\" type=\"email\" placeholder=\"you@company.com\"></div>",
+      "css": ".ds-field { display: grid; gap: 8px; max-width: 360px; font-family: Manrope, system-ui, sans-serif; } .ds-field label { color: #e7f2f7; font-size: 15px; font-weight: 500; line-height: 1.4; } .ds-field input { min-height: 48px; padding: 12px 16px; border: 1px solid rgba(231, 242, 247, 0.24); border-radius: 12px; background: #101a20; color: #e7f2f7; font: inherit; font-size: 16px; transition: border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-field input:hover { border-color: rgba(231, 242, 247, 0.4); } .ds-field input:focus-visible { border-color: #5a9fe0; outline: 2px solid #5a9fe0; outline-offset: 2px; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Brand left, muted links right, white with a 2px accent underline on hover.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">Chris Al-Rahi</a><ul><li><a href=\"#\">Projects</a></li><li><a href=\"#\">Experience</a></li><li><a href=\"#\">About</a></li><li><a href=\"#\">Contact</a></li></ul></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 32px; min-height: 84px; font-family: Manrope, system-ui, sans-serif; } .ds-brand { display: inline-flex; align-items: center; min-height: 44px; color: #ffffff; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; text-decoration: none; } .ds-nav ul { display: flex; gap: 32px; margin: 0; padding: 0; list-style: none; } .ds-nav ul a { display: inline-flex; align-items: center; min-height: 44px; color: rgba(231, 242, 247, 0.68); font-size: 16px; font-weight: 500; text-decoration: none; text-underline-offset: 0.24em; } .ds-brand:hover, .ds-nav ul a:hover { color: #ffffff; text-decoration: underline; text-decoration-color: #5a9fe0; text-decoration-thickness: 2px; } .ds-nav ul a:active { color: #83b7e8; } .ds-nav a:focus-visible { outline: 2px solid #5a9fe0; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Evidence Cards",
+    "overview": "The page is a dark navy desk with one steel-blue accent, and every piece of proof sits on it as a rounded card: a photo plate on top, then a coloured track badge, a heavy title, a one- or two-sentence hook, a row of big key figures and a few pill tags. A recruiter skims cards, not paragraphs, so the system leans on numbers set large, photographs set in deep-shadowed plates, and a single typeface at three weights. Density is low: one sentence where a bullet list would have been, and the detail moves into a native dialog behind \"See more\".\n\nPersonality comes from the materials, not from decoration. The hero sets the surname in the accent beside a 4:5 portrait plate; the pendulum card is the one signature moment, its looping clip overlapped at the corner by a white step-response plot that wipes itself in once. Motion is a short load sequence, once-only fade-ups, 4 px hover lifts and count-ups on the key figures, and none of it is tied to scroll position. Reduced motion is the only switch, and under it everything sits at its final state.\n\nConfirmed rejections from the direction: no bullets in the project unit, no labels above headings, no blueprint grid texture, no side rail, no big centred section titles, no scroll-driven effects, and no purple.",
+    "keyCharacteristics": [
+      "Dark tonal layering (ground, surface, plate ground) with soft, deep black shadows.",
+      "One accent (#5a9fe0) for fills and the surname; a lighter accent ink for small text and links.",
+      "Track badges in their own semantic tints (Work blue, School green, Personal amber), separate from the accent.",
+      "Manrope only, 400 / 500 / 800, with 800 carrying every heading and figure.",
+      "Everything interactive is a pill; every surface is a 20 px or 16 px rounded rectangle.",
+      "Motion plays once and settles; final values are always in the markup."
+    ],
+    "rules": [
+      {
+        "name": "The Ground Ink Rule",
+        "body": "Text on a Steel Blue fill is the ground colour (#101a20), never white; white on this blue fails AA.",
+        "section": "colors"
+      },
+      {
+        "name": "The Separate Tracks Rule",
+        "body": "Track badges use their own tints and never borrow the accent; the accent means \"act here\", a badge means \"which part of his life\".",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Weights Rule",
+        "body": "Manrope at 400, 500 and 800 only. No 600 or 700, no second family.",
+        "section": "typography"
+      },
+      {
+        "name": "The Balanced Heading Rule",
+        "body": "Headings use `text-wrap: balance`, paragraphs `text-wrap: pretty`.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lift On Hover Rule",
+        "body": "Plates and cards rise 4 px with the next shadow step over 220 ms, only on fine pointers with hover and never under reduced motion. The solid pill rises 2 px.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do put ground-coloured text (#101a20) on every Steel Blue fill.",
+      "Do build every new project unit as badge, title, hook, figures, tags, links and \"See more\", with the detail in its dialog.",
+      "Do set photos in Plate Black plates with the 20 px or 16 px radius, and put white-ground drawings and plots on Plot White.",
+      "Do keep final values in the markup for anything that animates, and gate every hidden starting state behind the `js` class and `prefers-reduced-motion: no-preference`.",
+      "Do keep interactive targets at least 44 px tall.",
+      "Do use the spacing scale (4 to 96 px) and the 200 / 220 ms timings on the shared ease."
+    ],
+    "donts": [
+      "Don't use bullets or Role and Outcome labels in a project unit.",
+      "Don't put labels above headings, centre the section titles, or add the blueprint grid texture or a side rail.",
+      "Don't tie any motion to scroll position or replay a reveal; motion plays once.",
+      "Don't set a single key figure larger than 30 px to fill space.",
+      "Don't add a second typeface or a weight outside 400 / 500 / 800.",
+      "Don't colour a track badge with the accent, or use purple anywhere."
+    ]
+  }
+}
