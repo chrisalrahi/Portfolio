@@ -50,9 +50,9 @@
   <!-- bump ?v= whenever these files change, or browsers keep a cached copy
        that no longer matches this page -->
   <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
-  <link href="assets/css/site.css?v=20261018a" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261018b" rel="stylesheet">
   <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
-  <script src="assets/js/site.js?v=20261018a" defer></script>
+  <script src="assets/js/site.js?v=20261018b" defer></script>
 </head>
 
 <body>
@@ -206,10 +206,9 @@
               <div class="detail-fade">
                 <div class="detail-head">
                   <div><span class="badge badge-personal">Personal</span><h3 id="dt-arm" class="detail-title" tabindex="-1">Six-Axis Robot Arm</h3></div>
-                  <button class="detail-close" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 </div>
                 <div class="detail-content">
-                  <div class="detail-media">
+                  <div class="detail-media" style="--n: 3">
                     <figure><img src="assets/img/opt/arm-render.webp" width="1120" height="840" alt="CAD render of the six-axis robot arm on its base plate" loading="lazy" decoding="async"><figcaption>Full arm render</figcaption></figure>
                     <figure><img src="assets/img/opt/arm-schematic.webp" width="900" height="1334" alt="Hand-drawn Mk-2 electronics schematic: 24 V supply, buck converters, ESP32, CAN bus to each joint, emergency stop relays" loading="lazy" decoding="async"><figcaption>Mk-2 electronics schematic</figcaption></figure>
                     <figure><img src="assets/img/opt/arm-covers.webp" width="1120" height="840" alt="CAD render of the arm with its covers removed, showing the planetary reducers and motors" loading="lazy" decoding="async"><figcaption>Covers removed</figcaption></figure>
@@ -245,10 +244,9 @@
               <div class="detail-fade">
                 <div class="detail-head">
                   <div><span class="badge badge-school">School</span><h3 id="dt-pendulum" class="detail-title" tabindex="-1">Inverted Pendulum</h3></div>
-                  <button class="detail-close" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 </div>
                 <div class="detail-content">
-                  <div class="detail-media">
+                  <div class="detail-media" style="--n: 4">
                     <figure class="dm-wide"><video class="plate-clip dialog-clip" muted loop playsinline preload="none" poster="assets/img/opt/pendulum-poster.webp" width="816" height="334" aria-hidden="true"></video><figcaption>The pendulum in action</figcaption></figure>
                     <figure><img class="on-white" src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" alt="Step response plots from tuning the PID controller at three proportional gains" loading="lazy" decoding="async"><figcaption>Step response at three proportional gains</figcaption></figure>
                     <figure><img src="assets/img/opt/pendulum-cad.webp" width="560" height="420" alt="SolidWorks assembly of the pendulum cart, rail, motor, and electronics enclosure" loading="lazy" decoding="async"><figcaption>SolidWorks assembly</figcaption></figure>
@@ -287,10 +285,9 @@
               <div class="detail-fade">
                 <div class="detail-head">
                   <div><span class="badge badge-school">School</span><h3 id="dt-reducer" class="detail-title" tabindex="-1">Two-Stage Gear Reducer</h3></div>
-                  <button class="detail-close" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 </div>
                 <div class="detail-content">
-                  <div class="detail-media"><figure class="dm-wide"><img src="assets/img/opt/reducer-exploded.webp" width="545" height="307" alt="Exploded view of the two-stage gear reducer assembly" loading="lazy" decoding="async"><figcaption>Exploded view</figcaption></figure><figure><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" alt="CAD render of the gear reducer with the casing shown transparent" loading="lazy" decoding="async"><figcaption>Transparent casing</figcaption></figure><figure><img src="assets/img/opt/reducer-drawing.webp" width="560" height="420" alt="Top level assembly drawing of the gear reducer with its parts list" loading="lazy" decoding="async"><figcaption>Assembly drawing</figcaption></figure></div>
+                  <div class="detail-media" style="--n: 3"><figure class="dm-wide"><img src="assets/img/opt/reducer-exploded.webp" width="545" height="307" alt="Exploded view of the two-stage gear reducer assembly" loading="lazy" decoding="async"><figcaption>Exploded view</figcaption></figure><figure><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" alt="CAD render of the gear reducer with the casing shown transparent" loading="lazy" decoding="async"><figcaption>Transparent casing</figcaption></figure><figure><img src="assets/img/opt/reducer-drawing.webp" width="560" height="420" alt="Top level assembly drawing of the gear reducer with its parts list" loading="lazy" decoding="async"><figcaption>Assembly drawing</figcaption></figure></div>
                   <p class="detail-text">I ran the bending and moment failure analysis and designed every part except the shaft, and the unit is validated for a five-year service life.</p>
                   <dl class="figures"><div><dt>Ratio</dt><dd>9:1</dd></div><div><dt>Input</dt><dd>6 <span class="unit">hp</span></dd></div><div><dt>Output</dt><dd>45 <span class="unit">rpm</span></dd></div><div><dt>Service life</dt><dd>5 <span class="unit">years</span></dd></div></dl>
                 </div>

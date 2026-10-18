@@ -288,16 +288,13 @@
   document.querySelectorAll("dialog.detail").forEach((dialog) => {
     if (typeof dialog.showModal !== "function") return;
     dialogStates.set(dialog, { busy: false, card: null, phase: "idle", closeRequested: false, openHandler: null, openTimer: 0 });
-    dialog.querySelector(".detail-close").addEventListener("click", () => closeDialog(dialog));
     dialog.addEventListener("cancel", (event) => {
       event.preventDefault();
       closeDialog(dialog);
     });
     dialog.addEventListener("click", (event) => {
-      if (event.target !== dialog) return;
-      const box = dialog.getBoundingClientRect();
-      const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
-      if (outside) closeDialog(dialog);
+      if (event.target.closest("a")) return;
+      closeDialog(dialog);
     });
   });
 

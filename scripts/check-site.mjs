@@ -186,7 +186,7 @@ const dialogWords = words(text.dialogs).length;
   report(9, 'css + js size', bytes < 110000 ? [] : [`${bytes} bytes`], `${bytes} bytes (limit 110000)`);
 }
 
-// Extra: every dialog trigger has a dialog, every dialog has a trigger, a Close button and a label; ids unique
+// Extra: every dialog trigger has a dialog, every dialog has a trigger, a fade wrapper, matching media count and a label; ids unique
 {
   const problems = [];
   const h = stripCode(index);
@@ -195,12 +195,23 @@ const dialogWords = words(text.dialogs).length;
   if (dup.length) problems.push(`duplicate ids: ${[...new Set(dup)].join(', ')}`);
   const targets = [...h.matchAll(/\sdata-dialog="([^"]+)"/g)].map((x) => x[1]);
   const dialogs = [...h.matchAll(/<dialog\b([^>]*)>([\s\S]*?)<\/dialog>/gi)];
+  if (targets.length !== 3) problems.push(`expected 3 dialog triggers, found ${targets.length}`);
+  if (dialogs.length !== 3) problems.push(`expected 3 dialogs, found ${dialogs.length}`);
+  if (h.includes('detail-close')) problems.push('expected no detail-close elements');
   for (const t of new Set(targets)) if (!dialogs.some((d) => d[1].includes(`id="${t}"`))) problems.push(`trigger for missing dialog ${t}`);
   for (const [, attrs, body] of dialogs) {
     const id = (attrs.match(/\sid="([^"]+)"/) || [])[1];
     if (targets.filter((t) => t === id).length !== 1) problems.push(`${id}: expected 1 card trigger`);
     if (!/aria-labelledby="[^"]+"/.test(attrs)) problems.push(`${id}: no aria-labelledby`);
-    if (!/<button class="detail-close" type="button" aria-label="Close">/.test(body)) problems.push(`${id}: no Close button`);
+    if ((body.match(/class="detail-fade"/g) || []).length !== 1) problems.push(`${id}: expected 1 detail-fade wrapper`);
+    const media = body.match(/<div class="detail-media"([^>]*)>([\s\S]*?)<\/div>/i);
+    if (!media) {
+      problems.push(`${id}: no detail-media`);
+      continue;
+    }
+    const figures = [...media[2].matchAll(/<figure\b/gi)].length;
+    const count = Number((media[1].match(/style="[^"]*--n:\s*(\d+)[^"]*"/) || [])[1]);
+    if (count !== figures) problems.push(`${id}: --n is ${count || 'missing'}, found ${figures} figures`);
   }
   report('+', 'dialogs and ids', problems, `${dialogs.length} dialogs, ${targets.length} triggers, ${ids.length} unique ids`);
 }
