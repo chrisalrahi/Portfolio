@@ -50,9 +50,9 @@
   <!-- bump ?v= whenever these files change, or browsers keep a cached copy
        that no longer matches this page -->
   <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
-  <link href="assets/css/site.css?v=20261018b" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261018c" rel="stylesheet">
   <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
-  <script src="assets/js/site.js?v=20261018b" defer></script>
+  <script src="assets/js/site.js?v=20261018c" defer></script>
 </head>
 
 <body>
@@ -64,6 +64,7 @@
   <header class="site-header">
     <div class="container">
       <a class="wordmark" href="#hero">Chris Al-Rahi</a>
+      <a class="btn btn-primary header-resume" href="assets/Docs/Chris%20Al-Rahi%20Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
@@ -153,7 +154,7 @@
         </div>
 
         <div class="card-grid">
-          <article class="card" id="cw-chassis" data-reveal aria-labelledby="t-chassis">
+          <article class="card card--expandable" id="cw-chassis" data-reveal aria-labelledby="t-chassis" data-dialog="d-chassis">
             <div class="card-plate card-plate--chassis">
               <img src="assets/img/opt/cw-chassis.webp" width="800" height="753" alt="The ruggedized VPX electronics chassis behind the liquid cooling redesign" loading="lazy" decoding="async">
             </div>
@@ -166,9 +167,27 @@
               </dl>
               <ul class="tags" aria-label="Tools"><li>Flotherm</li><li>Thermal design</li><li>CAD</li></ul>
             </div>
+            <button class="card-plus" type="button" aria-haspopup="dialog" aria-controls="d-chassis" aria-label="More about Liquid-Cooled Chassis Redesign"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
           </article>
 
-          <article class="card card--rtd" id="rtd-sensor" data-reveal style="--i: 1" aria-labelledby="t-rtd">
+          <dialog class="detail" id="d-chassis" aria-labelledby="dt-chassis">
+            <div class="detail-inner">
+              <div class="detail-fade">
+                <div class="detail-head">
+                  <div><span class="badge badge-work">Work</span><h3 id="dt-chassis" class="detail-title" tabindex="-1">Liquid-Cooled Chassis Redesign</h3></div>
+                </div>
+                <div class="detail-content">
+                  <div class="detail-media detail-media--one" style="--n: 1">
+                    <figure><img src="assets/img/opt/cw-chassis.webp" width="800" height="753" alt="The ruggedized VPX electronics chassis behind the liquid cooling redesign" loading="lazy" decoding="async"><figcaption>Ruggedized VPX chassis</figcaption></figure>
+                  </div>
+                  <p class="detail-text">I redrew the cooling paths in CAD around cheaper machining processes, then ran Flotherm simulations to compare the new geometry against the original. The result was a manufacturable, lower-cost layout the team could build against, and alongside it I ran thermal and environmental testing on nine conduction-cooled products.</p>
+                  <dl class="figures"><div><dt>Conduction-cooled products tested</dt><dd>9</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <article class="card card--rtd card--expandable" id="rtd-sensor" data-reveal style="--i: 1" aria-labelledby="t-rtd" data-dialog="d-rtd">
             <div class="card-plate card-plate--rtd">
               <img src="assets/img/opt/about-nrcan.webp" width="800" height="931" alt="Chris Al-Rahi presenting the aspirated and shielded RTD sensor research poster at CanmetENERGY" loading="lazy" decoding="async">
             </div>
@@ -181,9 +200,27 @@
               </dl>
               <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Instrumentation</li><li>Field testing</li></ul>
             </div>
+            <button class="card-plus" type="button" aria-haspopup="dialog" aria-controls="d-rtd" aria-label="More about Aspirated and Shielded RTD Sensor"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
           </article>
 
-          <article class="card card--wide card--expandable" id="robot-arm" data-reveal role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Six-Axis Robot Arm" data-dialog="d-arm">
+          <dialog class="detail" id="d-rtd" aria-labelledby="dt-rtd">
+            <div class="detail-inner">
+              <div class="detail-fade">
+                <div class="detail-head">
+                  <div><span class="badge badge-work">Work</span><h3 id="dt-rtd" class="detail-title" tabindex="-1">Aspirated and Shielded RTD Sensor</h3></div>
+                </div>
+                <div class="detail-content">
+                  <div class="detail-media detail-media--one" style="--n: 1">
+                    <figure><img src="assets/img/opt/about-nrcan.webp" width="800" height="931" alt="Chris Al-Rahi presenting the aspirated and shielded RTD sensor research poster at CanmetENERGY" loading="lazy" decoding="async"><figcaption>Presenting the research poster at CanmetENERGY</figcaption></figure>
+                  </div>
+                  <p class="detail-text">I designed the shield in SolidWorks, sized the aspiration from the literature, and ran the accuracy testing myself. Live temperature accuracy improved by more than 30%, and I presented the work as a research poster.</p>
+                  <dl class="figures"><div><dt>Better live temperature accuracy</dt><dd>30%+</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <article class="card card--wide card--expandable" id="robot-arm" data-reveal data-dialog="d-arm">
             <div class="card-plate">
               <img src="assets/img/opt/arm-render.webp" width="1120" height="840" alt="CAD render of the six-axis robot arm on its base plate" loading="lazy" decoding="async">
             </div>
@@ -199,6 +236,7 @@
               </dl>
               <ul class="tags" aria-label="Tools"><li>3D printing</li><li>Planetary gearing</li><li>ESP32 + CAN bus</li></ul>
             </div>
+            <button class="card-plus" type="button" aria-haspopup="dialog" aria-controls="d-arm" aria-label="More about Six-Axis Robot Arm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
           </article>
 
           <dialog class="detail" id="d-arm" aria-labelledby="dt-arm">
@@ -220,15 +258,15 @@
             </div>
           </dialog>
 
-          <article class="card card--signature card--expandable" id="inverted-pendulum" data-reveal role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Inverted Pendulum" data-dialog="d-pendulum">
+          <article class="card card--signature card--expandable" id="inverted-pendulum" data-reveal data-dialog="d-pendulum">
             <div class="sig-media">
               <figure class="sig-figure">
                 <div class="sig-clip"><video class="plate-clip card-clip" muted loop playsinline preload="none" poster="assets/img/opt/pendulum-poster.webp" width="816" height="334" aria-hidden="true"></video></div>
                 <figcaption>The pendulum in action</figcaption>
               </figure>
               <figure class="sig-plot">
-                <div class="plot-plate"><img src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" alt="Step response plots from tuning the PID controller at three proportional gains" loading="lazy" decoding="async"></div>
-                <figcaption>Step response at three proportional gains</figcaption>
+                <div class="plot-plate"><img src="assets/img/opt/pendulum-cad.webp" width="560" height="420" alt="SolidWorks assembly of the pendulum cart, rail, motor, and electronics enclosure" loading="lazy" decoding="async"></div>
+                <figcaption>SolidWorks assembly</figcaption>
               </figure>
             </div>
             <div class="card-body">
@@ -237,6 +275,7 @@
               <p class="hook">For Control Systems, we built a belt-driven cart that balances a pendulum upright using only the angle from a rotary encoder.</p>
               <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Arduino (C++)</li><li>PID control</li></ul>
             </div>
+            <button class="card-plus" type="button" aria-haspopup="dialog" aria-controls="d-pendulum" aria-label="More about Inverted Pendulum"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
           </article>
 
           <dialog class="detail" id="d-pendulum" aria-labelledby="dt-pendulum">
@@ -246,9 +285,8 @@
                   <div><span class="badge badge-school">School</span><h3 id="dt-pendulum" class="detail-title" tabindex="-1">Inverted Pendulum</h3></div>
                 </div>
                 <div class="detail-content">
-                  <div class="detail-media" style="--n: 4">
+                  <div class="detail-media" style="--n: 3">
                     <figure class="dm-wide"><video class="plate-clip dialog-clip" muted loop playsinline preload="none" poster="assets/img/opt/pendulum-poster.webp" width="816" height="334" aria-hidden="true"></video><figcaption>The pendulum in action</figcaption></figure>
-                    <figure><img class="on-white" src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" alt="Step response plots from tuning the PID controller at three proportional gains" loading="lazy" decoding="async"><figcaption>Step response at three proportional gains</figcaption></figure>
                     <figure><img src="assets/img/opt/pendulum-cad.webp" width="560" height="420" alt="SolidWorks assembly of the pendulum cart, rail, motor, and electronics enclosure" loading="lazy" decoding="async"><figcaption>SolidWorks assembly</figcaption></figure>
                     <figure class="dm-wide"><img src="assets/img/opt/pendulum-rig.webp" width="800" height="384" alt="The inverted pendulum cart and rail on a table, seen from above" loading="lazy" decoding="async"><figcaption>Cart and rail</figcaption></figure>
                   </div>
@@ -258,7 +296,7 @@
             </div>
           </dialog>
 
-          <article class="card card--compact" id="blade-polisher" data-reveal aria-labelledby="t-polisher">
+          <article class="card card--compact card--expandable" id="blade-polisher" data-reveal aria-labelledby="t-polisher" data-dialog="d-polisher">
             <div class="card-plate"><img src="assets/img/opt/blade-polisher.webp" width="800" height="560" alt="Isometric CAD render of the turbine blade mold polisher gantry system" loading="lazy" decoding="async"></div>
             <div class="card-body">
               <span class="badge badge-school">School</span>
@@ -267,9 +305,27 @@
               <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Engineering drawings</li><li>Pneumatic actuation</li></ul>
               <div class="card-foot"><a href="https://skfb.ly/pCKSo" target="_blank" rel="noopener">3D model (Sketchfab)</a><a href="https://drive.google.com/file/d/1IAgGhyez_0Hg4_hqSXrPCs9KN8DNypPy/view?usp=sharing" target="_blank" rel="noopener">Video</a><a href="assets/Docs/MCG2101%20-%20Turbine%20Mold%20Polisher%20-%20Deliverable%2310%20E2-2.pdf" target="_blank" rel="noopener">Report (PDF)</a></div>
             </div>
+            <button class="card-plus" type="button" aria-haspopup="dialog" aria-controls="d-polisher" aria-label="More about Turbine Blade Mold Polisher"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
           </article>
 
-          <article class="card card--compact card--expandable" id="gear-reducer" data-reveal style="--i: 1" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Two-Stage Gear Reducer" data-dialog="d-reducer">
+          <dialog class="detail" id="d-polisher" aria-labelledby="dt-polisher">
+            <div class="detail-inner">
+              <div class="detail-fade">
+                <div class="detail-head">
+                  <div><span class="badge badge-school">School</span><h3 id="dt-polisher" class="detail-title" tabindex="-1">Turbine Blade Mold Polisher</h3></div>
+                </div>
+                <div class="detail-content">
+                  <div class="detail-media detail-media--one" style="--n: 1">
+                    <figure><img src="assets/img/opt/blade-polisher.webp" width="800" height="560" alt="Isometric CAD render of the turbine blade mold polisher gantry system" loading="lazy" decoding="async"><figcaption>Isometric CAD render of the gantry</figcaption></figure>
+                  </div>
+                  <p class="detail-text">I helped design the mechanical layout and motion system: the gantry, the yoke, and the spring-connected polishing plates that conform to the curved mold surface. We finished with a complete CAD assembly, a full drawing package, and an interactive 3D model of a system that keeps constant polishing pressure across a complex curved surface.</p>
+                  <div class="detail-links"><a href="https://skfb.ly/pCKSo" target="_blank" rel="noopener">3D model (Sketchfab)</a><a href="https://drive.google.com/file/d/1IAgGhyez_0Hg4_hqSXrPCs9KN8DNypPy/view?usp=sharing" target="_blank" rel="noopener">Video</a><a href="assets/Docs/MCG2101%20-%20Turbine%20Mold%20Polisher%20-%20Deliverable%2310%20E2-2.pdf" target="_blank" rel="noopener">Report (PDF)</a></div>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <article class="card card--compact card--expandable" id="gear-reducer" data-reveal style="--i: 1" data-dialog="d-reducer">
             <div class="card-plate"><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" alt="CAD render of the gear reducer with the casing shown transparent" loading="lazy" decoding="async"></div>
             <div class="card-body">
               <span class="badge badge-school">School</span>
@@ -278,6 +334,7 @@
               <dl class="figures"><div><dt>Ratio</dt><dd>9:1</dd></div><div><dt>Input</dt><dd><span class="sr-only">6 hp</span><span aria-hidden="true"><span data-count="6">6</span> <span class="unit">hp</span></span></dd></div><div><dt>Output</dt><dd><span class="sr-only">45 rpm</span><span aria-hidden="true"><span data-count="45">45</span> <span class="unit">rpm</span></span></dd></div><div><dt>Service life</dt><dd><span class="sr-only">5 years</span><span aria-hidden="true"><span data-count="5">5</span> <span class="unit">years</span></span></dd></div></dl>
               <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Gear design</li><li>Failure analysis</li></ul>
             </div>
+            <button class="card-plus" type="button" aria-haspopup="dialog" aria-controls="d-reducer" aria-label="More about Two-Stage Gear Reducer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
           </article>
 
           <dialog class="detail" id="d-reducer" aria-labelledby="dt-reducer">

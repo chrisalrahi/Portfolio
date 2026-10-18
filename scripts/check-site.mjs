@@ -193,18 +193,32 @@ const dialogWords = words(text.dialogs).length;
   const ids = [...h.matchAll(/\sid="([^"]+)"/g)].map((x) => x[1]);
   const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
   if (dup.length) problems.push(`duplicate ids: ${[...new Set(dup)].join(', ')}`);
-  const targets = [...h.matchAll(/\sdata-dialog="([^"]+)"/g)].map((x) => x[1]);
+  const cards = [...h.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/gi)].filter((x) => /\bclass="[^"]*\bcard\b[^"]*"/.test(x[1]) && /\sdata-dialog="[^"]+"/.test(x[1]));
+  const targets = cards.map((x) => (x[1].match(/\sdata-dialog="([^"]+)"/) || [])[1]);
   const dialogs = [...h.matchAll(/<dialog\b([^>]*)>([\s\S]*?)<\/dialog>/gi)];
-  if (targets.length !== 3) problems.push(`expected 3 dialog triggers, found ${targets.length}`);
-  if (dialogs.length !== 3) problems.push(`expected 3 dialogs, found ${dialogs.length}`);
+  const plusCount = (h.match(/\bclass="[^"]*\bcard-plus\b[^"]*"/g) || []).length;
+  if (targets.length !== 6) problems.push(`expected 6 dialog triggers, found ${targets.length}`);
+  if (dialogs.length !== 6) problems.push(`expected 6 dialogs, found ${dialogs.length}`);
+  if (plusCount !== 6) problems.push(`expected 6 card-plus triggers, found ${plusCount}`);
   if (h.includes('detail-close')) problems.push('expected no detail-close elements');
+  if (index.includes('pendulum-tuning')) problems.push('index.html still references pendulum-tuning');
+  for (const [, attrs, body] of cards) {
+    const target = (attrs.match(/\sdata-dialog="([^"]+)"/) || [])[1];
+    const plus = body.match(/<button\b([^>]*\bclass="[^"]*\bcard-plus\b[^"]*"[^>]*)>/i);
+    if (!plus) {
+      problems.push(`${target}: no card-plus trigger`);
+      continue;
+    }
+    const controls = (plus[1].match(/\saria-controls="([^"]+)"/) || [])[1];
+    if (controls !== target) problems.push(`${target}: card-plus aria-controls is ${controls || 'missing'}`);
+  }
   for (const t of new Set(targets)) if (!dialogs.some((d) => d[1].includes(`id="${t}"`))) problems.push(`trigger for missing dialog ${t}`);
   for (const [, attrs, body] of dialogs) {
     const id = (attrs.match(/\sid="([^"]+)"/) || [])[1];
     if (targets.filter((t) => t === id).length !== 1) problems.push(`${id}: expected 1 card trigger`);
     if (!/aria-labelledby="[^"]+"/.test(attrs)) problems.push(`${id}: no aria-labelledby`);
     if ((body.match(/class="detail-fade"/g) || []).length !== 1) problems.push(`${id}: expected 1 detail-fade wrapper`);
-    const media = body.match(/<div class="detail-media"([^>]*)>([\s\S]*?)<\/div>/i);
+    const media = body.match(/<div\b([^>]*class="[^"]*\bdetail-media\b[^"]*"[^>]*)>([\s\S]*?)<\/div>/i);
     if (!media) {
       problems.push(`${id}: no detail-media`);
       continue;
@@ -212,8 +226,9 @@ const dialogWords = words(text.dialogs).length;
     const figures = [...media[2].matchAll(/<figure\b/gi)].length;
     const count = Number((media[1].match(/style="[^"]*--n:\s*(\d+)[^"]*"/) || [])[1]);
     if (count !== figures) problems.push(`${id}: --n is ${count || 'missing'}, found ${figures} figures`);
+    if (/\bdetail-media--one\b/.test(media[1]) && figures !== 1) problems.push(`${id}: detail-media--one has ${figures} figures`);
   }
-  report('+', 'dialogs and ids', problems, `${dialogs.length} dialogs, ${targets.length} triggers, ${ids.length} unique ids`);
+  report('+', 'dialogs and ids', problems, `${dialogs.length} dialogs, ${plusCount} card-plus triggers, ${ids.length} unique ids`);
 }
 
 let failed = 0;

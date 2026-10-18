@@ -152,10 +152,11 @@
   const dialogStates = new WeakMap();
   const restoreCardFocus = (card) => {
     if (!card) return;
+    const target = card.querySelector(".card-plus") || card;
     try {
-      card.focus({ preventScroll: true });
+      target.focus({ preventScroll: true });
     } catch (error) {
-      card.focus();
+      target.focus();
     }
     const box = card.getBoundingClientRect();
     if (box.top < 0 || box.bottom > window.innerHeight) {
@@ -300,12 +301,12 @@
 
   document.querySelectorAll(".card--expandable[data-dialog]").forEach((card) => {
     card.addEventListener("click", (event) => {
-      if (event.target.closest("a, button")) return;
+      if (event.target.closest("a")) return;
       openDialog(card);
     });
-    card.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
+    const plus = card.querySelector(".card-plus");
+    if (plus) plus.addEventListener("click", (event) => {
+      event.stopPropagation();
       openDialog(card);
     });
   });

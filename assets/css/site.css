@@ -358,6 +358,10 @@ main > section + section {
   cursor: pointer;
 }
 
+.header-resume {
+  display: none;
+}
+
 /* ---------- Planes (decorative drawing layers) ---------- */
 
 .plane {
@@ -874,8 +878,22 @@ html:not(.js) .sc-stage {
 /* ---------- Breakpoints ---------- */
 
 @media (max-width: 1199px) {
+  .site-header .container {
+    gap: 0.75rem;
+  }
+
+  .header-resume {
+    display: inline-flex;
+    justify-content: center;
+    height: 40px;
+    margin-left: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+  }
+
   .nav-toggle {
     display: block;
+    flex: none;
   }
 
   .site-nav {
@@ -1265,6 +1283,7 @@ html.is-locked {
 }
 
 .card {
+  position: relative;
   border-radius: 20px;
 }
 
@@ -1405,7 +1424,8 @@ html.is-locked {
 }
 
 .card-foot,
-.mini-foot {
+.mini-foot,
+.detail-links {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1415,7 +1435,8 @@ html.is-locked {
 }
 
 .card-foot a,
-.mini-foot a {
+.mini-foot a,
+.detail-links a {
   display: inline-flex;
   align-items: center;
   min-width: 44px;
@@ -1428,8 +1449,14 @@ html.is-locked {
 }
 
 .card-foot a:hover,
-.mini-foot a:hover {
+.mini-foot a:hover,
+.detail-links a:hover {
   border-bottom-color: var(--accent);
+}
+
+.detail-links {
+  margin-top: 1rem;
+  padding-top: 0;
 }
 
 .card--wide {
@@ -1486,7 +1513,7 @@ html.is-locked {
 .plot-plate {
   aspect-ratio: 4 / 3;
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--bg);
 }
 
 .sig-media figcaption {
@@ -1530,6 +1557,46 @@ html.is-locked {
 .card--expandable {
   cursor: pointer;
   transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card--expandable .tags,
+.card--expandable .card-foot {
+  padding-right: 60px;
+}
+
+.card-plus {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(231, 242, 247, 0.06);
+  color: var(--heading);
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.card-plus svg {
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card--expandable:hover .card-plus,
+.card-plus:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #101a20;
+}
+
+.card--expandable:hover .card-plus svg,
+.card-plus:focus-visible svg {
+  transform: rotate(90deg);
 }
 
 .mini-grid {
@@ -1675,6 +1742,10 @@ html.is-locked {
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
 }
 
+.detail-media--one img {
+  height: clamp(180px, 42vh, 440px);
+}
+
 .detail-media .on-white {
   background: #ffffff;
 }
@@ -1768,6 +1839,15 @@ html.is-locked {
 @media (prefers-reduced-motion: reduce) {
   .card--expandable {
     transition: none;
+  }
+
+  .card-plus svg {
+    transition: none;
+  }
+
+  .card--expandable:hover .card-plus svg,
+  .card-plus:focus-visible svg {
+    transform: none;
   }
 
   .detail,
@@ -1873,9 +1953,21 @@ html.is-locked {
     gap: 0.75rem;
   }
 
+  .detail-media--one {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-media[style*="--n: 3"] > figure:first-child {
+    grid-column: 1 / -1;
+  }
+
   .detail-media img,
   .detail-media video {
     height: clamp(84px, 15vh, 150px);
+  }
+
+  .detail-media--one img {
+    height: clamp(140px, 28vh, 260px);
   }
 
   .detail .figures {
@@ -1920,15 +2012,31 @@ html.is-locked {
   }
 }
 
+@media (max-width: 360px) {
+  .wordmark {
+    font-size: 1.125rem;
+  }
+
+  .header-resume {
+    padding: 0 0.625rem;
+    font-size: 0.8125rem;
+  }
+}
+
 @media (max-height: 700px) {
   .detail .figures,
-  .detail-media figcaption {
+  .detail-media figcaption,
+  .detail-links {
     display: none;
   }
 
   .detail-media img,
   .detail-media video {
     height: clamp(72px, 14vh, 120px);
+  }
+
+  .detail-media--one img {
+    height: clamp(90px, 17vh, 150px);
   }
 
   .detail-text {
