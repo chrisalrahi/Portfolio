@@ -89,6 +89,17 @@ img {
   height: auto;
   display: block;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .container {
   width: min(1140px, 100% - 3rem);
@@ -121,15 +132,16 @@ main > section {
   background-color: var(--bg);
 }
 
-/* The robot arm sheet is left out of the count so every other section keeps the
-   colour it had before the arm was added; the arm gets its own below. */
-main > section:nth-child(even of :not(#robot-arm)) {
-  background-color: var(--surface);
+#hero,
+#projects,
+#more,
+#experience,
+#contact {
+  background-color: var(--bg);
 }
 
-main > #robot-arm {
+#about {
   background-color: var(--surface);
-  border-top: 1px solid var(--border);
 }
 
 /* the sheet edge */
@@ -156,30 +168,16 @@ main > section + section {
   margin: 0 auto;
 }
 
-/* ---------- Small drawing labels ---------- */
-
-.sheet-key,
-.plate-note,
-.plate-caption,
-.titleblock,
-.parts-list__title,
-.meta dt,
-.figures dt {
-  font-family: var(--sc-font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-text);
-  font-weight: 400;
+.swipe-hint {
+  display: none;
 }
 
-.sheet-key {
-  margin: 0 0 0.75rem;
+/* Phone-only short copy: the full text is the default, the short twin shows
+   under 768px. display:none keeps the hidden twin out of screen readers too. */
+.copy-short {
+  display: none;
 }
 
-.sheet--intro .sheet-key {
-  text-align: center;
-}
 
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -360,130 +358,6 @@ main > section + section {
   cursor: pointer;
 }
 
-/* ---------- Parts list (the margin index) ---------- */
-
-.parts-list {
-  display: none;
-}
-
-.parts-list__title {
-  margin: 0 0 0.625rem;
-}
-
-.parts-list ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.125rem;
-}
-
-.parts-list li {
-  transition: opacity 200ms var(--sc-ease-out);
-}
-
-.parts-list a {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.625rem;
-  padding: 3px 0;
-  font-family: var(--nav-font);
-  font-size: 0.8125rem;
-  line-height: 1.35;
-  color: var(--text);
-}
-
-/* names wrap to a second line inside the 220px rail, so the balloon aligns to
-   the first line rather than to the middle of the block */
-.parts-list .balloon {
-  flex: none;
-  margin-top: 1px;
-}
-
-.parts-list li.is-current > a {
-  color: var(--heading);
-}
-
-.parts-list li.is-current .balloon {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--contrast);
-}
-
-.parts-list li.is-done > a {
-  color: var(--text);
-}
-
-.parts-list li.is-done > a::after {
-  content: "\2713";
-  font-size: 0.75rem;
-  color: var(--accent-text);
-}
-
-body.filter-work .parts-list li:not([data-track="work"]),
-body.filter-school .parts-list li:not([data-track="school"]),
-body.filter-personal .parts-list li:not([data-track="personal"]) {
-  opacity: 0.4;
-}
-
-@media (min-width: 1200px) {
-  .parts-list {
-    display: block;
-    position: fixed;
-    top: calc(50% + var(--header-h) / 2);
-    right: 1.25rem;
-    transform: translateY(-50%);
-    z-index: 80;
-    pointer-events: auto;
-    width: 220px;
-    transition: opacity 320ms var(--sc-ease-out), transform 320ms var(--sc-ease-out);
-    transform-origin: right center;
-  }
-
-  body.pl-hidden .parts-list {
-    opacity: 0;
-    transform: translateY(-50%) translateX(14px) scale(0.96);
-    pointer-events: none;
-  }
-
-  body.pl-near .parts-list {
-    opacity: 1;
-    transform: translateY(-50%);
-  }
-
-  body.pl-far .parts-list {
-    opacity: 0.55;
-    transform: translateY(-50%) translateX(6px) scale(0.92);
-  }
-
-  /* The rail is fixed, so it takes no space in flow and would sit on top of the
-     copy. Reserve its column: every container inside main shrinks by the rail's
-     240px gutter and stays centred in what is left. The header's container is
-     deliberately not in main, so the bar still spans the full width. */
-  main .container {
-    width: min(1140px, 100% - 3rem - 240px);
-    margin-left: max(1.5rem, calc((100% - 240px - min(1140px, 100% - 3rem - 240px)) / 2));
-    margin-right: auto;
-  }
-}
-
-/* ---------- Balloons ---------- */
-
-.balloon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--accent), transparent 50%);
-  font-family: var(--sc-font-mono);
-  font-size: 0.6875rem;
-  line-height: 1;
-  color: var(--accent-text);
-  transition: background-color 200ms var(--sc-ease-out), border-color 200ms var(--sc-ease-out), color 200ms var(--sc-ease-out);
-}
-
 /* ---------- Planes (decorative drawing layers) ---------- */
 
 .plane {
@@ -512,41 +386,14 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
   margin: 0;
 }
 
-.plate--portrait,
-.plate--photo,
-.plate--film,
-.plate--sheet,
-.plot-frame,
-.cad-frame {
+.plate--portrait {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 14px;
-  background-color: var(--surface);
-  box-shadow: var(--sc-e2), var(--sc-edge);
-}
-
-.plate--portrait {
   border-radius: 20px;
+  background-color: var(--surface);
   aspect-ratio: 4 / 5;
   box-shadow: var(--sc-e3), var(--sc-edge);
-}
-
-.plate--film {
-  aspect-ratio: 816 / 334;
-  box-shadow: var(--sc-e3), var(--sc-edge);
-}
-
-.plate--photo {
-  aspect-ratio: 4 / 3;
-}
-
-.plate--tall {
-  aspect-ratio: 4 / 5;
-}
-
-.plate--float {
-  aspect-ratio: 3 / 4;
 }
 
 .plate img {
@@ -555,67 +402,10 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
   object-fit: cover;
 }
 
-/* the reveal wrapper is a plain div inside the figure, so the wipe has a box */
-.plate--photo > div,
-.plate--film > div {
-  position: absolute;
-  inset: 0;
-}
 
-.plot-frame,
-.cad-frame {
-  aspect-ratio: 4 / 3;
-}
 
-.plot-frame {
-  background-color: var(--plot-white);
-  container-type: inline-size;
-}
 
-.plot-frame img,
-.cad-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-.plate-caption,
-.plate-note {
-  margin: 0.5rem 0 0;
-}
-
-/* Role and outcome fold: a real disclosure on phones, invisible plumbing on desktop */
-.label-more > summary {
-  display: none;
-}
-
-.label-more {
-  display: block;
-}
-
-.swipe-hint {
-  display: none;
-}
-
-/* Phone-only short copy: the full text is the default, the short twin shows
-   under 768px. display:none keeps the hidden twin out of screen readers too. */
-.copy-short {
-  display: none;
-}
-
-/* ---------- Shared: title block, tags, meta rows, links ---------- */
-
-.titleblock {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.625rem;
-  margin: 0 0 0.75rem;
-}
-
-.tb-meta {
-  color: var(--accent-text);
-}
 
 .badge {
   padding: 3px 12px;
@@ -665,49 +455,6 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
   font-family: var(--nav-font);
   font-size: 0.75rem;
   color: var(--text);
-}
-
-.meta {
-  margin: 0 0 1.25rem;
-}
-
-.meta div {
-  display: flex;
-  gap: 0.625rem;
-  margin-bottom: 0.5rem;
-}
-
-.meta dt {
-  flex: none;
-  width: 76px;
-  padding-top: 4px;
-}
-
-.meta dd {
-  margin: 0;
-  font-size: 0.9375rem;
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-}
-
-.project-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-family: var(--nav-font);
-  font-size: 0.875rem;
-  color: var(--text);
-  border-bottom: 1px solid color-mix(in srgb, var(--accent), transparent 50%);
-  padding-bottom: 2px;
-}
-
-.project-links a:hover {
-  color: var(--accent-text);
-  border-bottom-color: var(--accent);
 }
 
 /* ---------- A. Hero ---------- */
@@ -802,407 +549,6 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
   font-family: var(--sc-font-display);
   font-size: 1.25rem;
   color: var(--heading);
-}
-
-/* ---------- B. Projects intro ---------- */
-
-.projects-controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem 1.5rem;
-  margin: -1.5rem 0 0;
-  scroll-margin-top: calc(var(--header-h) + 1rem);
-}
-
-.track-filter {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  padding-right: 1.5rem;
-  border-right: 1px solid var(--border);
-}
-
-.deck-link {
-  padding: 8px 22px;
-  border-width: 1px;
-  border-color: var(--border);
-  font-size: 0.875rem;
-}
-
-.deck-link:hover {
-  border-color: var(--accent);
-}
-
-.track-btn {
-  padding: 8px 22px;
-  border-radius: 50px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  font-family: var(--nav-font);
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 200ms var(--sc-ease-out), border-color 200ms var(--sc-ease-out), color 200ms var(--sc-ease-out), transform 200ms var(--sc-ease-out);
-}
-
-.track-btn:hover {
-  border-color: var(--accent);
-}
-
-.track-btn:active {
-  transform: translateY(1px);
-}
-
-.track-btn[aria-pressed="true"] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--contrast);
-}
-
-/* ---------- C to I. Part sheets ---------- */
-
-.part-grid {
-  display: grid;
-  grid-template-columns: 1.02fr 0.98fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
-}
-
-.sheet--part.media-left .media-block {
-  order: -1;
-}
-
-.label-block {
-  max-width: 62ch;
-}
-
-.label-block h3 {
-  font-size: 1.875rem;
-  font-weight: 700;
-}
-
-.label-block .hook {
-  font-size: 1.0625rem;
-  color: var(--muted);
-  margin-bottom: 1.25rem;
-}
-
-.label-block--compact h3 {
-  font-size: 1.5rem;
-}
-
-.label-block--compact .hook {
-  font-size: 0.9375rem;
-  margin-bottom: 0.875rem;
-}
-
-.label-block--compact .meta dd {
-  font-size: 0.875rem;
-}
-
-/* the chassis sheet: three planes at three rates, so they separate as it passes */
-.plate-stack {
-  position: relative;
-  aspect-ratio: 4 / 3;
-}
-
-.plate-stack .plate--photo {
-  position: absolute;
-  inset: 19% 10% 5% 3%;
-  aspect-ratio: auto;
-}
-
-/* The label sits in the band ABOVE the plate, flush with the plate's left edge,
-   and drops a hairline leader to the plate's top-left corner. It never crosses
-   the photograph and never reaches the parts-list rail. */
-.plane--callout-top {
-  top: 0;
-  left: 3%;
-  right: auto;
-  width: 64%;
-  height: 17%;
-  aspect-ratio: auto;
-  z-index: 3;
-}
-
-/* greenhouse: one column of copy with the plate set into the margin */
-.sheet--inset .container::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.plate--float {
-  float: right;
-  width: 36%;
-  margin: 0 0 2rem 2rem;
-}
-
-/* ---------- E. Inverted pendulum ---------- */
-
-/* An ordinary sheet since 2026-10-17: the pinned, scroll-scrubbed stage made
-   scrolling feel buggy. The clip loops on its own and the plot is always drawn. */
-.peak-stage {
-  display: grid;
-}
-
-.peak-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  grid-template-areas:
-    "label film"
-    "cad   plot";
-  gap: clamp(1rem, 2.4vw, 2.25rem);
-  align-items: start;
-  align-content: center;
-  padding-block: clamp(3rem, 6vw, 5rem);
-}
-
-.peak-film {
-  grid-area: film;
-}
-
-.peak-grid .plate--plot {
-  grid-area: plot;
-}
-
-.peak-grid .plate--cad {
-  grid-area: cad;
-}
-
-.peak-grid .label-block {
-  grid-area: label;
-}
-
-/* both media plates are capped against the viewport height, so the sheet stays
-   about one screen tall beside the label block */
-.peak-film .plate--film {
-  max-width: min(100%, calc((100svh - var(--header-h)) * 0.34 * 816 / 334));
-}
-
-/* The poster and the looping clip share the plate; the clip fades in over the
-   poster once it is playing. */
-.peak-film .sc-stage__poster {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.peak-film .peak-clip {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 380ms var(--sc-ease-out);
-}
-
-.sc-has-clip .peak-clip {
-  opacity: 1;
-}
-
-.peak-grid .plate--plot {
-  max-width: min(100%, calc((100svh - var(--header-h)) * 0.40 * 4 / 3));
-}
-
-.peak-grid .plate--cad {
-  max-width: min(100%, 15rem);
-}
-
-/* ---------- G. Gear reducer media ---------- */
-
-.plate-trio {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-}
-
-.plate-trio figure {
-  margin: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  aspect-ratio: 4 / 3;
-}
-
-.plate-trio figure img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.plate-trio figure.wide {
-  grid-column: 1 / -1;
-  aspect-ratio: auto;
-}
-
-/* a portrait plate (the robot arm's schematic) takes the right column at the
-   full height of the two landscape plates stacked beside it */
-.plate-trio figure.tall {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  aspect-ratio: auto;
-}
-
-/* on a phone the plates are a swipe strip of equal 4:3 frames, so the portrait
-   schematic sits whole on its own paper colour instead of being cropped */
-@media (max-width: 768px) {
-  .plate-trio figure.tall {
-    aspect-ratio: 4 / 3;
-    background: #eff0ef;
-  }
-
-  .plate-trio figure.tall img {
-    object-fit: contain;
-  }
-}
-
-.figures {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.75rem;
-  margin: 0 0 1.25rem;
-}
-
-.figures div {
-  min-width: 0;
-}
-
-.figures dt {
-  margin-bottom: 0.125rem;
-}
-
-.figures dd {
-  margin: 0;
-  font-family: var(--heading-font);
-  font-size: 1.125rem;
-  color: var(--heading);
-  line-height: 1.1;
-}
-
-/* ---------- J. Parts bin ---------- */
-
-.more-title {
-  font-size: 1.75rem;
-  font-weight: 400;
-  letter-spacing: -0.5px;
-  text-align: center;
-  margin: 0 0 0.5rem;
-}
-
-.more-sub {
-  text-align: center;
-  color: var(--muted);
-  margin-bottom: 2.5rem;
-}
-
-.card-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin: 0 0 0.625rem;
-  font-family: var(--nav-font);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--accent-text);
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-.card {
-  background: var(--surface);
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-media {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-media.collage {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 2px;
-}
-
-/* min-width/height 0 override the grid items' intrinsic minimum so all
-   four quadrants stay inside the fixed-aspect box instead of clipping */
-.card-media.collage img {
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  object-fit: cover;
-}
-
-/* three photos: the first fills the left column, the other two stack on the right */
-.card-media.collage--three img:first-child {
-  grid-row: 1 / 3;
-}
-
-/* two photos side by side, each the full height of the card */
-.card-media.collage--two {
-  grid-template-rows: 1fr;
-}
-
-.card-body {
-  padding: 1.25rem 1.25rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  flex: 1;
-}
-
-.card h4 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.card p {
-  font-size: 0.875rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.card .tags {
-  margin: auto 0 0;
-}
-
-.card .project-links {
-  gap: 0.875rem;
-  margin-top: 0.875rem;
-}
-
-.card .project-links a {
-  font-size: 0.8125rem;
 }
 
 /* ---------- K. Experience ---------- */
@@ -1336,26 +682,6 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
 
 .edu strong {
   color: var(--heading);
-}
-
-/* ---------- L. About ---------- */
-
-.sheet--notes .container {
-  position: relative;
-  z-index: 1;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 3.5rem;
-  align-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.about-grid .lede {
-  font-size: 1.0625rem;
 }
 
 /* ---------- M. Contact, the sign-off ---------- */
@@ -1503,34 +829,15 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
     transform: translateY(-2px);
   }
 
-  .project-links a:hover {
-    transform: translateY(-2px);
-  }
 
-  .track-btn:hover {
-    transform: translateY(-2px);
-  }
 
   .scroll-top:hover {
     transform: translateY(-4px);
   }
 
-  .parts-list a:hover {
-    color: var(--heading);
-  }
 
-  .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 16px 40px color-mix(in srgb, var(--accent), transparent 85%), 0 16px 40px hsl(var(--sc-shadow-color) / 0.4);
-  }
 
-  .card-media img {
-    transition: transform 0.4s ease;
-  }
 
-  .card:hover .card-media img {
-    transform: scale(1.1);
-  }
 }
 
 /* ---------- Reduced motion: every scrubbed effect at its final state ---------- */
@@ -1540,11 +847,6 @@ body.filter-personal .parts-list li:not([data-track="personal"]) {
     scroll-behavior: auto;
   }
 
-  body.pl-hidden .parts-list,
-  body.pl-near .parts-list,
-  body.pl-far .parts-list {
-    transform: translateY(-50%);
-  }
 }
 
 /* ---------- No JS: nothing hidden, nothing pinned ---------- */
@@ -1566,20 +868,8 @@ html:not(.js) .sc-stage {
   overflow: visible;
 }
 
-html:not(.js) .plane,
-html:not(.js) .track-filter {
-  display: none;
-}
 
-html:not(.js) .peak-grid,
-html:not(.js) .hero-sheet {
-  padding-block: clamp(3.5rem, 8vw, 7rem);
-}
 
-html:not(.js) .peak-film .plate--film,
-html:not(.js) .peak-grid .plate--plot {
-  max-width: 100%;
-}
 
 /* ---------- Breakpoints ---------- */
 
@@ -1623,9 +913,6 @@ html:not(.js) .peak-grid .plate--plot {
     margin-top: 1rem;
   }
 
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -1633,14 +920,9 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 2.5rem;
   }
 
-  .hero-sheet,
-  .part-grid,
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
 
   .hero-sheet {
+    grid-template-columns: 1fr;
     gap: 1.25rem;
   }
 
@@ -1691,85 +973,20 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 1.0625rem;
   }
 
-  .sheet--part.media-left .media-block {
-    order: 0;
-  }
 
-  .projects-controls {
-    margin-top: -1rem;
-  }
 
-  /* the divider reads as a stray mark once the row wraps */
-  .track-filter {
-    padding-right: 0;
-    border-right: none;
-  }
 
-  /* the peak stage is one screen tall: film across the top, the plot and the
-     CAD render side by side under it, then the label block */
-  .peak-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "film film"
-      "plot cad"
-      "label label";
-    gap: 0.625rem 0.75rem;
-  }
 
-  .peak-film .plate--film,
-  .peak-grid .plate--plot,
-  .peak-grid .plate--cad {
-    max-width: 100%;
-  }
 
-  .label-block--compact h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
 
-  .label-block--compact .hook {
-    font-size: 0.875rem;
-    margin-bottom: 0.625rem;
-  }
 
-  .label-block--compact .meta {
-    margin-bottom: 0.75rem;
-  }
 
-  .label-block--compact .meta div {
-    margin-bottom: 0.375rem;
-  }
 
-  .label-block--compact .meta dd {
-    font-size: 0.8125rem;
-  }
 
-  .label-block--compact .tags {
-    gap: 0.375rem;
-    margin-bottom: 0;
-  }
 
-  .label-block--compact .tags li {
-    padding: 3px 10px;
-    font-size: 0.6875rem;
-  }
 
-  .plate--float {
-    float: none;
-    width: auto;
-    max-width: min(340px, 100%);
-    margin: 0 0 1.75rem;
-  }
 
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .about-grid .plate--portrait {
-    order: -1;
-    justify-self: center;
-    width: min(340px, 100%);
-  }
 
   .contact-form .form-grid {
     grid-template-columns: 1fr;
@@ -1799,227 +1016,48 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 1rem;
   }
 
-  .label-block h3 {
-    font-size: 1.625rem;
-    margin-bottom: 0.625rem;
-  }
 
-  .label-block .hook {
-    font-size: 1rem;
-    line-height: 1.65;
-    margin-bottom: 1rem;
-  }
 
-  .titleblock {
-    margin-bottom: 0.875rem;
-  }
 
-  .sheet--part .media-block {
-    order: -1;
-  }
 
   .part-grid {
     gap: 1.5rem;
   }
 
-  .label-more > summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    list-style: none;
-    cursor: pointer;
-    padding: 0.75rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    font-family: var(--nav-font);
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text);
-  }
 
-  .label-more > summary::-webkit-details-marker {
-    display: none;
-  }
 
-  .label-more > summary::after {
-    content: "+";
-    font-family: var(--sc-font-mono);
-    font-size: 1rem;
-    color: var(--accent-text);
-  }
 
-  .label-more[open] > summary::after {
-    content: "\2212";   /* minus sign */
-  }
 
-  .label-more[open] > summary {
-    border-bottom-color: transparent;
-    margin-bottom: 0.25rem;
-  }
 
-  .label-more .meta {
-    margin-top: 1rem;
-  }
 
-  .label-more .project-links {
-    margin-bottom: 0.5rem;
-  }
 
-  .label-more + .figures {
-    margin-top: 1.25rem;
-  }
 
-  .plate--float {
-    max-width: 100%;
-    margin-bottom: 1.5rem;
-  }
 
-  .peak-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "film"
-      "plot"
-      "label";
-    gap: 0.75rem;
-  }
 
-  .copy-full {
-    display: none;
-  }
 
-  .copy-short {
-    display: inline;
-  }
 
-  /* the stage has to hold film, plot, title, hook and the fold row inside one
-     phone screen with no inner scrolling, so the captions step out and the
-     plot shrinks */
-  .peak-grid .plate--cad,
-  .peak-film .plate-note,
-  .peak-grid .plate--plot .plate-caption {
-    display: none;
-  }
 
-  /* width, not max-width: with the caption gone the figure has no content
-     width of its own and would collapse under justify-self: start */
-  .peak-grid .plate--plot {
-    width: min(100%, 260px);
-    justify-self: start;
-  }
 
   /* short phones: the plot gives up height so the stage never scrolls inside */
   @media (max-height: 700px) {
-    .peak-grid {
-      padding-bottom: 0.25rem;
-    }
 
-    .peak-grid .plate--plot {
-      width: min(100%, 180px);
-    }
   }
 
-  .peak-grid .label-block--compact h3 {
-    margin-bottom: 0.375rem;
-  }
 
-  .peak-grid .label-block--compact .hook {
-    margin-bottom: 0.5rem;
-  }
 
-  .peak-grid .label-block--compact .hook {
-    font-size: 0.9375rem;
-  }
 
-  /* never a scroll container: the folded stage fits on one screen at every
-     phone size, and a nested scroller inside the pinned stage swallowed
-     every swipe that started on it (with overscroll-behavior: contain the
-     page could only be moved from the header or from the 72px strip under
-     the grid; without it an iPhone still latched the swipe to the inner box
-     and the page never moved). An opened fold can outgrow one screen, so the
-     stage grows with it and the page scroll carries the extra copy past the
-     fold: the act is one and a half screens tall, so the taller stage still
-     pins briefly and then rides out with the act's end */
-  .peak-grid {
-    align-content: start;
-  }
 
-  .plate-trio {
-    display: flex;
-    gap: 0.75rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    /* bleed to the screen edge: the phone container gutter is a fixed 1.5rem,
-       and scroll-padding has to be a length, since a percentage there resolves
-       against the strip itself and snaps the first item under the gutter */
-    margin-inline: -1.5rem;
-    padding-inline: 1.5rem;
-    scroll-padding-inline: 1.5rem;
-  }
 
-  .plate-trio::-webkit-scrollbar {
-    display: none;
-  }
 
-  .plate-trio figure {
-    flex: 0 0 78%;
-    scroll-snap-align: start;
-    aspect-ratio: 4 / 3;
-  }
 
-  .plate-trio figure.wide {
-    aspect-ratio: 4 / 3;
-  }
 
-  .more-sub {
-    margin-bottom: 0.5rem;
-  }
 
-  .swipe-hint {
-    display: block;
-    text-align: center;
-    margin: 0 0 1.5rem;
-    font-family: var(--sc-font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-text);
-  }
 
-  .card-grid {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-inline: -1.5rem;
-    padding-inline: 1.5rem;
-    scroll-padding-inline: 1.5rem;
-  }
 
-  .card-grid::-webkit-scrollbar {
-    display: none;
-  }
 
-  .card {
-    flex: 0 0 min(300px, 82vw);
-    scroll-snap-align: start;
-  }
 
-  .card .tags {
-    display: none;
-  }
 
-  .card-body {
-    padding: 1rem 1rem 1.25rem;
-  }
 
-  .card p {
-    font-size: 0.875rem;
-  }
 
   .xp-list {
     display: flex;
@@ -2070,13 +1108,7 @@ html:not(.js) .peak-grid .plate--plot {
     align-items: flex-start;
   }
 
-  .about-grid .plate--portrait {
-    width: min(220px, 100%);
-  }
 
-  .about-grid .lede {
-    font-size: 1rem;
-  }
 
   .contact-block p {
     font-size: 1rem;
@@ -2133,29 +1165,10 @@ html:not(.js) .peak-grid .plate--plot {
     font-size: 1rem;
   }
 
-  .peak-grid {
-    gap: 0.75rem;
-  }
 
-  .peak-grid .plate--cad,
-  .peak-grid .plate--cad .plate-caption,
-  .peak-film .plate-note {
-    display: none;
-  }
 
-  /* with the CAD plate gone the plot takes the whole width of its row; on the
-     desktop areas plot already starts in the last column, so this is a no-op */
-  .peak-grid .plate--plot {
-    grid-column: plot-start / -1;
-  }
 
-  .peak-grid .hook {
-    font-size: 0.9rem;
-  }
 
-  .peak-grid .meta dd {
-    font-size: 0.875rem;
-  }
 
   /* Safety net. If a stage still cannot hold its content, the content scrolls
      inside the stage instead of being cropped and unreachable. */
@@ -2169,9 +1182,6 @@ html:not(.js) .peak-grid .plate--plot {
     overscroll-behavior: contain;
   }
 
-  .peak-grid {
-    align-content: start;
-  }
 }
 
 /* Short phones only. The beat row would otherwise sit below the hero grid's
@@ -2199,13 +1209,6 @@ html:not(.js) .peak-grid .plate--plot {
   }
 }
 
-/* The chassis plate is wider than its photograph, so cover crops the height.
-   Bias the crop to the top so the Curtiss-Wright logo leaves the frame whole
-   instead of being sliced in half, and the product stays fully in view. */
-#cw-chassis .plate--photo img {
-  object-position: 50% 75%;
-}
-
 /* Contact is centred on the whole page, not on the rail-offset content column.
    The project list is receded and parked at the far right by then, so a 720px
    column centred at the viewport middle never reaches it. */
@@ -2215,123 +1218,703 @@ html:not(.js) .peak-grid .plate--plot {
     margin-inline: auto;
   }
 }
+/* ---------- Ported project cards and About ---------- */
+
+html.is-locked {
+  overflow: hidden;
+}
+
+.hero-name {
+  font-family: var(--heading-font);
+  font-size: clamp(44px, 6vw, 64px) !important;
+  font-weight: 700 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.02em;
+}
+
+.hero-name span {
+  display: block;
+}
+
+.hero-name .highlight::after {
+  display: none;
+}
+
+.projects-section,
+.more-section,
+.about-section {
+  padding-block: clamp(3rem, 6vw, 5rem);
+  scroll-margin-top: var(--header-h);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.card,
+.mini {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+}
+
+.card {
+  border-radius: 20px;
+}
+
+.card-plate,
+.mini-plate,
+.plot-plate,
+.sig-clip {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.card-plate {
+  aspect-ratio: 16 / 10;
+}
+
+.card-plate img,
+.mini-plate img,
+.plot-plate img,
+.sig-clip video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-plate--chassis,
+.card-plate--rtd {
+  aspect-ratio: 1 / 1;
+}
+
+.card-plate--chassis {
+  background: #000000;
+}
+
+.card-plate--chassis img {
+  object-fit: contain;
+}
+
+.card-plate--rtd img {
+  object-position: 50% 12%;
+}
+
+.card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.card-title,
+.mini-title,
+.detail-title {
+  color: var(--heading);
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+
+.card-title {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.card .hook {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.card .figures,
+.detail .figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin: 1.25rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.card .figures--one {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.card .figures > div,
+.detail .figures > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.card .figures dt,
+.detail .figures dt {
+  color: var(--muted);
+  font-family: var(--nav-font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.card .figures dd,
+.detail .figures dd {
+  margin: 0;
+  color: var(--heading);
+  font-family: var(--heading-font);
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.figures .unit {
+  color: var(--text);
+  font-size: 0.6em;
+  letter-spacing: 0;
+}
+
+.card .tags,
+.about-copy .tags {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.badge,
+.tags li {
+  font-family: var(--nav-font);
+  font-weight: 500;
+}
+
+.card-foot,
+.mini-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.card-foot a,
+.mini-foot a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent), transparent 50%);
+  color: var(--accent-text);
+  font-family: var(--nav-font);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.card-foot a:hover,
+.mini-foot a:hover {
+  border-bottom-color: var(--accent);
+}
+
+.card--wide {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.card--wide .card-plate {
+  min-height: 360px;
+  aspect-ratio: auto;
+}
+
+.card--wide .card-body {
+  padding: 2rem 3rem;
+}
+
+.card--signature {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 3.5rem;
+  align-items: start;
+  overflow: visible;
+  padding: 2rem;
+  border-color: color-mix(in srgb, var(--accent), transparent 65%);
+}
+
+.sig-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34%;
+  grid-template-rows: auto 72px auto;
+}
+
+.sig-figure {
+  grid-column: 1 / -1;
+  grid-row: 1 / 3;
+  margin: 0;
+}
+
+.sig-clip {
+  aspect-ratio: 816 / 334;
+  border-radius: 20px;
+}
+
+.sig-plot {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 2 / 4;
+  margin: 0 -2rem 0 0;
+}
+
+.plot-plate {
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.sig-media figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.card--signature .card-body {
+  padding: 0.5rem 0 0;
+}
+
+.card--compact .card-plate {
+  aspect-ratio: 16 / 9;
+}
+
+.card--compact .card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.card--compact .card-title {
+  margin-top: 0.625rem;
+  font-size: 1.5rem;
+}
+
+.card--compact .hook {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.card--compact .figures {
+  margin-top: 0.875rem;
+  padding-top: 0.75rem;
+}
+
+.card--compact .tags {
+  padding-top: 0.875rem;
+}
+
+.card--expandable {
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mini-item {
+  display: flex;
+}
+
+.mini {
+  flex: 1;
+  border-radius: 16px;
+}
+
+.mini-plate {
+  aspect-ratio: 16 / 10;
+}
+
+.mini-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.mini-title {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.1875rem;
+  line-height: 1.25;
+}
+
+.mini-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.mini-foot {
+  gap: 0.25rem 1rem;
+  padding-top: 0.75rem;
+}
+
+.pos-hottub { object-position: 50% 48%; }
+.pos-mobilitray { object-position: 50% 40%; }
+.pos-beer { object-position: 50% 20%; }
+.pos-greenhouse { object-position: 50% 75%; }
+.pos-fender { object-position: 50% 55%; }
+
+.detail {
+  width: min(1100px, calc(100% - 48px));
+  max-width: 1100px;
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid color-mix(in srgb, var(--text), transparent 76%);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform-origin: 0 0;
+}
+
+.detail::backdrop {
+  background: rgba(16, 26, 32, 0);
+  transition: background-color 300ms ease-out;
+}
+
+.detail.is-open::backdrop {
+  background: rgba(16, 26, 32, 0.72);
+}
+
+.detail.is-closing::backdrop {
+  background: rgba(16, 26, 32, 0);
+  transition-duration: 200ms;
+}
+
+.detail-inner {
+  min-width: 0;
+}
+
+.detail-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1rem 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.detail-head > div {
+  min-width: 0;
+}
+
+.detail-title {
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.detail-title:focus {
+  outline: none;
+}
+
+.detail-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--heading);
+  cursor: pointer;
+}
+
+.detail-content {
+  padding: 2rem;
+}
+
+.detail-media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1.25rem;
+  align-items: start;
+}
+
+.detail-media figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.detail-media img,
+.detail-media video {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  background: var(--bg);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
+}
+
+.detail-media .on-white {
+  background: #ffffff;
+}
+
+.detail-media figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-family: var(--nav-font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.detail-media .dm-wide {
+  grid-column: 1 / -1;
+}
+
+.detail-text {
+  max-width: 65ch;
+  margin: 2rem 0 0;
+}
+
+.about-panel {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+}
+
+.about-plate {
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+}
+
+.about-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.about-copy p {
+  max-width: 60ch;
+  margin: 0;
+  font-size: 1.1875rem;
+  line-height: 1.65;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card--expandable:hover {
+    transform: scale(1.02);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.card--expandable.is-measuring {
+  transform: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js:not(.no-motion) [data-reveal] {
+    opacity: 0;
+    translate: 0 14px;
+  }
+
+  .js [data-reveal] {
+    transition: opacity 500ms var(--sc-ease-out) calc(var(--i, 0) * 70ms), translate 500ms var(--sc-ease-out) calc(var(--i, 0) * 70ms);
+  }
+
+  .js .card--expandable[data-reveal] {
+    transition: opacity 500ms var(--sc-ease-out) calc(var(--i, 0) * 70ms), translate 500ms var(--sc-ease-out) calc(var(--i, 0) * 70ms), transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .js [data-reveal].is-in {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--expandable {
+    transition: none;
+  }
+
+  .detail,
+  .detail::backdrop {
+    transition-property: opacity, background-color !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .card--signature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .sig-plot {
+    margin-right: 1.5rem;
+  }
+
+  .mini-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .card-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card--wide {
+    display: flex;
+  }
+
+  .card--wide .card-plate {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .card--wide .card-body {
+    padding: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .project-strip {
-    background-color: var(--bg);
-    border-top: 1px solid var(--border);
-    scroll-margin-top: var(--header-h);
+  .card-body,
+  .card--wide .card-body {
+    padding: 1.25rem 1.25rem 1.5rem;
   }
 
-  .project-strip__head {
-    padding: 3rem 1.5rem 1.5rem;
+  .card-title {
+    font-size: 1.5rem;
   }
 
-  .project-strip__title {
-    font-size: 1.75rem;
-    font-weight: 400;
-    letter-spacing: -0.5px;
+  .card .figures,
+  .detail .figures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card .figures--one {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card--signature {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .sig-media {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sig-clip {
+    border-radius: 0;
+  }
+
+  .sig-figure figcaption {
+    margin: 0.75rem 1.25rem 0;
+  }
+
+  .sig-plot {
+    margin: 1.25rem 1.25rem 0;
+  }
+
+  .card--signature .card-body {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .mini-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .detail-head {
+    padding-left: 1.25rem;
+  }
+
+  .detail-content {
+    padding: 1.25rem;
+  }
+
+  .detail-media {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-media .dm-wide {
+    grid-column: auto;
+  }
+
+  .about-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .about-copy p {
+    font-size: 1.0625rem;
+  }
+
+  .copy-full {
+    display: none;
+  }
+
+  .copy-short {
+    display: inline;
+  }
+
+  .swipe-hint {
+    display: block;
     text-align: center;
-    margin: 0 0 0.5rem;
-  }
-
-  .project-strip__count {
-    margin: -1rem 0 0;
-    text-align: center;
+    margin: 0 0 1.5rem;
     font-family: var(--sc-font-mono);
     font-size: 0.6875rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent-text);
-  }
-
-  .project-strip__track {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    overscroll-behavior-x: contain;
-    padding: 0 1.5rem 3rem;
-    scroll-padding-inline: 1.5rem;
-  }
-
-  .project-strip__track::-webkit-scrollbar {
-    display: none;
-  }
-
-  .project-strip .sheet--part {
-    flex: 0 0 88%;
-    min-width: 0;
-    scroll-snap-align: start;
-    background: var(--surface);
-    border-top: 0;
-    border-radius: 10px;
-    overflow: clip;
-  }
-
-  .project-strip .sheet-inner {
-    padding-block: 1.25rem;
-  }
-
-  .project-strip .sheet--after-act .sheet-inner {
-    padding-top: 1.25rem;
-  }
-
-  .project-strip .container {
-    width: 100%;
-    padding-inline: 1rem;
-  }
-
-  .project-strip #inverted-pendulum .peak-grid {
-    grid-template-areas:
-      "film"
-      "plot"
-      "label";
-    padding-block: 1.25rem;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .project-strip #inverted-pendulum .peak-grid .plate--cad {
-    display: none;
-  }
-
-  .project-strip .plate-trio {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: visible;
-    scroll-snap-type: none;
-    margin-inline: 0;
-    padding-inline: 0;
-    scroll-padding-inline: 0;
-  }
-
-  .project-strip .plate-trio figure {
-    min-width: 0;
-    width: 100%;
-    flex: none;
-    scroll-snap-align: none;
-  }
-
-  .project-strip .plate-trio figure.wide {
-    grid-column: 1 / -1;
-    aspect-ratio: auto;
-  }
-
-  html.strips-on main > .sheet--bin,
-  html.strips-on main > #about {
-    background-color: var(--surface);
-  }
-
-  html.strips-on main > #experience,
-  html.strips-on main > #contact {
-    background-color: var(--bg);
-  }
-
-  html.strips-on main > .project-strip + section {
-    border-top: 1px solid var(--border);
   }
 }

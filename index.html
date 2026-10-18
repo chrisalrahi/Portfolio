@@ -50,9 +50,9 @@
   <!-- bump ?v= whenever these files change, or browsers keep a cached copy
        that no longer matches this page -->
   <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
-  <link href="assets/css/site.css?v=20261017c" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261018a" rel="stylesheet">
   <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
-  <script src="assets/js/site.js?v=20261017c" defer></script>
+  <script src="assets/js/site.js?v=20261018a" defer></script>
 </head>
 
 <body>
@@ -90,18 +90,6 @@
     </div>
   </header>
 
-  <nav class="parts-list" aria-label="Project list">
-    <p class="parts-list__title">Project List</p>
-    <ol>
-      <li data-part="cw-chassis" data-track="work"><a href="#cw-chassis"><span class="balloon">1</span>Liquid-Cooled Chassis</a></li>
-      <li data-part="rtd-sensor" data-track="work"><a href="#rtd-sensor"><span class="balloon">2</span>Shielded RTD Sensor</a></li>
-      <li data-part="robot-arm" data-track="personal"><a href="#robot-arm"><span class="balloon">3</span>Six-Axis Robot Arm</a></li>
-      <li data-part="inverted-pendulum" data-track="school"><a href="#inverted-pendulum"><span class="balloon">4</span>Inverted Pendulum</a></li>
-      <li data-part="blade-polisher" data-track="school"><a href="#blade-polisher"><span class="balloon">5</span>Blade Mold Polisher</a></li>
-      <li data-part="gear-reducer" data-track="school"><a href="#gear-reducer"><span class="balloon">6</span>Gear Reducer</a></li>
-    </ol>
-  </nav>
-
   <main id="main">
 
     <!-- ======== A. Hero sheet ======== -->
@@ -131,7 +119,7 @@
 
         <div class="container hero-sheet">
           <div class="hero-copy" data-sc-in data-sc-stagger="70">
-            <h1>Hello, I'm <span class="highlight">Chris Al-Rahi</span></h1>
+            <h1 class="hero-name"><span>Chris</span> <span class="highlight">Al-Rahi</span></h1>
             <p class="tagline">Mechanical Engineering &amp; Computing Technology student at the University of Ottawa</p>
             <p class="subline">Co-op · graduating April 2027 · Ottawa, ON · open to co-op and internship roles</p>
             <div class="hero-actions">
@@ -157,398 +145,176 @@
       </div>
     </section>
 
-    <!-- ======== B. Projects intro sheet ======== -->
-    <section id="projects" class="sheet sheet--intro sheet--after-act">
-      <div class="sheet-inner">
-        <div class="container" data-sc-in data-sc-stagger="60">
-          <p class="sheet-key">Sheet · Projects</p>
-          <div class="section-title">
-            <h2>Projects</h2>
-            <p>A mix of co-op work projects, school design projects, personal builds, and things I fixed along the way.</p>
-          </div>
-          <div class="projects-controls">
-            <div class="track-filter" role="group" aria-label="Filter projects">
-              <button type="button" class="track-btn" data-filter="work" aria-pressed="false">Work</button>
-              <button type="button" class="track-btn" data-filter="school" aria-pressed="false">School</button>
-              <button type="button" class="track-btn" data-filter="personal" aria-pressed="false">Personal</button>
-            </div>
-            <a class="btn btn-outline deck-link" href="deck.html" target="_blank" rel="noopener">
-              View my slide deck
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-            </a>
-          </div>
+    <section id="projects" class="section projects-section" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-title" data-reveal>
+          <h2 id="projects-title">Projects</h2>
+          <p>A mix of co-op work, school design projects and personal builds.</p>
         </div>
-      </div>
-    </section>
 
-    <!-- ======== C. Liquid-cooled chassis ======== -->
-    <section class="sheet sheet--part" id="cw-chassis" data-track="work" data-sc-act="flow">
-      <div class="sheet-inner">
-        <div class="container part-grid">
-          <div class="label-block">
-            <p class="titleblock"><span class="balloon">1</span><span class="tb-track badge badge-work">Work</span><span class="tb-meta">Curtiss-Wright · 2025</span></p>
-            <h3>Liquid-Cooled Chassis Redesign</h3>
-            <p class="hook"><span class="copy-full">I reworked the liquid cooling geometry of a ruggedized electronics chassis to see if cheaper machining methods could hold the same thermal performance.</span><span class="copy-short">Redrew the liquid cooling paths of a rugged electronics chassis so cheaper machining could hold the same thermal performance.</span></p>
-            <details class="label-more" open>
-              <summary>Role and outcome</summary>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>I redrew the cooling paths in CAD around cheaper machining processes, then ran Flotherm simulations to compare the new geometry against the original.</dd></div>
-                <div><dt>Outcome</dt><dd>A manufacturable, lower-cost layout the team could build against. Alongside it I ran thermal and environmental testing on nine conduction-cooled products.</dd></div>
+        <div class="card-grid">
+          <article class="card" id="cw-chassis" data-reveal aria-labelledby="t-chassis">
+            <div class="card-plate card-plate--chassis">
+              <img src="assets/img/opt/cw-chassis.webp" width="800" height="753" alt="The ruggedized VPX electronics chassis behind the liquid cooling redesign" loading="lazy" decoding="async">
+            </div>
+            <div class="card-body">
+              <span class="badge badge-work">Work</span>
+              <h3 id="t-chassis" class="card-title">Liquid-Cooled Chassis Redesign</h3>
+              <p class="hook">At Curtiss-Wright, I redrew the liquid cooling paths of a ruggedized electronics chassis so cheaper machining could hold the same thermal performance.</p>
+              <dl class="figures figures--one">
+                <div><dt>Conduction-cooled products tested</dt><dd><span class="sr-only">9</span><span aria-hidden="true" data-count="9">9</span></dd></div>
               </dl>
-              <ul class="tags">
-                <li>Flotherm</li><li>Thermal design</li><li>CAD</li>
-              </ul>
-            </details>
-          </div>
-          <div class="media-block">
-            <div class="plate-stack">
-              <div class="plane plane--grid" aria-hidden="true" data-sc-parallax="-0.9">
-                <svg viewBox="0 0 720 540" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <defs>
-                    <pattern id="cg-fine" width="48" height="48" patternUnits="userSpaceOnUse">
-                      <path d="M48 0H0v48" fill="none" stroke="#e7f2f7" stroke-opacity="0.08"/>
-                    </pattern>
-                    <pattern id="cg-bold" width="240" height="240" patternUnits="userSpaceOnUse">
-                      <path d="M240 0H0v240" fill="none" stroke="#e7f2f7" stroke-opacity="0.14"/>
-                    </pattern>
-                  </defs>
-                  <rect width="720" height="540" fill="url(#cg-fine)"/>
-                  <rect width="720" height="540" fill="url(#cg-bold)"/>
-                  <g stroke="#5a9fe0" stroke-opacity="0.35" fill="none">
-                    <path d="M24 500h216M24 490v20M240 490v20"/>
-                    <path d="M690 60v180M680 60h20M680 240h20"/>
-                  </g>
-                </svg>
-              </div>
-              <figure class="plate plate--photo" data-sc-parallax="-0.35">
-                <div data-sc-reveal="left" data-sc-reveal-at="0.12 0.42">
-                  <img src="assets/img/opt/cw-chassis.webp" width="800" height="753" loading="lazy" alt="The ruggedized VPX electronics chassis behind the liquid cooling redesign">
+              <ul class="tags" aria-label="Tools"><li>Flotherm</li><li>Thermal design</li><li>CAD</li></ul>
+            </div>
+          </article>
+
+          <article class="card card--rtd" id="rtd-sensor" data-reveal style="--i: 1" aria-labelledby="t-rtd">
+            <div class="card-plate card-plate--rtd">
+              <img src="assets/img/opt/about-nrcan.webp" width="800" height="931" alt="Chris Al-Rahi presenting the aspirated and shielded RTD sensor research poster at CanmetENERGY" loading="lazy" decoding="async">
+            </div>
+            <div class="card-body">
+              <span class="badge badge-work">Work</span>
+              <h3 id="t-rtd" class="card-title">Aspirated and Shielded RTD Sensor</h3>
+              <p class="hook">At CanmetENERGY, I built a shielded air temperature sensor that slides to any height and takes radiation error out of the SolarSteam readings.</p>
+              <dl class="figures figures--one">
+                <div><dt>Better live temperature accuracy</dt><dd><span class="sr-only">30%+</span><span aria-hidden="true"><span data-count="30">30</span>%+</span></dd></div>
+              </dl>
+              <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Instrumentation</li><li>Field testing</li></ul>
+            </div>
+          </article>
+
+          <article class="card card--wide card--expandable" id="robot-arm" data-reveal role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Six-Axis Robot Arm" data-dialog="d-arm">
+            <div class="card-plate">
+              <img src="assets/img/opt/arm-render.webp" width="1120" height="840" alt="CAD render of the six-axis robot arm on its base plate" loading="lazy" decoding="async">
+            </div>
+            <div class="card-body">
+              <span class="badge badge-personal">Personal</span>
+              <h3 id="t-arm" class="card-title">Six-Axis Robot Arm</h3>
+              <p class="hook">My friend Nik and I are building a desktop arm that lifts finished prints off the 3D printer, with six printed planetary reducers and a wrist camera.</p>
+              <dl class="figures">
+                <div><dt>Axes</dt><dd><span class="sr-only">6</span><span aria-hidden="true" data-count="6">6</span></dd></div>
+                <div><dt>Shoulder reduction</dt><dd><span class="sr-only">256:1</span><span aria-hidden="true"><span data-count="256">256</span>:1</span></dd></div>
+                <div><dt>Payload target</dt><dd><span class="sr-only">300 g</span><span aria-hidden="true"><span data-count="300">300</span> <span class="unit">g</span></span></dd></div>
+                <div><dt>Printed parts</dt><dd><span class="sr-only">93</span><span aria-hidden="true" data-count="93">93</span></dd></div>
+              </dl>
+              <ul class="tags" aria-label="Tools"><li>3D printing</li><li>Planetary gearing</li><li>ESP32 + CAN bus</li></ul>
+            </div>
+          </article>
+
+          <dialog class="detail" id="d-arm" aria-labelledby="dt-arm">
+            <div class="detail-inner">
+              <div class="detail-fade">
+                <div class="detail-head">
+                  <div><span class="badge badge-personal">Personal</span><h3 id="dt-arm" class="detail-title" tabindex="-1">Six-Axis Robot Arm</h3></div>
+                  <button class="detail-close" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 </div>
+                <div class="detail-content">
+                  <div class="detail-media">
+                    <figure><img src="assets/img/opt/arm-render.webp" width="1120" height="840" alt="CAD render of the six-axis robot arm on its base plate" loading="lazy" decoding="async"><figcaption>Full arm render</figcaption></figure>
+                    <figure><img src="assets/img/opt/arm-schematic.webp" width="900" height="1334" alt="Hand-drawn Mk-2 electronics schematic: 24 V supply, buck converters, ESP32, CAN bus to each joint, emergency stop relays" loading="lazy" decoding="async"><figcaption>Mk-2 electronics schematic</figcaption></figure>
+                    <figure><img src="assets/img/opt/arm-covers.webp" width="1120" height="840" alt="CAD render of the arm with its covers removed, showing the planetary reducers and motors" loading="lazy" decoding="async"><figcaption>Covers removed</figcaption></figure>
+                  </div>
+                  <p class="detail-text">We split the mechanical design and revised each other's schematic. The CAD prototype is done, and next we bench test two printed reducers.</p>
+                  <dl class="figures"><div><dt>Axes</dt><dd>6</dd></div><div><dt>Shoulder reduction</dt><dd>256:1</dd></div><div><dt>Payload target</dt><dd>300 <span class="unit">g</span></dd></div><div><dt>Printed parts</dt><dd>93</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <article class="card card--signature card--expandable" id="inverted-pendulum" data-reveal role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Inverted Pendulum" data-dialog="d-pendulum">
+            <div class="sig-media">
+              <figure class="sig-figure">
+                <div class="sig-clip"><video class="plate-clip card-clip" muted loop playsinline preload="none" poster="assets/img/opt/pendulum-poster.webp" width="816" height="334" aria-hidden="true"></video></div>
+                <figcaption>The pendulum in action</figcaption>
               </figure>
-              <div class="plane plane--callout plane--callout-top" aria-hidden="true" data-sc-parallax="0.25">
-                <svg viewBox="0 0 300 64" preserveAspectRatio="xMinYMax meet" focusable="false">
-                  <text x="2" y="16" fill="#83b7e8" fill-opacity="0.9" font-family="ui-monospace, Consolas, monospace" font-size="13" letter-spacing="1.4">RUGGEDIZED VPX CHASSIS</text>
-                  <path d="M6 26v22h32" stroke="#83b7e8" stroke-opacity="0.7" fill="none"/>
-                  <circle cx="42" cy="48" r="3.5" fill="#83b7e8" fill-opacity="0.7"/>
-                </svg>
-              </div>
+              <figure class="sig-plot">
+                <div class="plot-plate"><img src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" alt="Step response plots from tuning the PID controller at three proportional gains" loading="lazy" decoding="async"></div>
+                <figcaption>Step response at three proportional gains</figcaption>
+              </figure>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== D. Shielded RTD sensor ======== -->
-    <section class="sheet sheet--part media-left" id="rtd-sensor" data-track="work" data-sc-act="flow">
-      <div class="sheet-inner">
-        <div class="container part-grid">
-          <div class="label-block">
-            <p class="titleblock"><span class="balloon">2</span><span class="tb-track badge badge-work">Work</span><span class="tb-meta">CanmetENERGY · Renewable Heat &amp; Power · 2025</span></p>
-            <h3>Aspirated &amp; Shielded RTD Sensor</h3>
-            <p class="hook"><span class="copy-full">Air temperature readings inside the SolarSteam enclosure were being thrown off by radiation, so I built a shielded sensor that slides up and down to sample at any height.</span><span class="copy-short">A shielded, height-adjustable air temperature sensor that took radiation error out of the readings.</span></p>
-            <details class="label-more" open>
-              <summary>Role and outcome</summary>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>I designed the shield in SolidWorks, sized the aspiration from the literature, and ran the accuracy testing myself.</dd></div>
-                <div><dt>Outcome</dt><dd>Live temperature accuracy improved by more than 30%, and I presented the work as a research poster.</dd></div>
-              </dl>
-              <ul class="tags">
-                <li>SolidWorks</li><li>Instrumentation</li><li>Field testing</li>
-              </ul>
-            </details>
-          </div>
-          <div class="media-block">
-            <figure class="plate plate--photo plate--tall">
-              <div data-sc-reveal="up" data-sc-reveal-at="0.15 0.5">
-                <img src="assets/img/opt/about-nrcan.webp" width="800" height="931" loading="lazy" alt="Chris Al-Rahi presenting the aspirated and shielded RTD sensor research poster at CanmetENERGY">
-              </div>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== D2. Six-axis robot arm, the personal sheet ======== -->
-    <section class="sheet sheet--part" id="robot-arm" data-track="personal" data-sc-act="flow">
-      <div class="sheet-inner">
-        <div class="container part-grid">
-          <div class="label-block">
-            <p class="titleblock"><span class="balloon">3</span><span class="tb-track badge badge-personal">Personal</span><span class="tb-meta">With Nik · In progress</span></p>
-            <h3>Six-Axis Robot Arm</h3>
-            <p class="hook"><span class="copy-full">A desktop robot arm my friend Nik and I are building to lift finished prints off the 3D printer on its own. Six NEMA 17 steppers drive planetary reducers we print ourselves, with a camera on the wrist.</span><span class="copy-short">A desktop arm my friend Nik and I are building to lift finished prints off the 3D printer, with six printed planetary reducers and a wrist camera.</span></p>
-            <details class="label-more" open>
-              <summary>Role and status</summary>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>Nik and I worked together to make different parts of the mechanical design, iterating on each other's revisions of the electronics schematic and the building plan.</dd></div>
-                <div><dt>Status</dt><dd>A complete CAD prototype, with 93 printed parts designed, the wiring schematic drawn, and the motors, bearings and boards picked. Next is printing one large and one small reducer and testing them on the bench.</dd></div>
-              </dl>
-              <ul class="tags">
-                <li>3D printing</li><li>Planetary gearing</li><li>ESP32 + CAN bus</li><li>Stepper motors</li>
-              </ul>
-            </details>
-            <dl class="figures">
-              <div><dt>Axes</dt><dd>6</dd></div>
-              <div><dt>Shoulder reduction</dt><dd><span class="sc-nums" data-sc-count="4 256" data-sc-count-at="0.18 0.48">256</span>:1</dd></div>
-              <div><dt>Payload target</dt><dd>300 g</dd></div>
-              <div><dt>Printed parts</dt><dd>93</dd></div>
-            </dl>
-          </div>
-          <div class="media-block">
-            <div class="plate-trio plate-trio--tall">
-              <figure><img src="assets/img/opt/arm-render.webp" width="1120" height="840" loading="lazy" alt="CAD render of the six-axis robot arm on its base plate"></figure>
-              <figure class="tall"><img src="assets/img/opt/arm-schematic.webp" width="900" height="1334" loading="lazy" alt="Hand-drawn Mk-2 electronics schematic: 24 V supply, buck converters, ESP32, CAN bus to each joint, emergency stop relays"></figure>
-              <figure><img src="assets/img/opt/arm-covers.webp" width="1120" height="840" loading="lazy" alt="CAD render of the arm with its covers removed, showing the planetary reducers and motors"></figure>
+            <div class="card-body">
+              <span class="badge badge-school">School</span>
+              <h3 id="t-pendulum" class="card-title">Inverted Pendulum</h3>
+              <p class="hook">For Control Systems, we built a belt-driven cart that balances a pendulum upright using only the angle from a rotary encoder.</p>
+              <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Arduino (C++)</li><li>PID control</li></ul>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </article>
 
-    <!-- ======== E. Inverted pendulum ======== -->
-    <section class="sheet sheet--part" id="inverted-pendulum" data-track="school">
-      <div class="peak-stage">
-        <div class="container peak-grid">
-
-          <div class="peak-film">
-            <div class="plate plate--film">
-              <img class="sc-stage__poster" src="assets/img/opt/pendulum-poster.webp" width="816" height="334" alt="The inverted pendulum rig balancing on its rail in the controls lab">
-              <video class="peak-clip" data-loop-src="assets/video/pendulum.mp4" data-loop-src-mobile="assets/video/pendulum-m.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
-            </div>
-            <p class="plate-note">The pendulum in action</p>
-          </div>
-
-          <figure class="plate plate--plot">
-            <div class="plot-frame">
-              <img src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" loading="lazy" alt="Step response plots from tuning the PID controller at three proportional gains">
-            </div>
-            <figcaption class="plate-caption">Step response at three proportional gains</figcaption>
-          </figure>
-
-          <figure class="plate plate--cad">
-            <div class="cad-frame">
-              <img src="assets/img/opt/pendulum-cad.webp" width="560" height="420" loading="lazy" alt="SolidWorks assembly of the pendulum cart, rail, motor, and electronics enclosure">
-            </div>
-            <figcaption class="plate-caption">SolidWorks assembly</figcaption>
-          </figure>
-
-          <div class="label-block label-block--compact">
-            <p class="titleblock"><span class="balloon">4</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">Control Systems</span></p>
-            <h3>Inverted Pendulum</h3>
-            <p class="hook"><span class="copy-full">A belt-driven cart on a 0.5 m rail that balances a rigid pendulum upright, with a rotary encoder reading the angle and nothing telling it where the cart is.</span><span class="copy-short">A belt-driven cart that balances a pendulum upright using only the angle from an encoder.</span></p>
-            <details class="label-more" open>
-              <summary>Role and outcome</summary>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>I designed every 3D printed part on the rig, sourced all the parts, optimized the electronics layout, and helped tune the PID controller.</dd></div>
-                <div><dt>Outcome</dt><dd>A closed-loop system that holds the pendulum upright and recovers from disturbances.</dd></div>
-              </dl>
-              <ul class="tags">
-                <li>SolidWorks</li><li>Arduino (C++)</li><li>PID control</li><li>3D printing</li>
-              </ul>
-            </details>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== F. Turbine blade mold polisher, the calm sheet ======== -->
-    <section class="sheet sheet--part media-left" id="blade-polisher" data-track="school">
-      <div class="sheet-inner">
-        <div class="container part-grid" data-sc-in data-sc-stagger="70">
-          <div class="label-block">
-            <p class="titleblock"><span class="balloon">5</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">MCG 2101</span></p>
-            <h3>Turbine Blade Mold Polisher</h3>
-            <p class="hook"><span class="copy-full">A pneumatic gantry system that polishes 9-metre wind turbine blade molds automatically, replacing a job that used to be slow, inconsistent, and physically demanding to do by hand.</span><span class="copy-short">A pneumatic gantry that polishes 9-metre wind turbine blade molds automatically.</span></p>
-            <details class="label-more" open>
-              <summary>Role and outcome</summary>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>I helped design the mechanical layout and motion system: the gantry, the yoke, and the spring-connected polishing plates that conform to the curved mold surface.</dd></div>
-                <div><dt>Outcome</dt><dd>We finished with a complete CAD assembly, a full drawing package, and an interactive 3D model of a system that keeps constant polishing pressure across a complex curved surface.</dd></div>
-              </dl>
-              <ul class="tags">
-                <li>SolidWorks</li><li>Engineering drawings</li><li>Pneumatic actuation</li>
-              </ul>
-              <div class="project-links">
-                <a href="https://skfb.ly/pCKSo" target="_blank" rel="noopener">3D model (Sketchfab) <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a href="https://drive.google.com/file/d/1IAgGhyez_0Hg4_hqSXrPCs9KN8DNypPy/view?usp=sharing" target="_blank" rel="noopener">Video <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a href="assets/Docs/MCG2101%20-%20Turbine%20Mold%20Polisher%20-%20Deliverable%2310%20E2-2.pdf" target="_blank" rel="noopener">Report (PDF)</a>
-              </div>
-            </details>
-          </div>
-          <div class="media-block">
-            <figure class="plate plate--photo">
-              <img src="assets/img/opt/blade-polisher.webp" width="800" height="560" loading="lazy" alt="Isometric CAD render of the turbine blade mold polisher gantry system">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== G. Two-stage gear reducer ======== -->
-    <section class="sheet sheet--part" id="gear-reducer" data-track="school" data-sc-act="flow">
-      <div class="sheet-inner">
-        <div class="container part-grid">
-          <div class="label-block">
-            <p class="titleblock"><span class="balloon">6</span><span class="tb-track badge badge-school">School</span><span class="tb-meta">Machine Design</span></p>
-            <h3>Two-Stage Gear Reducer</h3>
-            <p class="hook">A 9:1 reducer for an industrial conveyor drive, taking 6 hp at 400 rpm down to 45 rpm.</p>
-            <details class="label-more" open>
-              <summary>Role and outcome</summary>
-              <dl class="meta">
-                <div><dt>My role</dt><dd>I sized the two-stage gear reduction and ran the bending and moment failure analysis, and I designed every part in the assembly except the shaft.</dd></div>
-                <div><dt>Outcome</dt><dd>A sealed unit validated for a five-year service life, with a full drawing package to go with it.</dd></div>
-              </dl>
-              <ul class="tags">
-                <li>SolidWorks</li><li>Gear design</li><li>Failure analysis</li><li>Engineering drawings</li>
-              </ul>
-            </details>
-            <dl class="figures">
-              <div><dt>Ratio</dt><dd>9:1</dd></div>
-              <div><dt>Input</dt><dd>6 hp at 400 rpm</dd></div>
-              <div><dt>Output</dt><dd><span class="sc-nums" data-sc-count="400 45" data-sc-count-at="0.18 0.48">400</span> rpm</dd></div>
-              <div><dt>Service life</dt><dd>5 years</dd></div>
-            </dl>
-          </div>
-          <div class="media-block">
-            <div class="plate-trio">
-              <figure class="wide"><img src="assets/img/opt/reducer-exploded.webp" width="545" height="307" loading="lazy" alt="Exploded view of the two-stage gear reducer assembly"></figure>
-              <figure><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" loading="lazy" alt="CAD render of the gear reducer with the casing shown transparent"></figure>
-              <figure><img src="assets/img/opt/reducer-drawing.webp" width="560" height="420" loading="lazy" alt="Top level assembly drawing of the gear reducer with its parts list"></figure>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== J. Parts bin ======== -->
-    <section class="sheet sheet--bin sheet--after-act">
-      <div class="sheet-inner">
-        <div class="container">
-          <h3 class="more-title">More projects, builds &amp; repairs</h3>
-          <p class="more-sub">A few more school projects, plus things I've built and fixed on my own time.</p>
-          <p class="swipe-hint" aria-hidden="true">Swipe sideways · 8 projects</p>
-
-          <div class="card-grid">
-
-            <article class="card" data-sc-in>
-              <div class="card-media collage collage--three">
-                <img src="assets/img/opt/pool-heater-1-housing.webp" width="480" height="720" loading="lazy" alt="Pool heater heat exchanger in its housing, with the fins corroded green">
-                <img src="assets/img/opt/pool-heater-2-removed.webp" width="480" height="360" loading="lazy" alt="Old heat exchanger pulled out of the pool heater">
-                <img src="assets/img/opt/pool-heater-3-new.webp" width="480" height="360" loading="lazy" alt="New copper heat exchanger in its box before installation">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
-                <h4>Pool Heater Recovery</h4>
-                <p><span class="copy-full">The pool heater's heat exchanger had a burst pipe, so I sourced a new one, took the heater apart, and replaced the whole exchanger myself.</span><span class="copy-short">Found a burst pipe in the heat exchanger, sourced a new one and swapped it in myself.</span></p>
-                <ul class="tags"><li>Heat exchangers</li><li>Leak diagnosis</li></ul>
-              </div>
-            </article>
-
-            <article class="card" data-sc-in>
-              <div class="card-media collage collage--two">
-                <img src="assets/img/opt/hottub-1-burnt-port.webp" width="480" height="720" loading="lazy" alt="Burnt heater port desoldered from the hot tub control board, beside the scorched pads it came off">
-                <img src="assets/img/opt/hottub-2-repaired.webp" width="480" height="720" loading="lazy" alt="Repaired control board back in the hot tub with the new heater port soldered in">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
-                <h4>Hot-Tub Heater Repair</h4>
-                <p><span class="copy-full">Traced a hot tub error to a burnt heater port on the control board, then desoldered it and soldered in a new one to get the hot tub running again.</span><span class="copy-short">Traced a hot tub error to a burnt heater port, then desoldered and replaced it on the board.</span></p>
-                <ul class="tags"><li>PCB rework</li><li>Soldering</li></ul>
-              </div>
-            </article>
-
-            <article class="card" data-sc-in id="mobilitray">
-              <div class="card-media">
-                <img src="assets/img/opt/mobilitray.webp" width="560" height="420" loading="lazy" alt="Mobilitray prototype clipped onto a posterior walker">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-school">School</span> GNG 2101</p>
-                <h4>Mobilitray</h4>
-                <p><span class="copy-full">A foldable tray that clips onto posterior walkers so users can carry things without losing stability. It held five pounds in user testing.</span><span class="copy-short">A foldable tray that clips onto posterior walkers. Holds five pounds, folds flat.</span></p>
-                <ul class="tags"><li>SolidWorks</li><li>3D printing</li><li>User testing</li></ul>
-                <div class="project-links">
-                  <a href="https://makerepo.com/ChristopherAlRahi/1904.gng2101group-a-41mobilitray" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                  <a href="assets/Docs/Mobilitray%20-%20User%20and%20Product%20Manual%204.1.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
+          <dialog class="detail" id="d-pendulum" aria-labelledby="dt-pendulum">
+            <div class="detail-inner">
+              <div class="detail-fade">
+                <div class="detail-head">
+                  <div><span class="badge badge-school">School</span><h3 id="dt-pendulum" class="detail-title" tabindex="-1">Inverted Pendulum</h3></div>
+                  <button class="detail-close" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                </div>
+                <div class="detail-content">
+                  <div class="detail-media">
+                    <figure class="dm-wide"><video class="plate-clip dialog-clip" muted loop playsinline preload="none" poster="assets/img/opt/pendulum-poster.webp" width="816" height="334" aria-hidden="true"></video><figcaption>The pendulum in action</figcaption></figure>
+                    <figure><img class="on-white" src="assets/img/opt/pendulum-tuning.webp" width="560" height="420" alt="Step response plots from tuning the PID controller at three proportional gains" loading="lazy" decoding="async"><figcaption>Step response at three proportional gains</figcaption></figure>
+                    <figure><img src="assets/img/opt/pendulum-cad.webp" width="560" height="420" alt="SolidWorks assembly of the pendulum cart, rail, motor, and electronics enclosure" loading="lazy" decoding="async"><figcaption>SolidWorks assembly</figcaption></figure>
+                    <figure class="dm-wide"><img src="assets/img/opt/pendulum-rig.webp" width="800" height="384" alt="The inverted pendulum cart and rail on a table, seen from above" loading="lazy" decoding="async"><figcaption>Cart and rail</figcaption></figure>
+                  </div>
+                  <p class="detail-text">I designed every 3D printed part, sourced the parts, optimized the electronics layout and helped tune the PID controller that holds the pendulum upright through disturbances.</p>
                 </div>
               </div>
-            </article>
+            </div>
+          </dialog>
 
-            <article class="card" data-sc-in id="beer-goggles">
-              <div class="card-media">
-                <img src="assets/img/opt/beer-goggles.webp" width="667" height="500" loading="lazy" alt="The Beer Goggles team with the fermentation-monitoring prototype">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-school">School</span> GNG 1103</p>
-                <h4>Beer Goggles</h4>
-                <p><span class="copy-full">A tank-mounted gravity and temperature monitor for Beyond the Pale Brewing. I led our team of five, and it read specific gravity within ±0.1.</span><span class="copy-short">A tank-mounted gravity and temperature monitor for Beyond the Pale Brewing, so nobody has to sample by hand.</span></p>
-                <ul class="tags"><li>Arduino (C++)</li><li>Sensor calibration</li><li>SolidWorks</li></ul>
-                <div class="project-links">
-                  <a href="https://makerepo.com/ChristopherAlRahi/1336.gng1103b04group16beergoggles" target="_blank" rel="noopener">MakeRepo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                  <a href="assets/Docs/Beer%20Goggles%20-%20User%20and%20Product%20Manual.pdf" target="_blank" rel="noopener">Manual (PDF)</a>
+          <article class="card card--compact" id="blade-polisher" data-reveal aria-labelledby="t-polisher">
+            <div class="card-plate"><img src="assets/img/opt/blade-polisher.webp" width="800" height="560" alt="Isometric CAD render of the turbine blade mold polisher gantry system" loading="lazy" decoding="async"></div>
+            <div class="card-body">
+              <span class="badge badge-school">School</span>
+              <h3 id="t-polisher" class="card-title">Turbine Blade Mold Polisher</h3>
+              <p class="hook">For MCG 2101, our team designed a pneumatic gantry that polishes wind turbine blade molds automatically, replacing slow, inconsistent hand work.</p>
+              <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Engineering drawings</li><li>Pneumatic actuation</li></ul>
+              <div class="card-foot"><a href="https://skfb.ly/pCKSo" target="_blank" rel="noopener">3D model (Sketchfab)</a><a href="https://drive.google.com/file/d/1IAgGhyez_0Hg4_hqSXrPCs9KN8DNypPy/view?usp=sharing" target="_blank" rel="noopener">Video</a><a href="assets/Docs/MCG2101%20-%20Turbine%20Mold%20Polisher%20-%20Deliverable%2310%20E2-2.pdf" target="_blank" rel="noopener">Report (PDF)</a></div>
+            </div>
+          </article>
+
+          <article class="card card--compact card--expandable" id="gear-reducer" data-reveal style="--i: 1" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Two-Stage Gear Reducer" data-dialog="d-reducer">
+            <div class="card-plate"><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" alt="CAD render of the gear reducer with the casing shown transparent" loading="lazy" decoding="async"></div>
+            <div class="card-body">
+              <span class="badge badge-school">School</span>
+              <h3 id="t-reducer" class="card-title">Two-Stage Gear Reducer</h3>
+              <p class="hook">I sized and modelled a sealed two-stage reducer for an industrial conveyor drive, taking 6 hp at 400 rpm down to 45 rpm for a five-year service life.</p>
+              <dl class="figures"><div><dt>Ratio</dt><dd>9:1</dd></div><div><dt>Input</dt><dd><span class="sr-only">6 hp</span><span aria-hidden="true"><span data-count="6">6</span> <span class="unit">hp</span></span></dd></div><div><dt>Output</dt><dd><span class="sr-only">45 rpm</span><span aria-hidden="true"><span data-count="45">45</span> <span class="unit">rpm</span></span></dd></div><div><dt>Service life</dt><dd><span class="sr-only">5 years</span><span aria-hidden="true"><span data-count="5">5</span> <span class="unit">years</span></span></dd></div></dl>
+              <ul class="tags" aria-label="Tools"><li>SolidWorks</li><li>Gear design</li><li>Failure analysis</li></ul>
+            </div>
+          </article>
+
+          <dialog class="detail" id="d-reducer" aria-labelledby="dt-reducer">
+            <div class="detail-inner">
+              <div class="detail-fade">
+                <div class="detail-head">
+                  <div><span class="badge badge-school">School</span><h3 id="dt-reducer" class="detail-title" tabindex="-1">Two-Stage Gear Reducer</h3></div>
+                  <button class="detail-close" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                </div>
+                <div class="detail-content">
+                  <div class="detail-media"><figure class="dm-wide"><img src="assets/img/opt/reducer-exploded.webp" width="545" height="307" alt="Exploded view of the two-stage gear reducer assembly" loading="lazy" decoding="async"><figcaption>Exploded view</figcaption></figure><figure><img src="assets/img/opt/reducer-assembly.webp" width="560" height="420" alt="CAD render of the gear reducer with the casing shown transparent" loading="lazy" decoding="async"><figcaption>Transparent casing</figcaption></figure><figure><img src="assets/img/opt/reducer-drawing.webp" width="560" height="420" alt="Top level assembly drawing of the gear reducer with its parts list" loading="lazy" decoding="async"><figcaption>Assembly drawing</figcaption></figure></div>
+                  <p class="detail-text">I ran the bending and moment failure analysis and designed every part except the shaft, and the unit is validated for a five-year service life.</p>
+                  <dl class="figures"><div><dt>Ratio</dt><dd>9:1</dd></div><div><dt>Input</dt><dd>6 <span class="unit">hp</span></dd></div><div><dt>Output</dt><dd>45 <span class="unit">rpm</span></dd></div><div><dt>Service life</dt><dd>5 <span class="unit">years</span></dd></div></dl>
                 </div>
               </div>
-            </article>
-
-            <article class="card" data-sc-in id="greenhouse">
-              <div class="card-media">
-                <img src="assets/img/opt/greenhouse.webp" width="540" height="563" loading="lazy" alt="Assembled greenhouse climate controller with sensors and wiring">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-school">School</span> ELG 3336</p>
-                <h4>Greenhouse Controller</h4>
-                <p><span class="copy-full">A climate controller my partner and I built that watches temperature, humidity, light and air quality, and corrects them on its own. I coded the full setup.</span><span class="copy-short">A controller that watches temperature, humidity, light and air quality, and corrects them on its own.</span></p>
-                <ul class="tags"><li>Arduino (C++)</li><li>Circuit design</li></ul>
-                <div class="project-links">
-                  <a href="https://drive.google.com/file/d/1O8_wQxcrmUnVgzpRxvYgv5CmfnYpsajJ/view?usp=sharing" target="_blank" rel="noopener">Demo video <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                  <a href="assets/Docs/ELG%203336%20-%20Greenhouse%20System%20-%20Final%20Report.docx.pdf" target="_blank" rel="noopener">Report (PDF)</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" data-sc-in id="truss-analysis">
-              <div class="card-media">
-                <img src="assets/img/opt/truss-bridge.webp" width="560" height="420" loading="lazy" alt="Balsa wood truss bridge built for load testing">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-school">School</span> CVG 2140</p>
-                <h4>Balsa Truss Bridge</h4>
-                <p><span class="copy-full">A balsa wood truss bridge we designed by hand using a hybrid Pratt-Warren layout, then built and load tested. It hit a load-to-weight ratio of 292.5.</span><span class="copy-short">A hand-designed balsa truss bridge, built and load tested to a 292.5 load-to-weight ratio.</span></p>
-                <ul class="tags"><li>Structural analysis</li><li>Load testing</li></ul>
-                <div class="project-links">
-                  <a href="assets/Docs/CVG%202140%20-%20Truss%20Analysis%20-%20Final%20Report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" data-sc-in>
-              <div class="card-media collage">
-                <img src="assets/img/opt/fender-1-broken.webp" width="480" height="490" loading="lazy" alt="Cracked car fender before repair">
-                <img src="assets/img/opt/fender-2-paint.webp" width="480" height="598" loading="lazy" alt="Fender during sanding and painting">
-                <img src="assets/img/opt/fender-3-fixed.webp" width="480" height="429" loading="lazy" alt="Repaired fender with colour-matched finish">
-                <img src="assets/img/opt/fender-4-installed.webp" width="480" height="641" loading="lazy" alt="Finished fender reinstalled on the car">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
-                <h4>Car Fender Repair</h4>
-                <p><span class="copy-full">The fender was cracked, so I repaired it myself. Filled and sanded the panel, matched the paint, and refit it on the car.</span><span class="copy-short">Filled, sanded, paint-matched and refit a cracked fender myself.</span></p>
-                <ul class="tags"><li>Surface prep</li><li>Finishing</li></ul>
-              </div>
-            </article>
-
-            <article class="card" data-sc-in>
-              <div class="card-media">
-                <img src="assets/img/opt/ping-pong.webp" width="601" height="625" loading="lazy" alt="Foldable ping-pong table top mounted on a pool table">
-              </div>
-              <div class="card-body">
-                <p class="card-eyebrow"><span class="badge badge-personal">Personal</span></p>
-                <h4>Foldable Ping-Pong Table</h4>
-                <p>Designed and built a fold-away top that turns our pool table into a ping pong table in seconds.</p>
-                <ul class="tags"><li>CAD</li><li>Fabrication</li><li>3D printing</li></ul>
-              </div>
-            </article>
-
-          </div>
+            </div>
+          </dialog>
         </div>
+      </div>
+    </section>
+
+    <section id="more" class="section more-section" aria-labelledby="more-title">
+      <div class="container">
+        <div class="section-title" data-reveal>
+          <h2 id="more-title">Also built and repaired</h2>
+        </div>
+        <ul class="mini-grid">
+          <li class="mini-item"><article class="mini" id="pool-heater" data-reveal aria-labelledby="t-pool"><div class="mini-plate"><img src="assets/img/opt/pool-heater-3-new.webp" width="480" height="360" alt="New copper heat exchanger in its box before installation" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-personal">Personal</span><h3 id="t-pool" class="mini-title">Pool Heater Recovery</h3><p>The heat exchanger had a burst pipe, so I replaced it myself.</p></div></article></li>
+          <li class="mini-item"><article class="mini" id="hot-tub" data-reveal style="--i: 1" aria-labelledby="t-hottub"><div class="mini-plate"><img class="pos-hottub" src="assets/img/opt/hottub-2-repaired.webp" width="480" height="720" alt="Repaired control board back in the hot tub with the new heater port soldered in" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-personal">Personal</span><h3 id="t-hottub" class="mini-title">Hot-Tub Heater Repair</h3><p>I traced a hot tub error to a burnt heater port and replaced it.</p></div></article></li>
+          <li class="mini-item"><article class="mini" id="mobilitray" data-reveal style="--i: 2" aria-labelledby="t-mobilitray"><div class="mini-plate"><img class="pos-mobilitray" src="assets/img/opt/mobilitray.webp" width="560" height="420" alt="Mobilitray prototype clipped onto a posterior walker" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-school">School</span><h3 id="t-mobilitray" class="mini-title">Mobilitray</h3><p>This foldable tray clips onto posterior walkers and held five pounds in user testing.</p><div class="mini-foot"><a href="https://makerepo.com/ChristopherAlRahi/1904.gng2101group-a-41mobilitray" target="_blank" rel="noopener">MakeRepo</a><a href="assets/Docs/Mobilitray%20-%20User%20and%20Product%20Manual%204.1.pdf" target="_blank" rel="noopener">Manual (PDF)</a></div></div></article></li>
+          <li class="mini-item"><article class="mini" id="beer-goggles" data-reveal style="--i: 3" aria-labelledby="t-beer"><div class="mini-plate"><img class="pos-beer" src="assets/img/opt/beer-goggles.webp" width="667" height="500" alt="The Beer Goggles team with the fermentation-monitoring prototype" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-school">School</span><h3 id="t-beer" class="mini-title">Beer Goggles</h3><p>I led our team of five on a brewery tank monitor that read specific gravity within &plusmn;0.1.</p><div class="mini-foot"><a href="https://makerepo.com/ChristopherAlRahi/1336.gng1103b04group16beergoggles" target="_blank" rel="noopener">MakeRepo</a><a href="assets/Docs/Beer%20Goggles%20-%20User%20and%20Product%20Manual.pdf" target="_blank" rel="noopener">Manual (PDF)</a></div></div></article></li>
+          <li class="mini-item"><article class="mini" id="greenhouse" data-reveal aria-labelledby="t-greenhouse"><div class="mini-plate"><img class="pos-greenhouse" src="assets/img/opt/greenhouse.webp" width="540" height="563" alt="Assembled greenhouse climate controller with sensors and wiring" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-school">School</span><h3 id="t-greenhouse" class="mini-title">Greenhouse Controller</h3><p>My partner and I built a climate controller, and I coded the full setup.</p><div class="mini-foot"><a href="https://drive.google.com/file/d/1O8_wQxcrmUnVgzpRxvYgv5CmfnYpsajJ/view?usp=sharing" target="_blank" rel="noopener">Demo video</a><a href="assets/Docs/ELG%203336%20-%20Greenhouse%20System%20-%20Final%20Report.docx.pdf" target="_blank" rel="noopener">Report (PDF)</a></div></div></article></li>
+          <li class="mini-item"><article class="mini" id="truss-analysis" data-reveal style="--i: 1" aria-labelledby="t-truss"><div class="mini-plate"><img src="assets/img/opt/truss-bridge.webp" width="560" height="420" alt="Balsa wood truss bridge built for load testing" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-school">School</span><h3 id="t-truss" class="mini-title">Balsa Truss Bridge</h3><p>We designed a balsa truss by hand and load tested it to a 292.5 load-to-weight ratio.</p><div class="mini-foot"><a href="assets/Docs/CVG%202140%20-%20Truss%20Analysis%20-%20Final%20Report.pdf" target="_blank" rel="noopener">Report (PDF)</a></div></div></article></li>
+          <li class="mini-item"><article class="mini" id="fender" data-reveal style="--i: 2" aria-labelledby="t-fender"><div class="mini-plate"><img class="pos-fender" src="assets/img/opt/fender-4-installed.webp" width="480" height="641" alt="Finished fender reinstalled on the car" loading="lazy" decoding="async"></div><div class="mini-body"><span class="badge badge-personal">Personal</span><h3 id="t-fender" class="mini-title">Car Fender Repair</h3><p>I filled, sanded, paint-matched and refit a cracked fender myself.</p></div></article></li>
+        </ul>
       </div>
     </section>
 
@@ -558,7 +324,7 @@
         <div class="container">
           <div class="section-title" data-sc-in>
             <h2>Experience</h2>
-            <p>Three co-op terms so far, split between defense electronics and renewable energy research, and a custom parts business I started this fall.</p>
+            <p>Three co-op terms so far, split between defence electronics and renewable energy research, and a custom parts business I started this fall.</p>
           </div>
           <p class="swipe-hint" aria-hidden="true">Swipe sideways · 4 roles</p>
 
@@ -623,45 +389,18 @@
       </div>
     </section>
 
-    <!-- ======== L. About, the notes sheet ======== -->
-    <section id="about" class="sheet sheet--notes" data-sc-act="flow">
-      <div class="sheet-inner">
-        <div class="plane plane--grid" aria-hidden="true" data-sc-parallax="-1">
-          <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <defs>
-              <pattern id="ag-fine" width="48" height="48" patternUnits="userSpaceOnUse">
-                <path d="M48 0H0v48" fill="none" stroke="#e7f2f7" stroke-opacity="0.08"/>
-              </pattern>
-              <pattern id="ag-bold" width="240" height="240" patternUnits="userSpaceOnUse">
-                <path d="M240 0H0v240" fill="none" stroke="#e7f2f7" stroke-opacity="0.14"/>
-              </pattern>
-            </defs>
-            <rect width="1440" height="900" fill="url(#ag-fine)"/>
-            <rect width="1440" height="900" fill="url(#ag-bold)"/>
-            <g stroke="#5a9fe0" stroke-opacity="0.35" fill="none">
-              <path d="M96 120h288M96 110v20M384 110v20"/>
-              <path d="M1344 216v264M1334 216h20M1334 480h20"/>
-            </g>
-          </svg>
+    <section id="about" class="section about-section" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-title" data-reveal>
+          <h2 id="about-title">About</h2>
         </div>
-        <div class="container">
-          <div class="section-title">
-            <h2>About</h2>
-            <p>A little more about me</p>
+        <div class="about-panel" data-reveal>
+          <div class="about-plate">
+            <img src="assets/img/opt/about-chris.webp" width="800" height="1000" alt="Chris Al-Rahi" loading="lazy" decoding="async">
           </div>
-
-          <div class="about-grid">
-            <div class="about-text">
-              <p class="sheet-key">Notes</p>
-              <p class="lede"><span class="copy-full">I love innovating. Building is my passion, and understanding is my method. If I see something that could be better, I work on making it better. I'm studying Mechanical Engineering and Computing Technology at uOttawa, and most of what's on this site started as something I wanted to figure out for myself.</span><span class="copy-short">I love building things and understanding how they work. If something could be better, I work on making it better. Right now that's a six-axis robot arm, the piano, and training for my next fight.</span></p>
-              <p class="lede copy-full">I'm competitive, and I commit fully to whatever I take on. Right now that's a six-axis robot arm, teaching myself the piano, and training for my next fight, with travelling and scuba diving filling whatever time I have left.</p>
-              <ul class="tags">
-                <li>Muay Thai</li><li>Scuba Diving</li><li>Volleyball</li><li>Travel</li><li>Reading</li>
-              </ul>
-            </div>
-            <figure class="plate plate--portrait" data-sc-parallax="-0.5">
-              <img src="assets/img/opt/about-chris.webp" width="800" height="1000" loading="lazy" alt="Chris Al-Rahi">
-            </figure>
+          <div class="about-copy">
+            <p>I love building things and understanding how they work, and if something could be better, I work on making it better. I commit fully to whatever I take on, and right now that's a six-axis robot arm, teaching myself the piano and training for my next fight, with travelling and scuba diving filling whatever time I have left.</p>
+            <ul class="tags" aria-label="Interests"><li>Muay Thai</li><li>Scuba Diving</li><li>Volleyball</li><li>Travel</li><li>Reading</li></ul>
           </div>
         </div>
       </div>
