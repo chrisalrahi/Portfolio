@@ -530,10 +530,6 @@ main > section + section {
   gap: 0.875rem;
 }
 
-.hero-plate-wrap {
-  position: relative;
-}
-
 .hero-beat-row {
   position: relative;
   z-index: 2;
@@ -955,12 +951,6 @@ html:not(.js) .sc-stage {
     padding-bottom: 0;
   }
 
-  .hero-sheet .hero-plate-wrap {
-    order: -1;
-    justify-self: center;
-    width: min(210px, 100%);
-  }
-
   .hero h1 {
     font-size: 2.25rem;
     margin-bottom: 0.625rem;
@@ -1148,18 +1138,6 @@ html:not(.js) .sc-stage {
    has to outrank the width breakpoints above, which set the larger sizes. */
 
 @media (max-height: 740px) {
-  /* max-width, never width: it may only shrink the plate, so the phone cap
-     set at 768px still holds on a small phone */
-  .hero-sheet .hero-plate-wrap {
-    justify-self: center;
-    max-width: calc((100svh - var(--header-h) - 4rem) * 0.8);
-  }
-
-  .hero-sheet .plate--portrait {
-    max-height: calc(100svh - var(--header-h) - 4rem);
-    width: auto;
-  }
-
   .hero h1 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
@@ -1212,10 +1190,6 @@ html:not(.js) .sc-stage {
 
   .hero-beat-row {
     display: none;
-  }
-
-  .hero-sheet .hero-plate-wrap {
-    width: min(120px, 100%);
   }
 
   .hero h1 {
@@ -1289,7 +1263,6 @@ html.is-locked {
 
 .card-plate,
 .mini-plate,
-.plot-plate,
 .sig-clip {
   position: relative;
   overflow: hidden;
@@ -1302,7 +1275,6 @@ html.is-locked {
 
 .card-plate img,
 .mini-plate img,
-.plot-plate img,
 .sig-clip video {
   position: absolute;
   inset: 0;
@@ -1485,35 +1457,13 @@ html.is-locked {
   border-color: color-mix(in srgb, var(--accent), transparent 65%);
 }
 
-.sig-media {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 34%;
-  grid-template-rows: auto 72px auto;
-}
-
 .sig-figure {
-  grid-column: 1 / -1;
-  grid-row: 1 / 3;
   margin: 0;
 }
 
 .sig-clip {
   aspect-ratio: 816 / 334;
   border-radius: 20px;
-}
-
-.sig-plot {
-  position: relative;
-  z-index: 1;
-  grid-column: 2;
-  grid-row: 2 / 4;
-  margin: 0 -2rem 0 0;
-}
-
-.plot-plate {
-  aspect-ratio: 4 / 3;
-  border-radius: 16px;
-  background: var(--bg);
 }
 
 .sig-media figcaption {
@@ -1862,10 +1812,6 @@ html.is-locked {
     gap: 2rem;
   }
 
-  .sig-plot {
-    margin-right: 1.5rem;
-  }
-
   .mini-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1918,21 +1864,12 @@ html.is-locked {
     padding: 0;
   }
 
-  .sig-media {
-    display: flex;
-    flex-direction: column;
-  }
-
   .sig-clip {
     border-radius: 0;
   }
 
   .sig-figure figcaption {
     margin: 0.75rem 1.25rem 0;
-  }
-
-  .sig-plot {
-    margin: 1.25rem 1.25rem 0;
   }
 
   .card--signature .card-body {
@@ -2074,17 +2011,17 @@ html.is-locked {
 }
 
 .hero-reel-arm {
-  object-position: 50% 100%;
+  object-position: 50% 44%;
   animation-delay: -15s !important;
 }
 
 .hero-reel-covers {
-  object-position: 50% 100%;
+  object-position: 50% 44%;
   animation-delay: -10s !important;
 }
 
 .hero-reel-polisher {
-  object-position: 14% 0;
+  object-position: 41% 13%;
   animation-delay: -5s !important;
 }
 
@@ -2101,31 +2038,16 @@ html.is-locked {
 .hero-film-layout {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 3.5rem;
-  align-items: center;
+  display: flex;
+  align-items: flex-end;
   min-height: 100vh;
   min-height: 100svh;
   padding-top: calc(var(--header-h) + 2rem);
-  padding-bottom: 7vh;
+  padding-bottom: 12vh;
 }
 
 .hero-reel-hero .hero-copy {
-  width: 100%;
-}
-
-.hero-reel-hero .hero-plate-wrap {
-  width: min(100%, 440px);
-  justify-self: end;
-  opacity: 0;
-  transform: translateY(14px);
-  animation: heroEnter 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  animation-delay: calc(var(--step) * 70ms);
-}
-
-.hero-reel-hero .plate--portrait {
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), var(--sc-edge);
+  width: min(900px, 83%);
 }
 
 .hero-reel-hero .hero-name {
@@ -2267,24 +2189,36 @@ html.is-locked {
   }
 }
 
+@keyframes heroReel3 {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25.33% {
+    opacity: 1;
+  }
+  33.33% {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  92% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 767px) {
   .hero-film-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
-    align-content: start;
     padding-top: calc(var(--header-h) + 1rem);
-    padding-bottom: 5rem;
+    padding-bottom: 9vh;
   }
 
   .hero-reel-hero .hero-copy {
     width: 100%;
-  }
-
-  .hero-reel-hero .hero-plate-wrap {
-    order: -1;
-    justify-self: center;
-    width: 56%;
-    max-width: 240px;
   }
 
   .hero-reel-hero .hero-name {
@@ -2337,12 +2271,6 @@ html.is-locked {
     animation: none;
   }
 
-  .hero-reel-hero .hero-plate-wrap {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-
   .hero-scroll-cue i::after {
     opacity: 1;
     transform: scaleY(1);
@@ -2350,38 +2278,75 @@ html.is-locked {
   }
 }
 
-@media (min-width: 481px) and (max-width: 1023px) {
-  .hero-reel-chassis {
-    object-position: 88% 45%;
-  }
-
-  .hero-reel-arm {
-    object-position: 70% 45%;
-  }
-
-  .hero-reel-covers {
-    object-position: 48% 45%;
-  }
-
-  .hero-reel-polisher {
-    object-position: 14% 0;
-  }
-}
-
-@media (max-width: 480px) {
+@media (min-width: 1024px) and (orientation: portrait) {
   .hero-reel-chassis {
     object-position: 93% 45%;
   }
 
   .hero-reel-arm {
-    object-position: 72% 45%;
+    object-position: 59% 44%;
   }
 
   .hero-reel-covers {
-    object-position: 40% 45%;
+    object-position: 5% 44%;
   }
 
   .hero-reel-polisher {
-    object-position: 33% 0;
+    object-position: 0 0;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .hero-reel-chassis {
+    object-position: 93% 45%;
+  }
+
+  .hero-reel-arm {
+    object-position: 64% 45%;
+  }
+
+  .hero-reel-covers {
+    object-position: 5% 45%;
+  }
+
+  .hero-reel-polisher {
+    object-position: 2% 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-reel-chassis {
+    object-position: 95% 45%;
+  }
+
+  .hero-reel-arm {
+    object-position: 73% 45%;
+  }
+
+  .hero-reel-covers {
+    object-position: 38% 45%;
+  }
+
+  .hero-reel-polisher {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) and (prefers-reduced-motion: no-preference) {
+  .hero-reel img {
+    animation-name: heroReel3;
+    animation-duration: 15s;
+  }
+
+  .hero-reel-chassis {
+    animation-delay: 0s !important;
+  }
+
+  .hero-reel-arm {
+    animation-delay: -10s !important;
+  }
+
+  .hero-reel-covers {
+    animation-delay: -5s !important;
   }
 }
