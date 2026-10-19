@@ -172,8 +172,9 @@ main > section + section {
   display: none;
 }
 
-/* The short twin of each Experience entry stays hidden at every width, phones
-   included. display:none keeps it out of screen readers too. */
+/* The short twin of each Experience entry replaces the full text at 860px and
+   narrower (see that media block). display:none keeps the hidden twin out of
+   screen readers too. */
 .copy-short {
   display: none;
 }
@@ -1884,6 +1885,14 @@ html.is-locked {
 
   .card--wide .card-body {
     padding: 2rem;
+  }
+
+  .xp .copy-full {
+    display: none;
+  }
+
+  .xp .copy-short {
+    display: inline;
   }
 }
 
