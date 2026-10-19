@@ -172,8 +172,8 @@ main > section + section {
   display: none;
 }
 
-/* Phone-only short copy: the full text is the default, the short twin shows
-   under 768px. display:none keeps the hidden twin out of screen readers too. */
+/* The short twin of each Experience entry stays hidden at every width, phones
+   included. display:none keeps it out of screen readers too. */
 .copy-short {
   display: none;
 }
@@ -606,8 +606,8 @@ main > section + section {
   margin: 0;
 }
 
-/* Infyl is Chris's own business: its timeline dot takes the brand's orange,
-   the one place on the page that colour appears outside the logo itself */
+/* Infyl is Chris's own business: its timeline dot and its Contact button take
+   the brand's orange, the only places that colour appears outside the logo */
 .xp--infyl::before {
   background: #ff6a3a;
   box-shadow: 0 0 10px rgba(255, 106, 58, 0.6);
@@ -708,6 +708,11 @@ main > section + section {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+#contact a[href="https://infylworks.com"].btn-outline {
+  border-color: #ff6a3a;
+  color: #ff6a3a;
 }
 
 .contact-form {
@@ -823,6 +828,11 @@ main > section + section {
     color: var(--contrast);
     transform: translateY(-2px);
     box-shadow: var(--sc-e2);
+  }
+
+  #contact a[href="https://infylworks.com"].btn-outline:hover {
+    background: #ff6a3a;
+    color: #101a20;
   }
 
   .icon-link:hover {
@@ -1067,41 +1077,6 @@ html:not(.js) .sc-stage {
 
 
 
-  .xp-list {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-inline: -1.5rem;
-    padding-inline: 1.5rem;
-    scroll-padding-inline: 1.5rem;
-    max-width: none;
-  }
-
-  .xp-list::-webkit-scrollbar {
-    display: none;
-  }
-
-  .xp {
-    flex: 0 0 min(300px, 82vw);
-    scroll-snap-align: start;
-    padding: 1.25rem;
-    border-left: 0;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
-  }
-
-  .xp::before {
-    display: none;
-  }
-
-  .xp:last-of-type {
-    padding-bottom: 1.25rem;
-  }
-
   .xp h3 {
     font-size: 1.0625rem;
   }
@@ -1243,6 +1218,16 @@ html.is-locked {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2rem;
+}
+
+/* Phone rows by category. Above the one-column breakpoint the rails drop out
+   of layout, so the cards sit in the two-column grid exactly as before. */
+.proj-label {
+  display: none;
+}
+
+.proj-rail {
+  display: contents;
 }
 
 .card,
@@ -1819,8 +1804,73 @@ html.is-locked {
 
 @media (max-width: 860px) {
   .card-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem;
+    display: block;
+  }
+
+  .proj-label {
+    display: block;
+    margin: 0 0 0.75rem;
+    color: var(--accent-text);
+    font-family: var(--nav-font);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .proj-rail + .proj-label {
+    margin-top: 2rem;
+  }
+
+  /* rows bleed to the screen edges; the extra block padding keeps the card
+     shadows from being cut off by the scroller */
+  .proj-rail,
+  .mini-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: -0.5rem -1.5rem -1.5rem;
+    padding: 0.5rem 1.5rem 1.5rem;
+    scroll-padding-inline: 1.5rem;
+  }
+
+  .proj-rail::-webkit-scrollbar,
+  .mini-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proj-rail > .card {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  .proj-rail[data-track="personal"] > .card {
+    flex-basis: 100%;
+  }
+
+  .mini-item {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+  }
+
+  /* trailing room so the last card can also snap its left edge to the gutter */
+  .proj-rail::after,
+  .mini-grid::after {
+    content: "";
+    flex: 0 0 calc(14% - 1rem);
+  }
+
+  .mini-grid::after {
+    flex-basis: calc(28% - 1rem);
+  }
+
+  .proj-rail[data-track="personal"]::after {
+    content: none;
   }
 
   .card--wide {
@@ -1876,11 +1926,6 @@ html.is-locked {
     padding: 1.25rem 1.25rem 1.5rem;
   }
 
-  .mini-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-  }
-
   .detail-fade {
     padding: 1.25rem 1.25rem 1.5rem;
   }
@@ -1927,25 +1972,6 @@ html.is-locked {
 
   .about-copy p {
     font-size: 1.0625rem;
-  }
-
-  .copy-full {
-    display: none;
-  }
-
-  .copy-short {
-    display: inline;
-  }
-
-  .swipe-hint {
-    display: block;
-    text-align: center;
-    margin: 0 0 1.5rem;
-    font-family: var(--sc-font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-text);
   }
 }
 

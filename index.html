@@ -50,9 +50,9 @@
   <!-- bump ?v= whenever these files change, or browsers keep a cached copy
        that no longer matches this page -->
   <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
-  <link href="assets/css/site.css?v=20261019e" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261019f" rel="stylesheet">
   <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
-  <script src="assets/js/site.js?v=20261019e" defer></script>
+  <script src="assets/js/site.js?v=20261019f" defer></script>
 </head>
 
 <body>
@@ -147,6 +147,8 @@
         </div>
 
         <div class="card-grid">
+          <p class="proj-label">Work</p>
+          <div class="proj-rail" data-track="work">
           <article class="card card--expandable" id="cw-chassis" data-reveal aria-labelledby="t-chassis" data-dialog="d-chassis">
             <div class="card-plate card-plate--chassis">
               <img src="assets/img/opt/cw-chassis.webp" width="800" height="753" alt="The ruggedized VPX electronics chassis behind the liquid cooling redesign" loading="lazy" decoding="async">
@@ -212,7 +214,10 @@
               </div>
             </div>
           </dialog>
+          </div>
 
+          <p class="proj-label">Personal</p>
+          <div class="proj-rail" data-track="personal">
           <article class="card card--wide card--expandable" id="robot-arm" data-reveal data-dialog="d-arm">
             <div class="card-plate">
               <img src="assets/img/opt/arm-render.webp" width="1120" height="840" alt="CAD render of the six-axis robot arm on its base plate" loading="lazy" decoding="async">
@@ -250,7 +255,10 @@
               </div>
             </div>
           </dialog>
+          </div>
 
+          <p class="proj-label">School</p>
+          <div class="proj-rail" data-track="school">
           <article class="card card--signature card--expandable" id="inverted-pendulum" data-reveal data-dialog="d-pendulum">
             <div class="sig-media">
               <figure class="sig-figure">
@@ -340,6 +348,7 @@
               </div>
             </div>
           </dialog>
+          </div>
         </div>
       </div>
     </section>

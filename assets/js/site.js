@@ -365,11 +365,18 @@
     return;
   }
 
+  const railMQ = window.matchMedia("(max-width: 860px)");
+  const revealGroup = (element) => {
+    const rail = railMQ.matches && element.closest(".proj-rail, .mini-grid");
+    return rail ? [...rail.querySelectorAll("[data-reveal]")] : [element];
+  };
   const reveal = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-in");
-      reveal.unobserve(entry.target);
+      revealGroup(entry.target).forEach((element) => {
+        element.classList.add("is-in");
+        reveal.unobserve(element);
+      });
     });
   }, { threshold: 0.15 });
 
