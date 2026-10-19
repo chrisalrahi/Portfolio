@@ -5,6 +5,14 @@
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hasIO = "IntersectionObserver" in window;
 
+  const hero = document.getElementById("hero");
+  if (hero && hasIO) {
+    const heroVisibility = new IntersectionObserver((entries) => {
+      hero.classList.toggle("is-offscreen", !entries[entries.length - 1].isIntersecting);
+    }, { threshold: 0 });
+    heroVisibility.observe(hero);
+  }
+
   if (window.ScrollCraft) window.ScrollCraft.mount(document.body);
 
   const header = document.querySelector(".site-header");
