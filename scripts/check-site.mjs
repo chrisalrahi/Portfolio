@@ -115,7 +115,7 @@ const words = (t) => t.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w));
   report(3, 'no em dash', problems, Object.keys(files).join(', '));
 }
 
-// 4. Every <img> has width, height and a non-empty alt
+// 4. Every <img> has width, height and a non-empty alt (the hero reel's decorative layers carry alt="")
 {
   const problems = [];
   let count = 0;
@@ -124,7 +124,8 @@ const words = (t) => t.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w));
       count++;
       if (!/\swidth="\d+"/.test(tag)) problems.push(`${name}: no width: ${tag.slice(0, 80)}`);
       if (!/\sheight="\d+"/.test(tag)) problems.push(`${name}: no height: ${tag.slice(0, 80)}`);
-      if (!/\salt="[^"]+"/.test(tag)) problems.push(`${name}: no alt: ${tag.slice(0, 80)}`);
+      const decorative = /\sclass="hero-reel-/.test(tag);
+      if (!(decorative ? /\salt=""/.test(tag) : /\salt="[^"]+"/.test(tag))) problems.push(`${name}: no alt: ${tag.slice(0, 80)}`);
     }
   }
   report(4, 'img width, height, alt', problems, `${count} images`);

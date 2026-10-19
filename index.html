@@ -50,9 +50,9 @@
   <!-- bump ?v= whenever these files change, or browsers keep a cached copy
        that no longer matches this page -->
   <link href="assets/css/scrollcraft.css?v=20261005" rel="stylesheet">
-  <link href="assets/css/site.css?v=20261018c" rel="stylesheet">
+  <link href="assets/css/site.css?v=20261018d" rel="stylesheet">
   <script src="assets/js/scrollcraft.js?v=20261005" defer></script>
-  <script src="assets/js/site.js?v=20261018c" defer></script>
+  <script src="assets/js/site.js?v=20261018d" defer></script>
 </head>
 
 <body>
@@ -94,56 +94,34 @@
   <main id="main">
 
     <!-- ======== A. Hero sheet ======== -->
-    <section id="hero" class="hero" data-sc-act="flow">
-      <div class="hero-stage">
-
-        <div class="plane plane--grid" aria-hidden="true" data-sc-parallax="-1.1">
-          <svg viewBox="0 0 1440 960" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <defs>
-              <pattern id="hg-fine" width="48" height="48" patternUnits="userSpaceOnUse">
-                <path d="M48 0H0v48" fill="none" stroke="#e7f2f7" stroke-opacity="0.08"/>
-              </pattern>
-              <pattern id="hg-bold" width="240" height="240" patternUnits="userSpaceOnUse">
-                <path d="M240 0H0v240" fill="none" stroke="#e7f2f7" stroke-opacity="0.14"/>
-              </pattern>
-            </defs>
-            <rect width="1440" height="960" fill="url(#hg-fine)"/>
-            <rect width="1440" height="960" fill="url(#hg-bold)"/>
-            <g stroke="#5a9fe0" stroke-opacity="0.35" fill="none">
-              <path d="M960 96h384M960 86v20M1344 86v20"/>
-              <path d="M1104 176h240M1104 166v20M1344 166v20"/>
-              <path d="M1392 264v300M1382 264h20M1382 564h20"/>
-              <path d="M168 76h216M168 66v20M384 66v20"/>
-            </g>
-          </svg>
-        </div>
-
-        <div class="container hero-sheet">
-          <div class="hero-copy" data-sc-in data-sc-stagger="70">
-            <h1 class="hero-name"><span>Chris</span> <span class="highlight">Al-Rahi</span></h1>
-            <p class="tagline">Mechanical Engineering &amp; Computing Technology student at the University of Ottawa</p>
-            <p class="subline">Co-op · graduating April 2027 · Ottawa, ON · open to co-op and internship roles</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="assets/Docs/Chris%20Al-Rahi%20Resume.pdf" target="_blank" rel="noopener">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
-                Resume (PDF)
-              </a>
-              <a class="btn btn-outline" href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener">LinkedIn</a>
-              <a class="btn btn-outline" href="mailto:chris.alrahi@gmail.com">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                Email
-              </a>
-            </div>
-          </div>
-
-          <div class="hero-plate-wrap">
-            <figure class="plate plate--portrait" data-sc-parallax="-0.45">
-              <img src="assets/img/opt/hero-chris.webp" width="640" height="767" alt="Chris Al-Rahi" fetchpriority="high">
-            </figure>
-          </div>
-        </div>
-
+    <section id="hero" class="hero hero-reel-hero">
+      <div class="hero-reel" aria-hidden="true">
+        <img class="hero-reel-chassis" src="assets/img/opt/cw-chassis.webp" width="800" height="753" alt="" fetchpriority="high">
+        <img class="hero-reel-arm" src="assets/img/opt/arm-render.webp" width="1120" height="840" alt="">
+        <img class="hero-reel-pendulum" src="assets/img/opt/pendulum-poster.webp" width="816" height="334" alt="">
+        <img class="hero-reel-polisher" src="assets/img/opt/blade-polisher.webp" width="800" height="560" alt="">
+        <img class="hero-reel-alt" src="assets/img/opt/about-nrcan.webp" width="800" height="931" alt="">
       </div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="container hero-film-layout">
+        <div class="hero-copy hero-intro">
+          <h1 class="hero-name" style="--step: 0"><span>Chris</span> <span class="highlight">Al-Rahi</span></h1>
+          <p class="tagline" style="--step: 1">Mechanical Engineering &amp; Computing Technology student at the University of Ottawa</p>
+          <p class="subline" style="--step: 2">Co-op · graduating April 2027 · Ottawa, ON · open to co-op and internship roles</p>
+          <div class="hero-actions" style="--step: 3">
+            <a class="btn btn-primary" href="assets/Docs/Chris%20Al-Rahi%20Resume.pdf" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+              Resume (PDF)
+            </a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/christopher-al-rahi/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-outline" href="mailto:chris.alrahi@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="hero-scroll-cue" href="#projects"><span>Projects</span><i aria-hidden="true"></i></a>
     </section>
 
     <section id="projects" class="section projects-section" aria-labelledby="projects-title">
